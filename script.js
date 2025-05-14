@@ -88,6 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
         searchBar.classList.toggle('active');
         if (searchBar.classList.contains('active')) {
             searchInput.focus();
+            
+            // Posicionar a barra de pesquisa de forma responsiva
+            if (window.innerWidth <= 575) {
+                // Fechar resultados ao abrir/fechar a barra para evitar desalinhamento
+                searchResults.classList.remove('active');
+            }
         } else {
             searchInput.value = '';
             searchResults.classList.remove('active');
@@ -142,6 +148,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (resultados.length === 0) {
             searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
             searchResults.classList.add('active');
+            
+            // Garantir que os resultados estejam posicionados corretamente
+            if (window.innerWidth <= 575) {
+                // Forçar reposicionamento em telas pequenas
+                setTimeout(() => {
+                    searchResults.style.top = (searchBar.offsetHeight + 10) + 'px';
+                }, 10);
+            }
             return;
         }
         
@@ -176,6 +190,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         searchResults.classList.add('active');
+        
+        // Garantir que os resultados estejam posicionados corretamente
+        if (window.innerWidth <= 575) {
+            // Forçar reposicionamento em telas pequenas
+            setTimeout(() => {
+                searchResults.style.top = (searchBar.offsetHeight + 10) + 'px';
+            }, 10);
+        }
     }
 
     // Função melhorada para filtrar os produtos na página principal

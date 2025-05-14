@@ -1769,7 +1769,7 @@ footer {
 .search-results {
     display: none;
     position: absolute;
-    top: calc(100% + 50px);
+    top: calc(100% + 10px);
     right: -10px;
     width: 320px;
     max-height: 400px;
