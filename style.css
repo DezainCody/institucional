@@ -784,8 +784,15 @@ nav ul li a::after {
 
 .colecoes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: clamp(1.25rem, 4vw, 2rem);
+}
+
+@media (max-width: 575px) {
+    .colecoes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
 .colecao-item {
@@ -893,7 +900,7 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: clamp(260px, 90vw, 300px);
+    width: clamp(260px, 80vw, 300px); /* Reduzido de 90vw para 80vw para telas pequenas */
     max-width: 300px;
     text-align: center;
     background-color: var(--white-color);
@@ -934,7 +941,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: clamp(300px, 70vw, 350px);
+    height: clamp(250px, 60vw, 350px); /* Reduzido de 300px-350px para 250px-350px e de 70vw para 60vw */
     object-fit: contain;
     margin-bottom: 1.2rem;
     border-radius: 2px;
@@ -2077,12 +2084,17 @@ footer {
     }
 
     .colecao-item {
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     .colecao-item img {
-        height: clamp(450px, 90vw, 550px);
+        height: clamp(350px, 85vw, 450px); /* Reduzido de 450px-550px para 350px-450px */
         width: 100%;
+    }
+
+    /* Garantir que todos os produtos sejam visíveis */
+    .colecoes-grid {
+        grid-template-columns: 1fr; /* Força apenas uma coluna em telas muito pequenas */
     }
 
     /* Evitar que elementos saiam da tela */
