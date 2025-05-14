@@ -557,7 +557,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
     }
 
-    // Função para adicionar ao carrinho
+    // Função para adicionar ao carrinho - SOLUÇÃO PARA O PROBLEMA 2
     function addToCart() {
         if (!currentProduct || !selectedSize) {
             alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
@@ -571,24 +571,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Verificar se já existe este produto com o mesmo tamanho no carrinho
-        const existingItemIndex = cart.findIndex(item => 
-            item.id === currentProduct.id && item.size === selectedSize
-        );
-        
-        if (existingItemIndex !== -1) {
-            // Atualizar quantidade se já existe
-            const newQuantity = cart[existingItemIndex].quantity + quantity;
-            cart[existingItemIndex].quantity = newQuantity > 10 ? 10 : newQuantity;
-        } else {
-            // Adicionar novo item ao carrinho
+        // ALTERAÇÃO: Sempre adicionar como um novo item, independente de já existir no carrinho
+        // Todos os itens serão adicionados individualmente, para que o tamanho seja selecionado para cada unidade
+        for (let i = 0; i < quantity; i++) {
+            // Adicionar novo item ao carrinho (1 unidade por vez)
             cart.push({
                 id: currentProduct.id,
                 name: currentProduct.name,
                 price: currentProduct.price,
                 image: currentProduct.image,
                 size: selectedSize,
-                quantity: quantity
+                quantity: 1  // Sempre adiciona 1 unidade
             });
         }
         
@@ -768,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // CORREÇÃO: Número do WhatsApp ajustado para formato internacional e sem caracteres especiais
             // Redirecionar para o WhatsApp
-            window.open(`https://api.whatsapp.com/send?phone=5583991816152&text=${whatsappMessage}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=5583991816153&text=${whatsappMessage}`, '_blank');
             
             // Limpar o carrinho e fechar o modal
             cart = [];

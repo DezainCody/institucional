@@ -2158,6 +2158,27 @@ footer {
         width: 100%;
         max-width: 100%;
     }
+    
+    /* SOLUÇÃO PARA O PROBLEMA 1: Ajuste da barra de pesquisa em telas pequenas */
+    .search-bar {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+    
+    .search-bar.active {
+        width: 90vw;
+        max-width: 280px;
+    }
+    
+    .search-results {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 320px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
