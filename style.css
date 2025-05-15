@@ -1780,11 +1780,14 @@ footer {
     z-index: 100;
     padding: 0.5rem;
     border: 1px solid rgba(160, 134, 119, 0.2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
 .search-results.active {
-    display: block;
-    animation: fadeInDown 0.3s forwards;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes fadeInDown {
@@ -2172,11 +2175,17 @@ footer {
     }
     
     /* SOLUÇÃO PARA O PROBLEMA 1: Ajuste da barra de pesquisa em telas pequenas */
+    .search-container {
+        position: static; /* Mudança crucial para posicionamento correto */
+    }
+
     .search-bar {
-        right: auto;
+        position: fixed; /* Mudar para fixed em vez de absolute */
+        top: 70px; /* Posição abaixo do header */
         left: 50%;
         transform: translateX(-50%);
         width: 0;
+        z-index: 1005; /* Garantir que fique acima de outros elementos */
     }
     
     .search-bar.active {
@@ -2185,11 +2194,14 @@ footer {
     }
     
     .search-results {
-        right: auto;
+        position: fixed; /* Mudar para fixed para acompanhar a barra */
+        top: 120px; /* Posição logo abaixo da barra de pesquisa */
         left: 50%;
         transform: translateX(-50%);
         width: 90vw;
-        max-width: 320px;
+        max-width: 280px;
+        z-index: 1005; /* Mesmo z-index da barra */
+        max-height: 60vh; /* Limitar altura para não ocupar toda a tela */
     }
 }
 

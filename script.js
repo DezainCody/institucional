@@ -89,14 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchBar.classList.contains('active')) {
             searchInput.focus();
             
-            // Posicionar a barra de pesquisa de forma responsiva
-            if (window.innerWidth <= 575) {
-                // Fechar resultados ao abrir/fechar a barra para evitar desalinhamento
-                searchResults.classList.remove('active');
-            }
+            // Fechar resultados ao abrir para depois mostrar apenas com a pesquisa
+            searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
+            
+            // Limpar o input para garantir que não mostrem resultados antigos
+            searchInput.value = '';
         } else {
             searchInput.value = '';
             searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
         }
     }
 
@@ -147,15 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (resultados.length === 0) {
             searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
-            searchResults.classList.add('active');
-            
-            // Garantir que os resultados estejam posicionados corretamente
-            if (window.innerWidth <= 575) {
-                // Forçar reposicionamento em telas pequenas
-                setTimeout(() => {
-                    searchResults.style.top = (searchBar.offsetHeight + 10) + 'px';
-                }, 10);
-            }
+            searchResults.style.display = 'block';
+            setTimeout(() => {
+                searchResults.classList.add('active');
+            }, 10);
             return;
         }
         
@@ -183,21 +180,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Fechar a pesquisa
                 searchBar.classList.remove('active');
                 searchResults.classList.remove('active');
+                searchResults.style.display = 'none';
                 searchInput.value = '';
             });
             
             searchResults.appendChild(resultadoItem);
         });
         
-        searchResults.classList.add('active');
-        
-        // Garantir que os resultados estejam posicionados corretamente
-        if (window.innerWidth <= 575) {
-            // Forçar reposicionamento em telas pequenas
-            setTimeout(() => {
-                searchResults.style.top = (searchBar.offsetHeight + 10) + 'px';
-            }, 10);
-        }
+        // Primeiro mostrar o elemento, depois adicionar a classe para a animação
+        searchResults.style.display = 'block';
+        setTimeout(() => {
+            searchResults.classList.add('active');
+        }, 10);
     }
 
     // Função melhorada para filtrar os produtos na página principal
@@ -819,8 +813,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fechar resultados de pesquisa quando clicar fora
     document.addEventListener('click', (e) => {
         if (searchBar && searchIcon && searchBar.classList.contains('active') && 
-            !searchBar.contains(e.target) && !searchIcon.contains(e.target)) {
+            !searchBar.contains(e.target) && !searchIcon.contains(e.target) && !searchResults.contains(e.target)) {
+            // Verificação adicional para não fechar ao clicar nos resultados
+            searchBar.classList.remove('active');
             searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
+            searchInput.value = '';
         }
     });
 
