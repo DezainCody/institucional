@@ -153,8 +153,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         termoPesquisa = removerAcentos(termoPesquisa.trim());
         
-        // Recuperar todos os produtos da página
-        const todosProdutos = document.querySelectorAll('.produto');
+        // Recuperar os produtos - todos ou apenas da seção de destaques
+        let todosProdutos;
+        if (isMainSearch) {
+            // Se for pesquisa principal, buscar apenas os produtos na seção de destaques
+            todosProdutos = document.querySelectorAll('.destaques-slider .produto');
+        } else {
+            // Caso contrário, buscar todos os produtos da página
+            todosProdutos = document.querySelectorAll('.produto');
+        }
         
         // Filtrar os resultados - agora usando includes() para correspondências parciais
         const resultados = Array.from(todosProdutos).filter(produto => {
@@ -167,8 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
             atualizarResultadosPesquisa(resultados);
         }
         
-        // Filtrar os produtos na página principal
-        filtrarProdutos(termoPesquisa);
+        // Filtrar os produtos na página principal ou na seção de destaques
+        filtrarProdutos(termoPesquisa, isMainSearch);
         
         // Atualizar o botão de limpar da pesquisa principal
         if (isMainSearch && mainSearchClear) {
@@ -223,8 +230,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Função melhorada para filtrar os produtos na página principal
-    function filtrarProdutos(termoPesquisa) {
-        const todosProdutos = document.querySelectorAll('.produto');
+    function filtrarProdutos(termoPesquisa, isMainSearch = false) {
+        let todosProdutos;
+        let produtosNaoEncontradosElement;
+        
+        if (isMainSearch) {
+            // Se for pesquisa principal, buscar apenas os produtos na seção de destaques
+            todosProdutos = document.querySelectorAll('.destaques-slider .produto');
+            // Criar ou obter uma mensagem de "não encontrado" específica para a seção de destaques
+            produtosNaoEncontradosElement = document.querySelector('.destaques .produtos-nao-encontrados');
+            if (!produtosNaoEncontradosElement) {
+                produtosNaoEncontradosElement = document.createElement('div');
+                produtosNaoEncontradosElement.className = 'produtos-nao-encontrados';
+                produtosNaoEncontradosElement.innerHTML = `
+                    <i class="fas fa-search"></i>
+                    <p>Nenhum produto encontrado para sua pesquisa.</p>
+                    <button class="btn limpar-pesquisa-destaque">Limpar Pesquisa</button>
+                `;
+                document.querySelector('.destaques-container').appendChild(produtosNaoEncontradosElement);
+                
+                // Adicionar evento para o botão limpar
+                const limparPesquisaDestaque = document.querySelector('.limpar-pesquisa-destaque');
+                if (limparPesquisaDestaque) {
+                    limparPesquisaDestaque.addEventListener('click', () => {
+                        if (mainSearchInput) {
+                            mainSearchInput.value = '';
+                            resetarFiltros(true);
+                        }
+                    });
+                }
+            }
+        } else {
+            // Caso contrário, buscar todos os produtos da página
+            todosProdutos = document.querySelectorAll('.produto');
+            produtosNaoEncontradosElement = produtosNaoEncontrados;
+        }
+        
         let produtosVisiveis = 0;
         
         todosProdutos.forEach(produto => {
@@ -240,30 +281,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Mostrar mensagem se nenhum produto for encontrado
-        if (produtosVisiveis === 0) {
-            produtosNaoEncontrados.style.display = 'block';
-        } else {
-            produtosNaoEncontrados.style.display = 'none';
+        if (produtosVisiveis === 0 && produtosNaoEncontradosElement) {
+            produtosNaoEncontradosElement.style.display = 'block';
+        } else if (produtosNaoEncontradosElement) {
+            produtosNaoEncontradosElement.style.display = 'none';
         }
     }
 
     // Função para resetar filtros de pesquisa
-    function resetarFiltros() {
-        const todosProdutos = document.querySelectorAll('.produto');
-        
-        todosProdutos.forEach(produto => {
-            produto.classList.remove('produto-hidden');
-        });
-        
-        produtosNaoEncontrados.style.display = 'none';
-        searchInput.value = '';
-        searchBar.classList.remove('active');
-        searchResults.classList.remove('active');
-        
-        if (mainSearchInput) {
-            mainSearchInput.value = '';
-            if (mainSearchClear) {
-                mainSearchClear.classList.remove('active');
+    function resetarFiltros(onlyMainSearch = false) {
+        if (onlyMainSearch) {
+            // Resetar apenas a pesquisa principal
+            const destaqueProdutos = document.querySelectorAll('.destaques-slider .produto');
+            destaqueProdutos.forEach(produto => {
+                produto.classList.remove('produto-hidden');
+            });
+            
+            const destaquesNaoEncontrados = document.querySelector('.destaques .produtos-nao-encontrados');
+            if (destaquesNaoEncontrados) {
+                destaquesNaoEncontrados.style.display = 'none';
+            }
+            
+            if (mainSearchInput) {
+                mainSearchInput.value = '';
+                if (mainSearchClear) {
+                    mainSearchClear.classList.remove('active');
+                }
+            }
+        } else {
+            // Resetar todas as pesquisas
+            const todosProdutos = document.querySelectorAll('.produto');
+            
+            todosProdutos.forEach(produto => {
+                produto.classList.remove('produto-hidden');
+            });
+            
+            produtosNaoEncontrados.style.display = 'none';
+            searchInput.value = '';
+            searchBar.classList.remove('active');
+            searchResults.classList.remove('active');
+            
+            const destaquesNaoEncontrados = document.querySelector('.destaques .produtos-nao-encontrados');
+            if (destaquesNaoEncontrados) {
+                destaquesNaoEncontrados.style.display = 'none';
+            }
+            
+            if (mainSearchInput) {
+                mainSearchInput.value = '';
+                if (mainSearchClear) {
+                    mainSearchClear.classList.remove('active');
+                }
             }
         }
     }
@@ -898,7 +965,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mainSearchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.value = '';
-                resetarFiltros();
+                resetarFiltros(true);
             }
         });
     }
@@ -907,7 +974,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainSearchClear) {
         mainSearchClear.addEventListener('click', function() {
             mainSearchInput.value = '';
-            resetarFiltros();
+            resetarFiltros(true);
             mainSearchClear.classList.remove('active');
         });
     }
