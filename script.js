@@ -1,205 +1,11 @@
-// Script principal com ajustes para responsividade, animações e correção de imagens
+// Script principal para a loja de roupas Estilo Único
 document.addEventListener('DOMContentLoaded', function() {
-    // Função para quebrar o título em duas linhas em dispositivos móveis
-    function adjustTitleForMobile() {
-        // Seleciona o título na seção hero
-        const heroTitle = document.querySelector('.hero-content h2');
-        
-        if (heroTitle) {
-            // Verifica se o texto contém "Design e Funcionalidade"
-            if (heroTitle.textContent.includes('Design e Funcionalidade')) {
-                // Função para verificar se estamos em um dispositivo móvel
-                function isMobile() {
-                    return window.innerWidth <= 767;
-                }
-                
-                // Função para ajustar o título
-                function updateTitle() {
-                    if (isMobile()) {
-                        // Em dispositivos móveis, adiciona a quebra de linha
-                        if (!heroTitle.innerHTML.includes('<br>')) {
-                            heroTitle.innerHTML = 'Design e<br>Funcionalidade';
-                        }
-                    } else {
-                        // Em desktops, remove a quebra de linha
-                        if (heroTitle.innerHTML.includes('<br>')) {
-                            heroTitle.innerHTML = 'Design e Funcionalidade';
-                        }
-                    }
-                }
-                
-                // Ajusta o título na carga inicial
-                updateTitle();
-                
-                // Ajusta o título quando a janela for redimensionada
-                window.addEventListener('resize', updateTitle);
-            }
-        }
-    }
-
-    // Função para adicionar efeito de entrada com delay nas imagens
-    function initScrollAnimations() {
-        // Seleciona todos os itens que devem ter animação ao scroll
-        const animatedElements = [
-            ...document.querySelectorAll('.colecao-item'),
-            ...document.querySelectorAll('.destaque-item'),
-            ...document.querySelectorAll('.sobre-img'),
-            ...document.querySelectorAll('.contato-content > div')
-        ];
-        
-        // Adiciona classe inicial para esconder os elementos
-        animatedElements.forEach(element => {
-            element.classList.add('scroll-animation');
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 0.8s ease, transform 1s ease';
-        });
-        
-        // Função para verificar se um elemento está visível na viewport
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
-            );
-        }
-        
-        // Função para animar elementos visíveis
-        function animateElementsOnScroll() {
-            animatedElements.forEach((element, index) => {
-                if (isElementInViewport(element) && element.style.opacity === '0') {
-                    // Calculando um delay escalonado mais rápido
-                    const row = Math.floor(index / 3); // Assume 3 elementos por linha
-                    const col = index % 3;
-                    const delay = 0.1 + (row * 0.15) + (col * 0.1); // Delays bem mais curtos
-                    
-                    setTimeout(() => {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
-                    }, delay * 1000);
-                }
-            });
-        }
-        
-        // Verificar elementos visíveis no carregamento inicial
-        setTimeout(() => {
-            animateElementsOnScroll();
-        }, 200);
-        
-        // Adicionar listener de scroll para animar elementos quando se tornarem visíveis
-        window.addEventListener('scroll', animateElementsOnScroll, { passive: true });
-        
-        // Executar novamente se a janela for redimensionada (para segurança)
-        window.addEventListener('resize', animateElementsOnScroll, { passive: true });
-    }
-
-    // Função para remover a descrição dos projetos em destaque e ajustar elementos no carregamento
-    function adjustProjectsDisplay() {
-        // Projetos em destaque - remover descrições
-        const destaqueItems = document.querySelectorAll('.destaque-item');
-        const isMobile = window.innerWidth <= 767;
-        
-        destaqueItems.forEach(item => {
-            // Remover o parágrafo de descrição (mantendo apenas no HTML para manter a estrutura original)
-            const description = item.querySelector('p');
-            if (description) {
-                description.style.display = 'none';
-            }
-            
-            // Ajustar o espaçamento após a imagem
-            const image = item.querySelector('img');
-            if (image) {
-                image.style.marginBottom = '1.2rem';
-                
-                // Para telas móveis, maximizar a área da imagem
-                if (isMobile) {
-                    item.style.maxWidth = 'none';
-                    item.style.width = '100%';
-                    item.style.padding = isMobile && window.innerWidth < 576 ? '0.8rem' : '1rem';
-                    item.style.margin = '0';
-                    item.style.borderRadius = isMobile && window.innerWidth < 576 ? '0' : '2px';
-                    
-                    if (window.innerWidth < 576) {
-                        image.style.borderRadius = '0';
-                    }
-                }
-            }
-            
-            // Remover a margem inferior do título, já que não tem descrição
-            const title = item.querySelector('h3');
-            if (title) {
-                title.style.marginBottom = '0';
-            }
-        });
-        
-        // Ajustar o container para telas móveis
-        if (isMobile) {
-            const destaquesContainer = document.querySelector('.destaques-container');
-            const destaquesSlider = document.querySelector('.destaques-slider');
-            
-            if (destaquesContainer) {
-                destaquesContainer.style.padding = '0';
-            }
-            
-            if (destaquesSlider) {
-                destaquesSlider.style.gap = window.innerWidth < 576 ? '0.5rem' : '0.8rem';
-                destaquesSlider.style.padding = '1rem 0 3rem 0';
-            }
-            
-            // Posicionar os botões de navegação
-            const prevBtn = document.querySelector('.slider-arrow-left');
-            const nextBtn = document.querySelector('.slider-arrow-right');
-            
-            if (prevBtn && nextBtn) {
-                prevBtn.style.left = '10px';
-                prevBtn.style.zIndex = '10';
-                nextBtn.style.right = '10px';
-                nextBtn.style.zIndex = '10';
-            }
-        }
-    }
-
-    // Função para corrigir o problema da imagem de salas
-    function fixSalaImage() {
-        // URL alternativa para a imagem de salas
-        const salasAlternativeUrl = "https://images.unsplash.com/photo-1583845112239-97ef1341b271?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80";
-        
-        // Seleciona todas as imagens e títulos nos itens de coleção
-        const collectionItems = document.querySelectorAll('.colecao-item');
-        
-        collectionItems.forEach(item => {
-            const title = item.querySelector('h3');
-            const img = item.querySelector('img');
-            
-            // Verifica se é o item de salas
-            if (title && title.textContent.trim() === 'Salas' && img) {
-                // Verifica se a imagem falhou ao carregar ou é a URL problemática
-                if (img.complete && img.naturalHeight === 0 || 
-                    (img.src && img.src.includes('postimg.cc'))) {
-                    // Substitui pela URL alternativa
-                    console.log("Corrigindo imagem de salas:", img.src);
-                    img.src = salasAlternativeUrl;
-                }
-                
-                // Adiciona listener de erro para garantir que a imagem seja substituída se falhar
-                img.onerror = function() {
-                    console.log("Erro ao carregar imagem de salas, substituindo...");
-                    this.src = salasAlternativeUrl;
-                    // Previne loop infinito
-                    this.onerror = null;
-                };
-                
-                // Adiciona classe para identificar esta imagem específica
-                img.classList.add('sala-image');
-            }
-        });
-    }
-
     // Ativar efeito de menu mobile
     const menuToggle = document.querySelector('.menu-toggle');
     const menuClose = document.querySelector('.menu-close');
     const nav = document.querySelector('nav');
     const menuOverlay = document.querySelector('.menu-overlay');
-    
+
     if (menuToggle && menuClose) {
         menuToggle.addEventListener('click', () => {
             nav.classList.add('active');
@@ -210,16 +16,265 @@ document.addEventListener('DOMContentLoaded', function() {
         menuClose.addEventListener('click', closeMenu);
         menuOverlay.addEventListener('click', closeMenu);
     }
-    
+
     function closeMenu() {
         nav.classList.remove('active');
         menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
-    
+
+    // Carrinho de compras
+    let cart = [];
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    const cartOverlay = document.querySelector('.cart-overlay');
+    const cartCount = document.querySelector('.cart-count');
+    const cartItems = document.querySelector('.cart-items');
+    const cartTotal = document.querySelector('.cart-total strong');
+    const cartClose = document.querySelector('.cart-close');
+    const btnContinue = document.querySelector('.btn-continue');
+    const btnCheckout = document.querySelector('.btn-checkout');
+
+    // Garantir que o carrinho comece corretamente fechado sem causar problemas de CSS
+    function resetCartStyles() {
+        cartSidebar.style.right = '-400px';
+        cartSidebar.style.opacity = '0';
+        cartSidebar.style.visibility = 'hidden';
+        cartOverlay.style.opacity = '0';
+        cartOverlay.style.visibility = 'hidden';
+    }
+
+    // Resetar o carrinho no carregamento da página
+    resetCartStyles();
+
+    // Sistema de pesquisa
+    const searchIcon = document.querySelector('.search-icon');
+    const searchBar = document.querySelector('.search-bar');
+    const searchInput = document.getElementById('search-input');
+    const searchClose = document.getElementById('search-close');
+    const searchResults = document.querySelector('.search-results');
+    const limparPesquisa = document.getElementById('limpar-pesquisa');
+    const produtosNaoEncontrados = document.querySelector('.produtos-nao-encontrados');
+
+    // Barra de pesquisa principal
+    const mainSearchInput = document.getElementById('main-search-input');
+    const mainSearchClear = document.getElementById('main-search-clear');
+
+    // Modal de Produto
+    const productModal = document.querySelector('.product-modal');
+    const productImage = document.querySelector('.product-image img');
+    const productTitle = document.querySelector('.product-title');
+    const productPrice = document.querySelector('.product-price');
+    const closeModal = document.querySelector('.close-modal');
+    const addToCartBtn = document.querySelector('.add-to-cart');
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    const quantityInput = document.querySelector('.quantity-input');
+    const minusBtn = document.querySelector('.quantity-btn.minus');
+    const plusBtn = document.querySelector('.quantity-btn.plus');
+
+    // Modal de Finalização de Pedido
+    const checkoutModal = document.querySelector('.checkout-modal');
+    const closeCheckout = document.querySelector('.close-checkout');
+    const checkoutItems = document.querySelector('.checkout-items');
+    const checkoutTotal = document.querySelector('.checkout-total strong');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    // Variáveis para controle do produto atual
+    let currentProduct = null;
+    let selectedSize = null;
+
+    // Função para abrir/fechar a barra de pesquisa
+    function toggleSearchBar() {
+        searchBar.classList.toggle('active');
+        
+        if (searchBar.classList.contains('active')) {
+            searchInput.focus();
+            
+            // Resetar qualquer resultado de pesquisa anterior
+            searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+            
+            // Atualizar altura do header quando abrir a barra de pesquisa
+            if (window.innerWidth <= 575) {
+                // Adicionar evento para verificar quando a animação da barra terminar
+                setTimeout(() => {
+                    // Garantir que a barra de resultados esteja oculta ao abrir a pesquisa
+                    searchResults.style.display = 'none';
+                    searchResults.classList.remove('active');
+                }, 100);
+            }
+        } else {
+            // Fechar a barra e os resultados
+            searchInput.value = '';
+            searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
+        }
+    }
+
+    // Função para remover acentos para comparação
+    function removerAcentos(texto) {
+        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    // Função melhorada para realizar a pesquisa
+    function realizarPesquisa(termoPesquisa, isMainSearch = false) {
+        // Se o termo de pesquisa estiver vazio, reset tudo
+        if (!termoPesquisa || termoPesquisa.trim() === '') {
+            if (!isMainSearch) {
+                searchResults.classList.remove('active');
+            }
+            resetarFiltros();
+            return;
+        }
+        
+        termoPesquisa = removerAcentos(termoPesquisa.trim());
+        
+        // Recuperar todos os produtos da página
+        const todosProdutos = document.querySelectorAll('.produto');
+        
+        // Filtrar os resultados - agora usando includes() para correspondências parciais
+        const resultados = Array.from(todosProdutos).filter(produto => {
+            const nomeProduto = removerAcentos(produto.dataset.nome);
+            return nomeProduto.includes(termoPesquisa);
+        });
+        
+        // Se não for a pesquisa principal, atualizar o dropdown de resultados
+        if (!isMainSearch) {
+            atualizarResultadosPesquisa(resultados);
+        }
+        
+        // Filtrar os produtos na página principal
+        filtrarProdutos(termoPesquisa);
+        
+        // Atualizar o botão de limpar da pesquisa principal
+        if (isMainSearch && mainSearchClear) {
+            mainSearchClear.classList.add('active');
+        }
+    }
+
+    // Função para atualizar os resultados de pesquisa no dropdown
+    function atualizarResultadosPesquisa(resultados) {
+        searchResults.innerHTML = '';
+        
+        if (resultados.length === 0) {
+            searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
+            searchResults.style.display = 'block';
+            
+            // Para dispositivos móveis, posicionar exatamente abaixo da barra
+            if (window.innerWidth <= 575) {
+                // Obter a altura atual da barra de pesquisa para posicionamento exato
+                const searchBarHeight = searchBar.offsetHeight;
+                const searchBarRect = searchBar.getBoundingClientRect();
+                
+                // Posicionar os resultados exatamente abaixo da barra
+                searchResults.style.top = (searchBarRect.bottom + window.scrollY) + 'px';
+            }
+            
+            setTimeout(() => {
+                searchResults.classList.add('active');
+            }, 10);
+            return;
+        }
+        
+        resultados.forEach(produto => {
+            const resultadoItem = document.createElement('div');
+            resultadoItem.className = 'search-result-item';
+            resultadoItem.innerHTML = `
+                <img src="${produto.dataset.img}" alt="${produto.dataset.nome}" class="search-result-img">
+                <div class="search-result-details">
+                    <h4>${produto.dataset.nome}</h4>
+                    <p>R$ ${parseFloat(produto.dataset.preco).toFixed(2).replace('.', ',')}</p>
+                </div>
+            `;
+            
+            resultadoItem.addEventListener('click', () => {
+                const productData = {
+                    id: produto.dataset.id,
+                    name: produto.dataset.nome,
+                    price: parseFloat(produto.dataset.preco),
+                    image: produto.dataset.img
+                };
+                
+                openProductModal(productData);
+                
+                // Fechar a pesquisa
+                searchBar.classList.remove('active');
+                searchResults.classList.remove('active');
+                searchResults.style.display = 'none';
+                searchInput.value = '';
+            });
+            
+            searchResults.appendChild(resultadoItem);
+        });
+        
+        // Exibir os resultados
+        searchResults.style.display = 'block';
+        
+        // Para dispositivos móveis, posicionar exatamente abaixo da barra
+        if (window.innerWidth <= 575) {
+            // Obter a altura atual da barra de pesquisa para posicionamento exato
+            const searchBarHeight = searchBar.offsetHeight;
+            const searchBarRect = searchBar.getBoundingClientRect();
+            
+            // Posicionar os resultados exatamente abaixo da barra
+            searchResults.style.top = (searchBarRect.bottom + window.scrollY) + 'px';
+        }
+        
+        setTimeout(() => {
+            searchResults.classList.add('active');
+        }, 10);
+    }
+
+    // Função melhorada para filtrar os produtos na página principal
+    function filtrarProdutos(termoPesquisa) {
+        const todosProdutos = document.querySelectorAll('.produto');
+        let produtosVisiveis = 0;
+        
+        todosProdutos.forEach(produto => {
+            const nomeProduto = removerAcentos(produto.dataset.nome);
+            
+            // Verifica se o nome do produto contém o termo de pesquisa (correspondência parcial)
+            if (nomeProduto.includes(termoPesquisa)) {
+                produto.classList.remove('produto-hidden');
+                produtosVisiveis++;
+            } else {
+                produto.classList.add('produto-hidden');
+            }
+        });
+        
+        // Mostrar mensagem se nenhum produto for encontrado
+        if (produtosVisiveis === 0) {
+            produtosNaoEncontrados.style.display = 'block';
+        } else {
+            produtosNaoEncontrados.style.display = 'none';
+        }
+    }
+
+    // Função para resetar filtros de pesquisa
+    function resetarFiltros() {
+        const todosProdutos = document.querySelectorAll('.produto');
+        
+        todosProdutos.forEach(produto => {
+            produto.classList.remove('produto-hidden');
+        });
+        
+        produtosNaoEncontrados.style.display = 'none';
+        searchInput.value = '';
+        searchBar.classList.remove('active');
+        searchResults.classList.remove('active');
+        
+        if (mainSearchInput) {
+            mainSearchInput.value = '';
+            if (mainSearchClear) {
+                mainSearchClear.classList.remove('active');
+            }
+        }
+    }
+
     // Efeito de header scroll
     const header = document.querySelector('header');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
@@ -227,10 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('scrolled');
         }
     });
-    
+
     // Navegação suave ao clicar em links do menu
     const navLinks = document.querySelectorAll('nav a, .footer-links a, .btn[href^="#"]');
-    
+
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             if (this.getAttribute('href').startsWith('#')) {
@@ -253,41 +308,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
+    // Inicializar animações de scroll
+    function initScrollAnimations() {
+        // Seleciona todos os itens que devem ter animação ao scroll
+        const animatedElements = [
+            ...document.querySelectorAll('.colecao-item'),
+            ...document.querySelectorAll('.destaque-item'),
+            ...document.querySelectorAll('.sobre-text'),
+            ...document.querySelectorAll('.contato-content > div')
+        ];
+        
+        // Adiciona classe inicial para esconder os elementos
+        animatedElements.forEach(element => {
+            element.classList.add('scroll-animation');
+        });
+        
+        // Função para verificar se um elemento está visível na viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+            );
+        }
+        
+        // Função para animar elementos visíveis
+        function animateElementsOnScroll() {
+            animatedElements.forEach((element, index) => {
+                if (isElementInViewport(element) && !element.classList.contains('animated')) {
+                    // Calculando um delay escalonado
+                    const row = Math.floor(index / 3); // Assume 3 elementos por linha
+                    const col = index % 3;
+                    const delay = 0.1 + (row * 0.15) + (col * 0.1);
+                    
+                    setTimeout(() => {
+                        element.classList.add('animated');
+                    }, delay * 1000);
+                }
+            });
+        }
+        
+        // Verificar elementos visíveis no carregamento inicial
+        setTimeout(() => {
+            animateElementsOnScroll();
+        }, 200);
+        
+        // Adicionar listener de scroll para animar elementos quando se tornarem visíveis
+        window.addEventListener('scroll', animateElementsOnScroll, { passive: true });
+    }
+
     // Controle do slider de destaques
     const destaquesSlider = document.querySelector('.destaques-slider');
     const slideItems = document.querySelectorAll('.destaque-item');
     const prevBtn = document.querySelector('.slider-arrow-left');
     const nextBtn = document.querySelector('.slider-arrow-right');
-    
+
     if (destaquesSlider && slideItems.length > 0) {
-        // Botões de navegação para carrossel 
-        setTimeout(() => {
-            // Recalcular após as alterações do tamanho dos itens
-            const itemWidth = slideItems[0].offsetWidth;
-            const slideGap = parseInt(window.getComputedStyle(destaquesSlider).columnGap) || 24;
-            const moveDistance = itemWidth + slideGap;
-            
-            prevBtn.addEventListener('click', () => {
-                destaquesSlider.scrollBy({
-                    left: -moveDistance,
-                    behavior: 'smooth'
-                });
+        // Recalcular após as alterações do tamanho dos itens
+        const itemWidth = slideItems[0].offsetWidth;
+        const slideGap = parseInt(window.getComputedStyle(destaquesSlider).columnGap) || 24;
+        const moveDistance = itemWidth + slideGap;
+        
+        prevBtn.addEventListener('click', () => {
+            destaquesSlider.scrollBy({
+                left: -moveDistance,
+                behavior: 'smooth'
             });
-            
-            nextBtn.addEventListener('click', () => {
-                destaquesSlider.scrollBy({
-                    left: moveDistance,
-                    behavior: 'smooth'
-                });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            destaquesSlider.scrollBy({
+                left: moveDistance,
+                behavior: 'smooth'
             });
-        }, 100); // Pequeno delay para garantir que as alterações de estilo foram aplicadas
+        });
     }
-    
+
     // Tooltip para o botão de WhatsApp
     const whatsappBtn = document.querySelector('.whatsapp-btn');
     const tooltip = document.getElementById('tooltip');
-    
+
     if (whatsappBtn && tooltip) {
         whatsappBtn.addEventListener('mouseenter', () => {
             const rect = whatsappBtn.getBoundingClientRect();
@@ -300,236 +400,503 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.classList.remove('visible');
         });
     }
-    
-    // Inicialização do lightbox para visualização de projetos
-    initLightbox();
 
-    // Enviando formulário para WhatsApp
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+    // Funções para o carrinho de compras - CORRIGIDAS
+    function openCart() {
+        // Primeiro, certifique-se de que os estilos sejam resetados para evitar conflitos
+        cartSidebar.style.right = '-400px';
+        cartSidebar.style.opacity = '0';
+        cartSidebar.style.visibility = 'hidden';
+        
+        // Depois aplique as classes e estilos para abrir
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+        
+        // Aguarde um pequeno momento para aplicar a transição visual
+        setTimeout(() => {
+            cartSidebar.style.right = '0';
+            cartSidebar.style.opacity = '1';
+            cartSidebar.style.visibility = 'visible';
+            document.body.style.overflow = 'hidden';
+        }, 10);
+    }
+
+    function closeCart() {
+        cartSidebar.style.right = '-400px';
+        cartSidebar.style.opacity = '0';
+        cartSidebar.style.visibility = 'hidden';
+        
+        cartSidebar.classList.remove('active');
+        cartOverlay.classList.remove('active');
+        
+        document.body.style.overflow = '';
+    }
+
+    function updateCartDisplay() {
+        // Atualiza apenas o contador de itens
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = totalItems;
+        
+        // Atualiza a lista de itens no carrinho
+        cartItems.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio</p>';
+            cartTotal.textContent = 'R$ 0,00';
+            return;
+        }
+        
+        // Calcula o total
+        let totalPrice = 0;
+        
+        // Adiciona cada item ao carrinho
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                <div class="cart-item-details">
+                    <h4 class="cart-item-title">${item.name}</h4>
+                    <p class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                    <p class="cart-item-size">Tamanho: ${item.size}</p>
+                    <div class="cart-item-quantity">
+                        <button class="cart-quantity-btn minus" data-index="${index}">-</button>
+                        <input type="number" class="cart-quantity-input" value="${item.quantity}" min="1" max="10" data-index="${index}">
+                        <button class="cart-quantity-btn plus" data-index="${index}">+</button>
+                    </div>
+                    <p class="cart-item-price-total">Total: R$ ${itemTotal.toFixed(2).replace('.', ',')}</p>
+                    <button class="cart-item-remove" data-index="${index}">Remover</button>
+                </div>
+            `;
+            
+            cartItems.appendChild(cartItem);
+        });
+        
+        // Atualiza o total do carrinho
+        cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+        
+        // Adiciona event listeners para os botões de quantidade e remoção
+        const minusBtns = document.querySelectorAll('.cart-item .minus');
+        const plusBtns = document.querySelectorAll('.cart-item .plus');
+        const quantityInputs = document.querySelectorAll('.cart-quantity-input');
+        const removeBtns = document.querySelectorAll('.cart-item-remove');
+        
+        minusBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = parseInt(btn.dataset.index);
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                    updateCartDisplay();
+                }
+            });
+        });
+        
+        plusBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = parseInt(btn.dataset.index);
+                if (cart[index].quantity < 10) {
+                    cart[index].quantity++;
+                    updateCartDisplay();
+                }
+            });
+        });
+        
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                const index = parseInt(input.dataset.index);
+                const newQuantity = parseInt(input.value);
+                
+                if (newQuantity >= 1 && newQuantity <= 10) {
+                    cart[index].quantity = newQuantity;
+                } else if (newQuantity < 1) {
+                    cart[index].quantity = 1;
+                } else {
+                    cart[index].quantity = 10;
+                }
+                
+                updateCartDisplay();
+            });
+        });
+        
+        removeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = parseInt(btn.dataset.index);
+                cart.splice(index, 1);
+                updateCartDisplay();
+            });
+        });
+    }
+
+    // Funções para o modal de produto
+    function openProductModal(productData) {
+        currentProduct = productData;
+        
+        // Preencher os dados do produto no modal
+        productImage.src = productData.image;
+        productTitle.textContent = productData.name;
+        productPrice.textContent = `R$ ${productData.price.toFixed(2).replace('.', ',')}`;
+        
+        // Reset tamanho e quantidade
+        selectedSize = null;
+        sizeBtns.forEach(btn => btn.classList.remove('active'));
+        quantityInput.value = 1;
+        
+        // Mostrar o modal
+        productModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+        productModal.classList.remove('active');
+        document.body.style.overflow = '';
+        currentProduct = null;
+    }
+
+    // Funções para o modal de checkout
+    function openCheckoutModal() {
+        // Mostrar os itens do carrinho no checkout
+        updateCheckoutDisplay();
+        
+        // Mostrar o modal
+        checkoutModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutModal() {
+        checkoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateCheckoutDisplay() {
+        checkoutItems.innerHTML = '';
+        
+        if (cart.length === 0) {
+            checkoutItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio</p>';
+            checkoutTotal.textContent = 'R$ 0,00';
+            return;
+        }
+        
+        // Calcula o total
+        let totalPrice = 0;
+        
+        // Adiciona cada item ao checkout
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+            
+            const checkoutItem = document.createElement('div');
+            checkoutItem.className = 'checkout-item';
+            checkoutItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="checkout-item-img">
+                <div class="checkout-item-details">
+                    <h4 class="checkout-item-title">${item.name}</h4>
+                    <p>Quantidade: ${item.quantity} | Tamanho: ${item.size}</p>
+                    <p>Preço: R$ ${itemTotal.toFixed(2).replace('.', ',')}</p>
+                </div>
+            `;
+            
+            checkoutItems.appendChild(checkoutItem);
+        });
+        
+        // Atualiza o total do checkout
+        checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    }
+
+    // Função para adicionar ao carrinho - SOLUÇÃO PARA O PROBLEMA 2
+    function addToCart() {
+        if (!currentProduct || !selectedSize) {
+            alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
+            return;
+        }
+        
+        const quantity = parseInt(quantityInput.value);
+        
+        if (quantity < 1 || quantity > 10) {
+            alert('A quantidade deve estar entre 1 e 10 itens.');
+            return;
+        }
+        
+        // ALTERAÇÃO: Sempre adicionar como um novo item, independente de já existir no carrinho
+        // Todos os itens serão adicionados individualmente, para que o tamanho seja selecionado para cada unidade
+        for (let i = 0; i < quantity; i++) {
+            // Adicionar novo item ao carrinho (1 unidade por vez)
+            cart.push({
+                id: currentProduct.id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                image: currentProduct.image,
+                size: selectedSize,
+                quantity: 1  // Sempre adiciona 1 unidade
+            });
+        }
+        
+        // Atualizar o carrinho e fechar o modal
+        updateCartDisplay();
+        closeProductModal();
+        
+        // Abrir o carrinho para mostrar o item adicionado
+        openCart();
+    }
+
+    // Event Listeners - CORRIGIDOS
+
+    // Abrir/fechar carrinho
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            openCart();
+        });
+    }
+
+    if (cartClose) {
+        cartClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeCart();
+        });
+    }
+
+    if (cartOverlay) {
+        cartOverlay.addEventListener('click', function() {
+            closeCart();
+        });
+    }
+
+    if (btnContinue) {
+        btnContinue.addEventListener('click', function() {
+            closeCart();
+        });
+    }
+
+    // Mostrar modal de produto ao clicar em "Comprar"
+    const buyButtons = document.querySelectorAll('.btn-comprar');
+
+    buyButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productItem = button.closest('.produto');
+            
+            if (productItem) {
+                const productData = {
+                    id: productItem.dataset.id,
+                    name: productItem.dataset.nome,
+                    price: parseFloat(productItem.dataset.preco),
+                    image: productItem.dataset.img
+                };
+                
+                openProductModal(productData);
+            }
+        });
+    });
+
+    // Fechar modal de produto
+    if (closeModal) {
+        closeModal.addEventListener('click', closeProductModal);
+    }
+
+    // Selecionar tamanho no modal de produto
+    sizeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sizeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedSize = btn.dataset.size;
+        });
+    });
+
+    // Controle de quantidade no modal de produto
+    if (minusBtn) {
+        minusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+    }
+
+    if (plusBtn) {
+        plusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue < 10) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
+    }
+
+    if (quantityInput) {
+        quantityInput.addEventListener('change', () => {
+            const newValue = parseInt(quantityInput.value);
+            if (newValue < 1) {
+                quantityInput.value = 1;
+            } else if (newValue > 10) {
+                quantityInput.value = 10;
+            }
+        });
+    }
+
+    // Adicionar ao carrinho do modal de produto
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', addToCart);
+    }
+
+    // Abrir modal de checkout
+    if (btnCheckout) {
+        btnCheckout.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio.');
+                return;
+            }
+            
+            // Fechar carrinho
+            closeCart();
+            
+            // Abrir checkout
+            openCheckoutModal();
+        });
+    }
+
+    // Fechar modal de checkout
+    if (closeCheckout) {
+        closeCheckout.addEventListener('click', closeCheckoutModal);
+    }
+
+    // Enviar pedido para WhatsApp
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validar formulário
-            const nome = document.getElementById('nome').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-            const endereco = document.getElementById('endereco').value.trim();
-            const ambiente = document.getElementById('ambiente').value.trim();
-            const horario = document.getElementById('horario').value.trim();
-            const mensagem = document.getElementById('mensagem').value.trim();
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio.');
+                return;
+            }
             
-            if (!nome || !telefone || !ambiente || !horario || !mensagem) {
+            // Coletar dados do formulário
+            const nome = document.getElementById('checkout-nome').value.trim();
+            const telefone = document.getElementById('checkout-telefone').value.trim();
+            const endereco = document.getElementById('checkout-endereco').value.trim();
+            const pagamento = document.getElementById('checkout-pagamento').value;
+            const obs = document.getElementById('checkout-obs').value.trim();
+            
+            if (!nome || !telefone || !endereco || !pagamento) {
                 alert('Por favor, preencha todos os campos obrigatórios.');
                 return;
             }
             
-            // Formatando a mensagem para o WhatsApp
-            let whatsappMessage = `*Novo Orçamento - Modern Designs*%0A%0A`;
-            whatsappMessage += `*Nome:* ${nome}%0A`;
+            // Calcular o total do pedido
+            const totalPedido = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            // Formatar a mensagem para o WhatsApp
+            let whatsappMessage = `*Novo Pedido - Estilo Único*%0A%0A`;
+            whatsappMessage += `*Cliente:* ${nome}%0A`;
             whatsappMessage += `*Telefone:* ${telefone}%0A`;
+            whatsappMessage += `*Endereço:* ${endereco}%0A`;
+            whatsappMessage += `*Forma de Pagamento:* ${document.getElementById('checkout-pagamento').options[document.getElementById('checkout-pagamento').selectedIndex].text}%0A%0A`;
             
-            if (endereco) {
-                whatsappMessage += `*Endereço:* ${endereco}%0A`;
+            whatsappMessage += `*Itens do Pedido:*%0A`;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                whatsappMessage += `- ${item.quantity}x ${item.name} (Tamanho: ${item.size})%0A`;
+                whatsappMessage += `   R$ ${itemTotal.toFixed(2).replace('.', ',')}%0A`;
+            });
+            
+            whatsappMessage += `%0A*Total do Pedido:* R$ ${totalPedido.toFixed(2).replace('.', ',')}%0A%0A`;
+            
+            if (obs) {
+                whatsappMessage += `*Observações:* ${obs}%0A%0A`;
             }
             
-            whatsappMessage += `*Ambiente:* ${document.getElementById('ambiente').options[document.getElementById('ambiente').selectedIndex].text}%0A`;
-            whatsappMessage += `*Horário:* ${document.getElementById('horario').options[document.getElementById('horario').selectedIndex].text}%0A`;
-            whatsappMessage += `*Detalhes:* ${mensagem}%0A`;
+            // CORREÇÃO: Número do WhatsApp ajustado para formato internacional e sem caracteres especiais
+            // Redirecionar para o WhatsApp
+            window.open(`https://api.whatsapp.com/send?phone=5583991816153&text=${whatsappMessage}`, '_blank');
             
-            // Redirecionando para o WhatsApp com a mensagem formatada
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
+            // Limpar o carrinho e fechar o modal
+            cart = [];
+            updateCartDisplay();
+            closeCheckoutModal();
             
-            // Limpar formulário
-            contactForm.reset();
+            // Mostrar confirmação
+            alert('Seu pedido foi enviado com sucesso! Em breve entraremos em contato.');
         });
     }
-    
-    // Aplicar a função para ajustar o título em dispositivos móveis
-    adjustTitleForMobile();
-    
-    // Iniciar animações de scroll
-    initScrollAnimations();
-    
-    // Ajustar elementos dos projetos em destaque
-    adjustProjectsDisplay();
-    
-    // Corrigir a imagem de salas
-    fixSalaImage();
-    
-    // Adicionar evento de redimensionamento para ajustar projetos em telas móveis
-    window.addEventListener('resize', function() {
-        adjustProjectsDisplay();
-        fixSalaImage();
-    });
-});
 
-// Função Lightbox para projetos
-function initLightbox() {
-    // Criar elementos do lightbox
-    const lightboxOverlay = document.createElement('div');
-    lightboxOverlay.className = 'lightbox-overlay';
-    document.body.appendChild(lightboxOverlay);
+    // Event listeners para a funcionalidade de pesquisa
+    if (searchIcon) {
+        searchIcon.addEventListener('click', toggleSearchBar);
+    }
     
-    const lightboxContainer = document.createElement('div');
-    lightboxContainer.className = 'lightbox-container';
-    lightboxOverlay.appendChild(lightboxContainer);
-    
-    const lightboxImage = document.createElement('img');
-    lightboxImage.className = 'lightbox-image';
-    lightboxContainer.appendChild(lightboxImage);
-    
-    const lightboxCaption = document.createElement('div');
-    lightboxCaption.className = 'lightbox-caption';
-    lightboxContainer.appendChild(lightboxCaption);
-    
-    const lightboxClose = document.createElement('button');
-    lightboxClose.className = 'lightbox-close';
-    lightboxClose.innerHTML = '<i class="fas fa-times"></i>';
-    lightboxContainer.appendChild(lightboxClose);
-    
-    const lightboxPrev = document.createElement('button');
-    lightboxPrev.className = 'lightbox-nav lightbox-prev';
-    lightboxPrev.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    lightboxContainer.appendChild(lightboxPrev);
-    
-    const lightboxNext = document.createElement('button');
-    lightboxNext.className = 'lightbox-nav lightbox-next';
-    lightboxNext.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    lightboxContainer.appendChild(lightboxNext);
-    
-    // Variáveis para controle do lightbox
-    let currentIndex = 0;
-    let images = [];
-    
-    // Selecionar todas as imagens dos projetos
-    const projectImages = document.querySelectorAll('.colecao-item img, .destaque-item img');
-    
-    // Preparar dados das imagens
-    projectImages.forEach((img, index) => {
-        // Obter título do projeto
-        const title = img.closest('.colecao-item, .destaque-item').querySelector('h3')?.textContent || '';
-        const subtitle = img.closest('.colecao-item, .destaque-item').querySelector('p')?.textContent || '';
-        
-        // Adicionar à lista de imagens
-        images.push({
-            src: img.src,
-            title: title,
-            subtitle: subtitle,
-            element: img
+    if (searchClose) {
+        searchClose.addEventListener('click', toggleSearchBar);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            realizarPesquisa(this.value, false);
         });
         
-        // Adicionar evento de clique para abrir o lightbox
-        img.addEventListener('click', (e) => {
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                toggleSearchBar();
+            }
+        });
+    }
+
+    // Fechar resultados de pesquisa quando clicar fora
+    document.addEventListener('click', (e) => {
+        if (searchBar && searchIcon && searchBar.classList.contains('active') && 
+            !searchBar.contains(e.target) && !searchIcon.contains(e.target) && !searchResults.contains(e.target)) {
+            // Verificação adicional para não fechar ao clicar nos resultados
+            searchBar.classList.remove('active');
+            searchResults.classList.remove('active');
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+        }
+    });
+
+    // Event listeners para a pesquisa principal
+    if (mainSearchInput) {
+        mainSearchInput.addEventListener('input', function() {
+            realizarPesquisa(this.value, true);
+        });
+        
+        mainSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.value = '';
+                resetarFiltros();
+            }
+        });
+    }
+
+    // Botão para limpar a pesquisa principal
+    if (mainSearchClear) {
+        mainSearchClear.addEventListener('click', function() {
+            mainSearchInput.value = '';
+            resetarFiltros();
+            mainSearchClear.classList.remove('active');
+        });
+    }
+
+    // Botão para limpar a pesquisa na mensagem de "nenhum produto encontrado"
+    if (limparPesquisa) {
+        limparPesquisa.addEventListener('click', resetarFiltros);
+    }
+
+    // Impedir que o formulário de pesquisa envie
+    if (searchBar) {
+        searchBar.addEventListener('submit', (e) => {
             e.preventDefault();
-            openLightbox(index);
         });
-    });
-    
-    // Função para abrir o lightbox
-    function openLightbox(index) {
-        currentIndex = index;
-        updateLightbox();
-        lightboxOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevenir rolagem
     }
-    
-    // Função para fechar o lightbox
-    function closeLightbox() {
-        lightboxOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restaurar rolagem
-    }
-    
-    // Função para atualizar o conteúdo do lightbox
-    function updateLightbox() {
-        const image = images[currentIndex];
-        lightboxImage.src = image.src;
-        lightboxCaption.innerHTML = `<h3>${image.title}</h3><p>${image.subtitle}</p>`;
-        
-        // Verificar se deve mostrar os botões de navegação
-        lightboxPrev.style.display = currentIndex > 0 ? 'flex' : 'none';
-        lightboxNext.style.display = currentIndex < images.length - 1 ? 'flex' : 'none';
-    }
-    
-    // Navegação para próxima imagem
-    function nextImage() {
-        if (currentIndex < images.length - 1) {
-            currentIndex++;
-            updateLightbox();
-        }
-    }
-    
-    // Navegação para imagem anterior
-    function prevImage() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLightbox();
-        }
-    }
-    
-    // Adicionar eventos de clique para navegação
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxOverlay.addEventListener('click', (e) => {
-        if (e.target === lightboxOverlay) {
-            closeLightbox();
-        }
-    });
-    lightboxPrev.addEventListener('click', prevImage);
-    lightboxNext.addEventListener('click', nextImage);
-    
-    // Navegação por teclado
-    document.addEventListener('keydown', (e) => {
-        if (!lightboxOverlay.classList.contains('active')) return;
-        
-        if (e.key === 'Escape') {
-            closeLightbox();
-        } else if (e.key === 'ArrowRight') {
-            nextImage();
-        } else if (e.key === 'ArrowLeft') {
-            prevImage();
-        }
-    });
-}
 
-// Adiciona um listener para o evento window.onload para garantir que as imagens sejam verificadas
-window.addEventListener('load', function() {
-    // URL alternativa para a imagem de salas (caso a imagem ainda não carregue)
-    const salasAlternativeUrl = "https://images.unsplash.com/photo-1583845112239-97ef1341b271?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80";
-    
-    // Verifica especificamente a imagem com classe 'sala-image' ou com título 'Salas'
-    const salasImages = document.querySelectorAll('.sala-image, .colecao-item h3:contains("Salas") + img');
-    
-    // Se a imagem não foi encontrada pela classe, busca pelo título
-    if (!salasImages.length) {
-        const salaItems = document.querySelectorAll('.colecao-item');
-        salaItems.forEach(item => {
-            const title = item.querySelector('h3');
-            if (title && title.textContent.trim() === 'Salas') {
-                const img = item.querySelector('img');
-                if (img) {
-                    // Verifica se a imagem carregou corretamente
-                    if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0)) {
-                        img.src = salasAlternativeUrl;
-                    }
-                    
-                    // Adiciona um ouvinte de erro como backup
-                    img.onerror = function() {
-                        this.src = salasAlternativeUrl;
-                        this.onerror = null;
-                    };
-                }
-            }
-        });
-    } else {
-        // Se encontrou pela classe, verifica se as imagens carregaram corretamente
-        salasImages.forEach(img => {
-            if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0)) {
-                img.src = salasAlternativeUrl;
-            }
-            
-            img.onerror = function() {
-                this.src = salasAlternativeUrl;
-                this.onerror = null;
-            };
-        });
+    // Inicializar
+    initScrollAnimations();
+
+    // Apenas atualiza o contador, sem mostrar o carrinho
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    if (cartCount) {
+        cartCount.textContent = totalItems || '0';
     }
+    
+    // Fim do bloco de escopo da função anônima do DOMContentLoaded
 });
