@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `*Mensagem:*%0A${mensagem}%0A%0A`;
             
             // Redirecionar para o WhatsApp usando o formato correto
-            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
+            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
             
             // Limpar o formulário
             contactForm.reset();
@@ -845,7 +845,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Redirecionar para o WhatsApp com formato correto - SOLUÇÃO PROBLEMA 2
-            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
+            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
             
             // Limpar o carrinho e fechar o modal
             cart = [];
