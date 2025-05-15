@@ -35,6 +35,7 @@ body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
+    padding-top: 70px; /* Espaço para compensar o header fixo e barra de pesquisa */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -578,12 +579,13 @@ nav ul li a::after {
 
 /* Hero Section com animação de texto e Parallax - Posicionamento melhorado */
 .hero {
-    height: 100vh; /* Altura total da viewport para melhor distribuição */
+    height: 100vh;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza horizontalmente */
+    justify-content: center;
     overflow: hidden;
+    margin-top: 60px; /* Ajuste para evitar sobreposição */
 }
 
 .hero-background {
@@ -614,15 +616,15 @@ nav ul li a::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.7)); /* Ajustado para melhor legibilidade sem o backdrop filter */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.7));
 }
 
 .hero .container {
     position: relative;
     z-index: 2;
-    width: 100%; /* Largura total para aproveitamento máximo em telas pequenas */
+    width: 100%;
     display: flex;
-    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
 }
@@ -635,7 +637,7 @@ nav ul li a::after {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.5s;
-    margin-top: clamp(-35px, -4vw, -50px); /* Ajusta posição vertical para melhor equilíbrio visual */
+    margin-top: clamp(-35px, -4vw, -50px);
 }
 
 @keyframes fadeInUp {
@@ -838,7 +840,6 @@ nav ul li a::after {
 }
 
 .colecao-item:hover .colecao-info {
-    /* Apenas um leve efeito de destaque no hover */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7) 80%, rgba(0, 0, 0, 0));
 }
 
@@ -900,7 +901,7 @@ nav ul li a::after {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: clamp(260px, 80vw, 300px); /* Reduzido de 90vw para 80vw para telas pequenas */
+    width: clamp(260px, 80vw, 300px);
     max-width: 300px;
     text-align: center;
     background-color: var(--white-color);
@@ -941,7 +942,7 @@ nav ul li a::after {
 
 .destaque-item img {
     width: 100%;
-    height: clamp(250px, 60vw, 350px); /* Reduzido de 300px-350px para 250px-350px e de 70vw para 60vw */
+    height: clamp(250px, 60vw, 350px);
     object-fit: contain;
     margin-bottom: 1.2rem;
     border-radius: 2px;
@@ -1137,7 +1138,7 @@ nav ul li a::after {
     color: var(--secondary-color);
     background-color: #f9f9f9;
     transition: all var(--transition-medium);
-    -webkit-appearance: none; /* Remove default styling on iOS */
+    -webkit-appearance: none;
     appearance: none;
 }
 
@@ -1171,7 +1172,7 @@ nav ul li a::after {
     transition: all var(--transition-medium);
     position: relative;
     overflow: hidden;
-    -webkit-appearance: none; /* Remove default styling on iOS */
+    -webkit-appearance: none;
     appearance: none;
 }
 
@@ -1364,13 +1365,13 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transition-medium), visibility var(--transition-medium);
-    pointer-events: none; /* Impede interação quando oculto */
+    pointer-events: none;
 }
 
 .product-modal.active, .checkout-modal.active {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto; /* Permite interação quando visível */
+    pointer-events: auto;
 }
 
 .product-modal-content, .checkout-modal-content {
@@ -1624,14 +1625,16 @@ footer {
     transform: translateY(0);
 }
 
-/* Barra de pesquisa - Design Aprimorado */
+/* ========== SISTEMA DE PESQUISA - AJUSTES COMPLETOS ========== */
+/* Container de pesquisa */
 .search-container {
     display: flex;
     align-items: center;
     margin-right: 1rem;
-    position: relative;
+    position: static !important; /* Posição estática para permitir posicionamento absoluto dos filhos */
 }
 
+/* Ícone de lupa */
 .search-icon {
     font-size: 1.2rem;
     color: var(--primary-color);
@@ -1646,7 +1649,7 @@ footer {
     background-color: rgba(160, 134, 119, 0.15);
     box-shadow: 0 2px 8px rgba(160, 134, 119, 0.2);
     position: relative;
-    z-index: 10;
+    z-index: 100; /* Elevado para garantir que fique acima de outros elementos */
 }
 
 .search-icon::before {
@@ -1699,10 +1702,12 @@ footer {
     animation: pulsate 1.5s infinite ease-in-out;
 }
 
+/* Barra de pesquisa */
 .search-bar {
     position: absolute;
-    top: calc(100% + 10px);
-    right: -10px;
+    top: 60px; /* Posicionamento abaixo do header */
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     overflow: hidden;
     transition: all var(--transition-medium);
@@ -1765,40 +1770,32 @@ footer {
     color: var(--primary-color);
 }
 
-/* Resultados da pesquisa - Design Aprimorado */
+/* Resultados da pesquisa */
 .search-results {
-    display: none;
     position: absolute;
-    top: calc(100% + 10px);
-    right: -10px;
-    width: 320px;
-    max-height: 400px;
+    top: 110px; /* Posicionado logo abaixo da barra de pesquisa */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px; /* Mesmo tamanho da barra de pesquisa */
+    max-height: 60vh;
     overflow-y: auto;
     background-color: var(--white-color);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
-    z-index: 100;
+    z-index: 99; /* Um nível abaixo da barra para evitar sobreposição */
     padding: 0.5rem;
     border: 1px solid rgba(160, 134, 119, 0.2);
     opacity: 0;
-    transform: translateY(-10px);
+    visibility: hidden;
+    display: none;
     transition: opacity 0.3s, transform 0.3s;
 }
 
 .search-results.active {
     opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    visibility: visible;
+    display: block;
+    transform: translateY(0) !important;
 }
 
 .search-result-item {
@@ -1875,6 +1872,33 @@ footer {
     opacity: 0.7;
 }
 
+/* Tooltip para o ícone de pesquisa */
+.search-icon::after {
+    content: 'Pesquisar';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Produtos filtrados - classe para quando um produto não corresponde à pesquisa */
 .produto-hidden {
     display: none !important;
@@ -1929,44 +1953,6 @@ footer {
 
 #limpar-pesquisa::before {
     display: none;
-}
-
-.search-icon::after {
-    content: 'Pesquisar';
-    position: absolute;
-    top: 115%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.65rem;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.search-icon::after::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 8px;
-    height: 8px;
-    background-color: var(--secondary-color);
-}
-
-.search-icon:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
 }
 
 /* Barra de pesquisa principal abaixo do título */
@@ -2053,6 +2039,61 @@ footer {
     color: var(--white-color);
 }
 
+/* ========== RESPONSIVIDADE DO SISTEMA DE PESQUISA ========== */
+@media (max-width: 575px) {
+    /* Para dispositivos móveis pequenos */
+    .search-bar {
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    .search-bar.active {
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    .search-results {
+        width: 90%;
+        max-width: 280px;
+        max-height: 50vh; /* Um pouco menor em dispositivos móveis */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    /* Para tablets */
+    .search-bar {
+        width: 320px;
+        max-width: 70%;
+    }
+    
+    .search-bar.active {
+        width: 320px;
+        max-width: 70%;
+    }
+    
+    .search-results {
+        width: 320px;
+        max-width: 70%;
+        max-height: 60vh;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Para desktop */
+    .search-bar {
+        width: 350px;
+    }
+    
+    .search-bar.active {
+        width: 350px;
+    }
+    
+    .search-results {
+        width: 350px;
+        max-height: 70vh;
+    }
+}
+
 @media (max-width: 768px) {
     .main-search-bar {
         max-width: 90%;
@@ -2091,13 +2132,13 @@ footer {
     }
 
     .colecao-item img {
-        height: clamp(350px, 85vw, 450px); /* Reduzido de 450px-550px para 350px-450px */
+        height: clamp(350px, 85vw, 450px);
         width: 100%;
     }
 
     /* Garantir que todos os produtos sejam visíveis */
     .colecoes-grid {
-        grid-template-columns: 1fr; /* Força apenas uma coluna em telas muito pequenas */
+        grid-template-columns: 1fr;
     }
 
     /* Evitar que elementos saiam da tela */
@@ -2118,7 +2159,7 @@ footer {
     .form-group input,
     .form-group select,
     .form-group textarea {
-        font-size: 16px; /* Previne zoom automático em iPhones */
+        font-size: 16px;
     }
 
     /* Ajustes ampliados para melhor visualização em telas muito pequenas */
@@ -2172,36 +2213,6 @@ footer {
     .cart-sidebar {
         width: 100%;
         max-width: 100%;
-    }
-    
-    /* SOLUÇÃO PARA O PROBLEMA: Ajuste da barra de pesquisa em telas pequenas */
-    .search-container {
-        position: static; /* Mudança crucial para posicionamento correto */
-    }
-
-    .search-bar {
-        position: fixed; /* Fixar a posição para consistência */
-        top: 70px; /* Posição abaixo do header */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        z-index: 1005; /* Garantir que fique acima de outros elementos */
-    }
-    
-    .search-bar.active {
-        width: 90vw;
-        max-width: 280px;
-    }
-    
-    .search-results {
-        position: fixed; /* Fixado para acompanhar a barra */
-        top: 115px; /* MODIFICADO: Ajustado para ficar exatamente abaixo da barra */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90vw;
-        max-width: 280px;
-        z-index: 1005; /* Mesmo z-index da barra */
-        max-height: 60vh; /* Altura limitada para não ocupar toda a tela */
     }
 }
 

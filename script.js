@@ -83,27 +83,26 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProduct = null;
     let selectedSize = null;
 
-    // Função para posicionar dinamicamente os resultados de pesquisa
+    // SOLUÇÃO PROBLEMA 1: Função aprimorada para posicionar resultados de pesquisa
     function posicionarResultadosPesquisa() {
-        // Verifica se estamos em uma tela pequena (mobile)
-        if (window.innerWidth <= 575) {
-            const searchBar = document.querySelector('.search-bar');
-            const searchResults = document.querySelector('.search-results');
-            
-            if (searchBar && searchResults && searchBar.classList.contains('active')) {
-                // Obter a posição e dimensões da barra de pesquisa
-                const searchBarRect = searchBar.getBoundingClientRect();
-                
-                // Posicionar resultados exatamente abaixo da barra
-                searchResults.style.top = (searchBarRect.bottom + 5) + 'px';
-            }
-        }
+        if (!searchBar || !searchResults) return;
+        
+        // Obter a posição e dimensões da barra de pesquisa
+        const searchBarRect = searchBar.getBoundingClientRect();
+        const headerHeight = document.querySelector('header').offsetHeight;
+        
+        // Posicionar resultados exatamente abaixo da barra de pesquisa
+        searchResults.style.top = (searchBarRect.bottom + 5) + 'px';
+        searchResults.style.left = searchBarRect.left + 'px';
+        searchResults.style.width = searchBarRect.width + 'px';
     }
 
-    // Função para abrir/fechar a barra de pesquisa
+    // Função para abrir/fechar a barra de pesquisa com posicionamento consistente
     function toggleSearchBar() {
         searchBar.classList.toggle('active');
+        
         if (searchBar.classList.contains('active')) {
+            // Quando abre a barra, posiciona-a corretamente
             searchInput.focus();
             
             // Fechar resultados ao abrir para depois mostrar apenas com a pesquisa
@@ -114,12 +113,26 @@ document.addEventListener('DOMContentLoaded', function() {
             searchInput.value = '';
             
             // Adicionar pequeno atraso para permitir que a barra de pesquisa seja renderizada primeiro
-            setTimeout(posicionarResultadosPesquisa, 50);
+            setTimeout(() => {
+                // Garantir que a barra esteja visível na tela
+                const headerHeight = document.querySelector('header').offsetHeight;
+                searchBar.style.top = (headerHeight + 5) + 'px';
+                
+                // Pré-posicionar os resultados (mesmo que não mostrados ainda)
+                posicionarResultadosPesquisa();
+            }, 50);
         } else {
-            searchInput.value = '';
-            searchResults.classList.remove('active');
-            searchResults.style.display = 'none';
+            // Quando fecha a barra, limpa tudo
+            closeSearchBar();
         }
+    }
+
+    // Função para fechar a barra de pesquisa (para ser usada em vários lugares)
+    function closeSearchBar() {
+        searchBar.classList.remove('active');
+        searchResults.classList.remove('active');
+        searchResults.style.display = 'none';
+        searchInput.value = '';
     }
 
     // Função para remover acentos para comparação
@@ -169,50 +182,43 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (resultados.length === 0) {
             searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
-            searchResults.style.display = 'block';
-            setTimeout(() => {
-                searchResults.classList.add('active');
-                posicionarResultadosPesquisa(); // Chamar função de posicionamento
-            }, 10);
-            return;
+        } else {
+            resultados.forEach(produto => {
+                const resultadoItem = document.createElement('div');
+                resultadoItem.className = 'search-result-item';
+                resultadoItem.innerHTML = `
+                    <img src="${produto.dataset.img}" alt="${produto.dataset.nome}" class="search-result-img">
+                    <div class="search-result-details">
+                        <h4>${produto.dataset.nome}</h4>
+                        <p>R$ ${parseFloat(produto.dataset.preco).toFixed(2).replace('.', ',')}</p>
+                    </div>
+                `;
+                
+                resultadoItem.addEventListener('click', () => {
+                    const productData = {
+                        id: produto.dataset.id,
+                        name: produto.dataset.nome,
+                        price: parseFloat(produto.dataset.preco),
+                        image: produto.dataset.img
+                    };
+                    
+                    openProductModal(productData);
+                    
+                    // Fechar a pesquisa
+                    closeSearchBar();
+                });
+                
+                searchResults.appendChild(resultadoItem);
+            });
         }
         
-        resultados.forEach(produto => {
-            const resultadoItem = document.createElement('div');
-            resultadoItem.className = 'search-result-item';
-            resultadoItem.innerHTML = `
-                <img src="${produto.dataset.img}" alt="${produto.dataset.nome}" class="search-result-img">
-                <div class="search-result-details">
-                    <h4>${produto.dataset.nome}</h4>
-                    <p>R$ ${parseFloat(produto.dataset.preco).toFixed(2).replace('.', ',')}</p>
-                </div>
-            `;
-            
-            resultadoItem.addEventListener('click', () => {
-                const productData = {
-                    id: produto.dataset.id,
-                    name: produto.dataset.nome,
-                    price: parseFloat(produto.dataset.preco),
-                    image: produto.dataset.img
-                };
-                
-                openProductModal(productData);
-                
-                // Fechar a pesquisa
-                searchBar.classList.remove('active');
-                searchResults.classList.remove('active');
-                searchResults.style.display = 'none';
-                searchInput.value = '';
-            });
-            
-            searchResults.appendChild(resultadoItem);
-        });
-        
-        // Primeiro mostrar o elemento, depois adicionar a classe para a animação
+        // Mostrar os resultados e posicioná-los corretamente
         searchResults.style.display = 'block';
+        
+        // Usar setTimeout para garantir que a renderização complete antes de animar
         setTimeout(() => {
+            posicionarResultadosPesquisa();
             searchResults.classList.add('active');
-            posicionarResultadosPesquisa(); // Chamar função de posicionamento
         }, 10);
     }
 
@@ -270,6 +276,11 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+        
+        // Reposicionar resultados da pesquisa ao fazer scroll
+        if (searchResults.classList.contains('active')) {
+            posicionarResultadosPesquisa();
         }
     });
 
@@ -631,6 +642,42 @@ document.addEventListener('DOMContentLoaded', function() {
         openCart();
     }
 
+    // SOLUÇÃO PROBLEMA 2: Corrigido o envio do formulário de contato para o WhatsApp
+    // Event Listener para o formulário de contato
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Coletar dados do formulário
+            const nome = document.getElementById('nome').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensagem = document.getElementById('mensagem').value.trim();
+            
+            if (!nome || !telefone || !email || !mensagem) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Formatar a mensagem para o WhatsApp
+            let whatsappMessage = `*Contato via Site - Estilo Único*%0A%0A`;
+            whatsappMessage += `*Nome:* ${nome}%0A`;
+            whatsappMessage += `*Telefone:* ${telefone}%0A`;
+            whatsappMessage += `*Email:* ${email}%0A%0A`;
+            whatsappMessage += `*Mensagem:*%0A${mensagem}%0A%0A`;
+            
+            // Redirecionar para o WhatsApp usando o formato correto
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
+            
+            // Limpar o formulário
+            contactForm.reset();
+            
+            // Mostrar confirmação
+            alert('Sua mensagem foi enviada com sucesso! Em breve entraremos em contato.');
+        });
+    }
+
     // Event Listeners - CORRIGIDOS
 
     // Abrir/fechar carrinho
@@ -797,9 +844,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 whatsappMessage += `*Observações:* ${obs}%0A%0A`;
             }
             
-            // CORREÇÃO: Número do WhatsApp ajustado para formato internacional e sem caracteres especiais
-            // Redirecionar para o WhatsApp
-            window.open(`https://api.whatsapp.com/send?phone=5583991816153&text=${whatsappMessage}`, '_blank');
+            // Redirecionar para o WhatsApp com formato correto - SOLUÇÃO PROBLEMA 2
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
             
             // Limpar o carrinho e fechar o modal
             cart = [];
@@ -817,7 +863,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (searchClose) {
-        searchClose.addEventListener('click', toggleSearchBar);
+        searchClose.addEventListener('click', () => {
+            closeSearchBar();
+        });
     }
 
     if (searchInput) {
@@ -827,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                toggleSearchBar();
+                closeSearchBar();
             }
         });
     }
@@ -837,10 +885,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchBar && searchIcon && searchBar.classList.contains('active') && 
             !searchBar.contains(e.target) && !searchIcon.contains(e.target) && !searchResults.contains(e.target)) {
             // Verificação adicional para não fechar ao clicar nos resultados
-            searchBar.classList.remove('active');
-            searchResults.classList.remove('active');
-            searchResults.style.display = 'none';
-            searchInput.value = '';
+            closeSearchBar();
         }
     });
 
@@ -880,7 +925,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Adicionar evento de redimensionamento para atualizar a posição dos resultados
-    window.addEventListener('resize', posicionarResultadosPesquisa);
+    window.addEventListener('resize', () => {
+        if (searchResults.classList.contains('active')) {
+            posicionarResultadosPesquisa();
+        }
+    });
 
     // Inicializar
     initScrollAnimations();
@@ -890,6 +939,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cartCount) {
         cartCount.textContent = totalItems || '0';
     }
-    
-    // Fim do bloco de escopo da função anônima do DOMContentLoaded
 });
