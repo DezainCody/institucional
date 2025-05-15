@@ -2174,13 +2174,13 @@ footer {
         max-width: 100%;
     }
     
-    /* SOLUÇÃO PARA O PROBLEMA 1: Ajuste da barra de pesquisa em telas pequenas */
+    /* SOLUÇÃO PARA O PROBLEMA: Ajuste da barra de pesquisa em telas pequenas */
     .search-container {
         position: static; /* Mudança crucial para posicionamento correto */
     }
 
     .search-bar {
-        position: fixed; /* Mudar para fixed em vez de absolute */
+        position: fixed; /* Fixar a posição para consistência */
         top: 70px; /* Posição abaixo do header */
         left: 50%;
         transform: translateX(-50%);
@@ -2194,14 +2194,14 @@ footer {
     }
     
     .search-results {
-        position: fixed; /* Mudar para fixed para acompanhar a barra */
-        top: 120px; /* Posição logo abaixo da barra de pesquisa */
+        position: fixed; /* Fixado para acompanhar a barra */
+        top: 115px; /* MODIFICADO: Ajustado para ficar exatamente abaixo da barra */
         left: 50%;
         transform: translateX(-50%);
         width: 90vw;
         max-width: 280px;
         z-index: 1005; /* Mesmo z-index da barra */
-        max-height: 60vh; /* Limitar altura para não ocupar toda a tela */
+        max-height: 60vh; /* Altura limitada para não ocupar toda a tela */
     }
 }
 

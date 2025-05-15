@@ -83,29 +83,39 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProduct = null;
     let selectedSize = null;
 
+    // Função para posicionar dinamicamente os resultados de pesquisa
+    function posicionarResultadosPesquisa() {
+        // Verifica se estamos em uma tela pequena (mobile)
+        if (window.innerWidth <= 575) {
+            const searchBar = document.querySelector('.search-bar');
+            const searchResults = document.querySelector('.search-results');
+            
+            if (searchBar && searchResults && searchBar.classList.contains('active')) {
+                // Obter a posição e dimensões da barra de pesquisa
+                const searchBarRect = searchBar.getBoundingClientRect();
+                
+                // Posicionar resultados exatamente abaixo da barra
+                searchResults.style.top = (searchBarRect.bottom + 5) + 'px';
+            }
+        }
+    }
+
     // Função para abrir/fechar a barra de pesquisa
     function toggleSearchBar() {
         searchBar.classList.toggle('active');
-        
         if (searchBar.classList.contains('active')) {
             searchInput.focus();
             
-            // Resetar qualquer resultado de pesquisa anterior
+            // Fechar resultados ao abrir para depois mostrar apenas com a pesquisa
             searchResults.classList.remove('active');
             searchResults.style.display = 'none';
+            
+            // Limpar o input para garantir que não mostrem resultados antigos
             searchInput.value = '';
             
-            // Atualizar altura do header quando abrir a barra de pesquisa
-            if (window.innerWidth <= 575) {
-                // Adicionar evento para verificar quando a animação da barra terminar
-                setTimeout(() => {
-                    // Garantir que a barra de resultados esteja oculta ao abrir a pesquisa
-                    searchResults.style.display = 'none';
-                    searchResults.classList.remove('active');
-                }, 100);
-            }
+            // Adicionar pequeno atraso para permitir que a barra de pesquisa seja renderizada primeiro
+            setTimeout(posicionarResultadosPesquisa, 50);
         } else {
-            // Fechar a barra e os resultados
             searchInput.value = '';
             searchResults.classList.remove('active');
             searchResults.style.display = 'none';
@@ -160,19 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (resultados.length === 0) {
             searchResults.innerHTML = '<div class="search-no-results"><i class="fas fa-search"></i>Nenhum produto encontrado</div>';
             searchResults.style.display = 'block';
-            
-            // Para dispositivos móveis, posicionar exatamente abaixo da barra
-            if (window.innerWidth <= 575) {
-                // Obter a altura atual da barra de pesquisa para posicionamento exato
-                const searchBarHeight = searchBar.offsetHeight;
-                const searchBarRect = searchBar.getBoundingClientRect();
-                
-                // Posicionar os resultados exatamente abaixo da barra
-                searchResults.style.top = (searchBarRect.bottom + window.scrollY) + 'px';
-            }
-            
             setTimeout(() => {
                 searchResults.classList.add('active');
+                posicionarResultadosPesquisa(); // Chamar função de posicionamento
             }, 10);
             return;
         }
@@ -208,21 +208,11 @@ document.addEventListener('DOMContentLoaded', function() {
             searchResults.appendChild(resultadoItem);
         });
         
-        // Exibir os resultados
+        // Primeiro mostrar o elemento, depois adicionar a classe para a animação
         searchResults.style.display = 'block';
-        
-        // Para dispositivos móveis, posicionar exatamente abaixo da barra
-        if (window.innerWidth <= 575) {
-            // Obter a altura atual da barra de pesquisa para posicionamento exato
-            const searchBarHeight = searchBar.offsetHeight;
-            const searchBarRect = searchBar.getBoundingClientRect();
-            
-            // Posicionar os resultados exatamente abaixo da barra
-            searchResults.style.top = (searchBarRect.bottom + window.scrollY) + 'px';
-        }
-        
         setTimeout(() => {
             searchResults.classList.add('active');
+            posicionarResultadosPesquisa(); // Chamar função de posicionamento
         }, 10);
     }
 
@@ -888,6 +878,9 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
         });
     }
+
+    // Adicionar evento de redimensionamento para atualizar a posição dos resultados
+    window.addEventListener('resize', posicionarResultadosPesquisa);
 
     // Inicializar
     initScrollAnimations();
