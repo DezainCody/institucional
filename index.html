@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estilo Único | Moda Contemporânea</title>
+    <title>Modern Designs | Móveis Planejados</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -12,14 +12,14 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1>Estilo</h1>
-                <p>Único</p>
+                <h1>Modern</h1>
+                <p>Designs</p>
             </div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
                 <!-- Botão de fechar para o menu mobile -->
@@ -27,22 +27,6 @@
                     <i class="fas fa-times"></i>
                 </div>
             </nav>
-            <div class="search-container">
-                <div class="search-icon" title="Clique para pesquisar">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Pesquisar produtos...">
-                    <button id="search-close"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="search-results">
-                    <!-- Resultados da pesquisa serão adicionados aqui via JavaScript -->
-                </div>
-            </div>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">0</span>
-            </div>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
@@ -52,37 +36,18 @@
     <!-- Overlay do menu mobile -->
     <div class="menu-overlay"></div>
 
-    <!-- Carrinho de Compras -->
-    <div class="cart-sidebar" style="right: -400px; opacity: 0; visibility: hidden;">
-        <div class="cart-header">
-            <h3>Seu Carrinho</h3>
-            <button class="cart-close"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items">
-            <!-- Itens do carrinho serão adicionados aqui via JavaScript -->
-        </div>
-        <div class="cart-total">
-            <span>Total:</span>
-            <strong>R$ 0,00</strong>
-        </div>
-        <div class="cart-actions">
-            <button class="btn btn-checkout">Finalizar Pedido</button>
-            <button class="btn btn-continue">Continuar Comprando</button>
-        </div>
-    </div>
-    <div class="cart-overlay" style="opacity: 0; visibility: hidden;"></div>
-
     <!-- Home Section -->
     <section id="home" class="hero">
         <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Vitrine Estilo Único">
+            <!-- Imagem da frente da loja de móveis planejados -->
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Showroom Modern Designs">
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Estilo e Personalidade</h2>
-                <p>Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea</p>
-                <a href="#produtos" class="btn">Ver Coleção</a>
+                <h2>Design e Funcionalidade</h2>
+                <p>Transformamos espaços em ambientes personalizados com móveis planejados de alta qualidade</p>
+                <a href="#projetos" class="btn">Ver Projetos</a>
             </div>
         </div>
     </section>
@@ -91,84 +56,73 @@
     <section id="sobre" class="sobre">
         <div class="container">
             <div class="section-header">
-                <h2>Sobre a Estilo Único</h2>
+                <h2>Sobre a Modern Designs</h2>
                 <div class="divider"></div>
             </div>
             <div class="sobre-content">
                 <div class="sobre-text">
                     <h3>Nossa História</h3>
-                    <p>Fundada em 2018, a Estilo Único nasceu da paixão por moda autêntica e design contemporâneo. Trabalhamos com tecidos de alta qualidade e designers talentosos para criar peças que expressam personalidade e estilo único.</p>
+                    <p>Fundada em 2010, a Modern Designs nasceu da paixão por design de interiores e marcenaria de precisão. Trabalhamos com materiais de alta qualidade e profissionais especializados para criar móveis sob medida que otimizam cada espaço.</p>
                     
                     <h3>Nossa Missão</h3>
-                    <p>Transformar o visual das pessoas através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente.</p>
+                    <p>Transformar ambientes através de móveis planejados que unem beleza, funcionalidade e durabilidade, sempre respeitando o estilo e as necessidades específicas de cada cliente.</p>
                     
                     <h3>Nossos Valores</h3>
-                    <p>Qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.</p>
+                    <p>Excelência, inovação, pontualidade e compromisso com a sustentabilidade são os pilares que guiam todos os nossos projetos, desde a concepção até a instalação final.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Produtos Section -->
-    <section id="produtos" class="colecoes">
+    <!-- Projetos Section (antigo Coleções) -->
+    <section id="projetos" class="colecoes">
         <div class="container">
             <div class="section-header">
-                <h2>Nossos Produtos</h2>
+                <h2>Nossos Projetos</h2>
                 <div class="divider"></div>
             </div>
             <div class="colecoes-grid">
-                <div class="colecao-item produto" data-id="1" data-nome="Camisa Linho Premium" data-preco="149.90" data-img="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camisa Linho Premium">
+                <div class="colecao-item">
+                    <img src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Cozinhas Planejadas">
                     <div class="colecao-info">
-                        <h3>Camisa Linho Premium</h3>
-                        <p class="preco">R$ 149,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Cozinhas</h3>
+                        <p>Funcionalidade e beleza para o coração do lar</p>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="2" data-nome="Vestido Primavera" data-preco="189.90" data-img="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Vestido Primavera">
+                <div class="colecao-item">
+                    <img src="https://images.unsplash.com/photo-1617104678098-de229db51175?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Dormitórios Planejados">
                     <div class="colecao-info">
-                        <h3>Vestido Primavera</h3>
-                        <p class="preco">R$ 189,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Dormitórios</h3>
+                        <p>Conforto e organização para seu descanso</p>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="3" data-nome="Calça Jeans Moderna" data-preco="159.90" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Jeans Moderna">
+                <div class="colecao-item">
+                    <img src="https://i.postimg.cc/J4sgdQGx/sala.jpg" alt="Salas Planejadas">
                     <div class="colecao-info">
-                        <h3>Calça Jeans Moderna</h3>
-                        <p class="preco">R$ 159,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Salas</h3>
+                        <p>Ambientes integrados e funcionais</p>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="4" data-nome="Blazer Elegance" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Blazer Elegance">
+                <div class="colecao-item">
+                    <img src="https://images.unsplash.com/photo-1593476550610-87baa860004a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Home Office Planejado">
                     <div class="colecao-info">
-                        <h3>Blazer Elegance</h3>
-                        <p class="preco">R$ 259,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Home Office</h3>
+                        <p>Produtividade e conforto para seu trabalho</p>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="5" data-nome="Saia Midi Flow" data-preco="129.90" data-img="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Saia Midi Flow">
+                <div class="colecao-item">
+                    <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Banheiros Planejados">
                     <div class="colecao-info">
-                        <h3>Saia Midi Flow</h3>
-                        <p class="preco">R$ 129,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Banheiros</h3>
+                        <p>Elegância e praticidade para seu dia a dia</p>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="6" data-nome="Conjunto Casual Chic" data-preco="219.90" data-img="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Conjunto Casual Chic">
+                <div class="colecao-item">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Área Gourmet Planejada">
                     <div class="colecao-info">
-                        <h3>Conjunto Casual Chic</h3>
-                        <p class="preco">R$ 219,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <h3>Área Gourmet</h3>
+                        <p>Espaços completos para seu lazer e recepções</p>
                     </div>
-                </div>
-                <div class="produtos-nao-encontrados">
-                    <i class="fas fa-search"></i>
-                    <p>Nenhum produto encontrado para sua pesquisa.</p>
-                    <button id="limpar-pesquisa" class="btn">Limpar Pesquisa</button>
                 </div>
             </div>
         </div>
@@ -178,15 +132,8 @@
     <section class="destaques">
         <div class="container">
             <div class="section-header">
-                <h2>Destaques da Estação</h2>
+                <h2>Projetos em Destaque</h2>
                 <div class="divider"></div>
-                <div class="main-search-container">
-                    <div class="main-search-bar">
-                        <i class="fas fa-search search-icon-main"></i>
-                        <input type="text" id="main-search-input" placeholder="Pesquisar produtos...">
-                        <button id="main-search-clear" class="main-search-clear"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
             </div>
             <div class="destaques-container">
                 <!-- Setas de navegação -->
@@ -197,35 +144,30 @@
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 <div class="destaques-slider">
-                    <div class="destaque-item produto" data-id="7" data-nome="Vestido Floral Verão" data-preco="229.90" data-img="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Vestido Floral Verão">
-                        <h3>Vestido Floral Verão</h3>
-                        <p class="preco">R$ 229,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                    <div class="destaque-item">
+                        <img src="https://images.unsplash.com/photo-1556912998-c57cc6b63cd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Cozinha Moderna">
+                        <h3>Cozinha Contemporânea</h3>
+                        <p>Design clean com acabamento em laca branca</p>
                     </div>
-                    <div class="destaque-item produto" data-id="8" data-nome="Camisa Social Slim" data-preco="139.90" data-img="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camisa Social Slim">
-                        <h3>Camisa Social Slim</h3>
-                        <p class="preco">R$ 139,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                    <div class="destaque-item">
+                        <img src="https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Escritório">
+                        <h3>Home Office Executivo</h3>
+                        <p>Ambiente produtivo e sofisticado</p>
                     </div>
-                    <div class="destaque-item produto" data-id="9" data-nome="Calça Alfaiataria" data-preco="179.90" data-img="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Calça Alfaiataria">
-                        <h3>Calça Alfaiataria</h3>
-                        <p class="preco">R$ 179,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                    <div class="destaque-item">
+                        <img src="https://images.unsplash.com/photo-1629079447777-1e605162dc8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Banheiro">
+                        <h3>Banheiro Luxo</h3>
+                        <p>Acabamentos premium com atenção aos detalhes</p>
                     </div>
-                    <div class="destaque-item produto" data-id="10" data-nome="Jaqueta Jeans Premium" data-preco="249.90" data-img="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Jeans Premium">
-                        <h3>Jaqueta Jeans Premium</h3>
-                        <p class="preco">R$ 249,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                    <div class="destaque-item">
+                        <img src="https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Área Gourmet">
+                        <h3>Área Gourmet</h3>
+                        <p>Espaço completo para receber com estilo</p>
                     </div>
-                    <div class="destaque-item produto" data-id="11" data-nome="Conjunto Esportivo" data-preco="199.90" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Esportivo">
-                        <h3>Conjunto Esportivo</h3>
-                        <p class="preco">R$ 199,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                    <div class="destaque-item">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Projeto Varanda">
+                        <h3>Varanda Mobiliada</h3>
+                        <p>Aproveitamento máximo de espaços externos</p>
                     </div>
                 </div>
             </div>
@@ -236,7 +178,7 @@
     <section id="contato" class="contato">
         <div class="container">
             <div class="section-header">
-                <h2>Entre em Contato</h2>
+                <h2>Solicite seu Orçamento</h2>
                 <div class="divider"></div>
             </div>
             <div class="contato-content">
@@ -244,19 +186,19 @@
                     <h3>Informações</h3>
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <p>Av. Fashion, 1234, Centro</p>
+                        <p>Av. Planejados, 1234, Centro</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <p>(83) 99181-6153</p>
+                        <p>(83) 99181-6152</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <p>contato@estilounico.com</p>
+                        <p>contato@moderndesigns.com</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-clock"></i>
-                        <p>Seg-Sex: 9h às 20h | Sáb: 9h às 17h</p>
+                        <p>Seg-Sex: 9h às 18h | Sáb: 9h às 13h</p>
                     </div>
                     <div class="social-media">
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -275,14 +217,37 @@
                             <input type="tel" id="telefone" name="telefone" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="endereco">Endereço (opcional)</label>
+                            <input type="text" id="endereco" name="endereco">
                         </div>
                         <div class="form-group">
-                            <label for="mensagem">Mensagem</label>
+                            <label for="ambiente">Ambiente desejado</label>
+                            <select id="ambiente" name="ambiente" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="cozinha">Cozinha</option>
+                                <option value="dormitorio">Dormitório</option>
+                                <option value="sala">Sala</option>
+                                <option value="homeoffice">Home Office</option>
+                                <option value="banheiro">Banheiro</option>
+                                <option value="closet">Closet</option>
+                                <option value="areagourmet">Área Gourmet</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="horario">Preferência de horário para visita</label>
+                            <select id="horario" name="horario" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="manha">Manhã (9h-12h)</option>
+                                <option value="tarde">Tarde (13h-18h)</option>
+                                <option value="sabado">Sábado (9h-13h)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Detalhes do projeto</label>
                             <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-submit">Enviar Mensagem</button>
+                        <button type="submit" class="btn btn-submit">Solicitar Orçamento</button>
                     </form>
                 </div>
             </div>
@@ -294,110 +259,32 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2>Estilo</h2>
-                    <p>Único</p>
+                    <h2>Modern</h2>
+                    <p>Designs</p>
                 </div>
                 <div class="footer-links">
                     <h3>Links Rápidos</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Estilo Único. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Modern Designs. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5583991816152" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
     
     <!-- Tooltip para imagens clicáveis -->
     <div id="tooltip" class="tooltip">Clique para conversar no WhatsApp</div>
-
-    <!-- Modal de Detalhes do Produto -->
-    <div class="product-modal">
-        <div class="product-modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="product-details">
-                <div class="product-image">
-                    <img src="" alt="">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title"></h2>
-                    <p class="product-price"></p>
-                    <div class="product-size">
-                        <h3>Tamanho</h3>
-                        <div class="size-options">
-                            <button class="size-btn" data-size="P">P</button>
-                            <button class="size-btn" data-size="M">M</button>
-                            <button class="size-btn" data-size="G">G</button>
-                            <button class="size-btn" data-size="GG">GG</button>
-                        </div>
-                    </div>
-                    <div class="product-quantity">
-                        <h3>Quantidade</h3>
-                        <div class="quantity-selector">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1" max="10">
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                    </div>
-                    <button class="btn add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal de Finalização de Pedido -->
-    <div class="checkout-modal">
-        <div class="checkout-modal-content">
-            <span class="close-checkout">&times;</span>
-            <h2>Finalizar Pedido</h2>
-            <div class="checkout-items">
-                <!-- Itens do pedido serão adicionados aqui via JavaScript -->
-            </div>
-            <form id="checkout-form" class="checkout-form">
-                <div class="form-group">
-                    <label for="checkout-nome">Nome Completo</label>
-                    <input type="text" id="checkout-nome" name="checkout-nome" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-telefone">Telefone</label>
-                    <input type="tel" id="checkout-telefone" name="checkout-telefone" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-endereco">Endereço Completo</label>
-                    <input type="text" id="checkout-endereco" name="checkout-endereco" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-pagamento">Forma de Pagamento</label>
-                    <select id="checkout-pagamento" name="checkout-pagamento" required>
-                        <option value="">Selecione uma opção</option>
-                        <option value="cartao">Cartão de Crédito</option>
-                        <option value="pix">PIX</option>
-                        <option value="boleto">Boleto Bancário</option>
-                        <option value="dinheiro">Dinheiro (na entrega)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-obs">Observações (opcional)</label>
-                    <textarea id="checkout-obs" name="checkout-obs" rows="3"></textarea>
-                </div>
-                <div class="checkout-total">
-                    <span>Total:</span>
-                    <strong></strong>
-                </div>
-                <button type="submit" class="btn btn-submit">Confirmar Pedido</button>
-            </form>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
