@@ -777,8 +777,8 @@ img {
 
 .produtos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Aumentado de 300px para 350px */
-    gap: var(--spacing-xl); /* Aumentado de spacing-lg para spacing-xl */
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /* Aumentado para 450px para imagens ainda maiores */
+    gap: var(--spacing-2xl); /* Aumentado para dar mais espaço entre os itens */
     position: relative;
 }
 
@@ -794,7 +794,7 @@ img {
 .produto-img-container {
     position: relative;
     overflow: hidden;
-    padding-bottom: 140%; /* Aumentado de 125% para 140% */
+    padding-bottom: 160%; /* Aumentado para 160% para imagens significativamente mais altas */
 }
 
 .produto-item img {
@@ -1482,7 +1482,7 @@ img {
     }
     
     .produtos-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* Reduzido para 2 colunas em telas grandes para imagens maiores */
     }
 }
 
@@ -1550,11 +1550,11 @@ img {
     }
     
     .produtos-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: 1fr; /* Uma coluna para dispositivos médios */
     }
     
     .produto-item {
-        max-width: 400px; /* Aumentado de 350px */
+        max-width: none; /* Removido limitador de largura para permitir expandir ao máximo */
         margin: 0 auto;
     }
     
@@ -1622,11 +1622,11 @@ img {
     }
     
     .produtos-grid {
-        grid-template-columns: 1fr; /* Uma coluna em dispositivos muito pequenos */
+        grid-template-columns: 1fr; /* Mantido uma coluna em dispositivos pequenos */
     }
     
     .produto-img-container {
-        padding-bottom: 130%; /* Um pouco menor em dispositivos pequenos */
+        padding-bottom: 150%; /* Ajustado para dispositivos pequenos, mas ainda mantendo imagens grandes */
     }
 }
 
