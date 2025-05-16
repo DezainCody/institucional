@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnContinue = document.querySelector('.btn-continue');
     const btnCheckout = document.querySelector('.btn-checkout');
 
+    // Nova variável para rastrear o índice do item atual no carrinho
+    let currentCartItemIndex = null;
+
     // Garantir que o carrinho comece corretamente fechado sem causar problemas de CSS
     function resetCartStyles() {
         cartSidebar.style.right = '-400px';
@@ -571,13 +574,28 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
+        // MODIFICAÇÃO: O botão plus agora abre a modal de produto
         plusBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const index = parseInt(btn.dataset.index);
-                if (cart[index].quantity < 10) {
-                    cart[index].quantity++;
-                    updateCartDisplay();
-                }
+                const item = cart[index];
+                
+                // Armazenar o índice do item atual no carrinho
+                currentCartItemIndex = index;
+                
+                // Obter os dados do produto para a modal
+                const productData = {
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    image: item.image
+                };
+                
+                // Fechar o carrinho
+                closeCart();
+                
+                // Abrir a modal do produto
+                openProductModal(productData);
             });
         });
         
@@ -629,7 +647,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeProductModal() {
         productModal.classList.remove('active');
         document.body.style.overflow = '';
-        currentProduct = null;
+        
+        // Se estávamos adicionando a partir do carrinho e cancelamos, abrir o carrinho novamente
+        if (currentCartItemIndex !== null) {
+            currentCartItemIndex = null;
+            openCart();
+        }
     }
 
     // Funções para o modal de checkout
@@ -682,7 +705,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
     }
 
-    // Função para adicionar ao carrinho - SOLUÇÃO PARA O PROBLEMA 2
+    // MODIFICAÇÃO: Função modificada para adicionar ao carrinho
     function addToCart() {
         if (!currentProduct || !selectedSize) {
             alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
@@ -696,18 +719,36 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // ALTERAÇÃO: Sempre adicionar como um novo item, independente de já existir no carrinho
-        // Todos os itens serão adicionados individualmente, para que o tamanho seja selecionado para cada unidade
-        for (let i = 0; i < quantity; i++) {
-            // Adicionar novo item ao carrinho (1 unidade por vez)
-            cart.push({
+        // Verifica se estamos adicionando a partir do botão "mais" no carrinho
+        if (currentCartItemIndex !== null) {
+            // Criar o novo item com os dados do produto atual
+            const newItem = {
                 id: currentProduct.id,
                 name: currentProduct.name,
                 price: currentProduct.price,
                 image: currentProduct.image,
                 size: selectedSize,
-                quantity: 1  // Sempre adiciona 1 unidade
-            });
+                quantity: quantity
+            };
+            
+            // Inserir o novo item logo após o item atual no carrinho
+            cart.splice(currentCartItemIndex + 1, 0, newItem);
+            
+            // Resetar o índice
+            currentCartItemIndex = null;
+        } else {
+            // Comportamento original: adicionar como itens individuais
+            for (let i = 0; i < quantity; i++) {
+                // Adicionar novo item ao carrinho (1 unidade por vez)
+                cart.push({
+                    id: currentProduct.id,
+                    name: currentProduct.name,
+                    price: currentProduct.price,
+                    image: currentProduct.image,
+                    size: selectedSize,
+                    quantity: 1  // Sempre adiciona 1 unidade
+                });
+            }
         }
         
         // Atualizar o carrinho e fechar o modal
