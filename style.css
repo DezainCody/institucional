@@ -1,4 +1,19 @@
-/* 
+/* Estilo para o botão de compra na seção de destaques */
+.destaque-info .btn-comprar {
+    min-width: 150px;
+    padding: 0.8rem 1.5rem;
+    letter-spacing: 2px;
+    border-width: 1px;
+    border-color: var(--color-white);
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-medium);
+}
+
+.destaque-info .btn-comprar:hover {
+    background-color: var(--color-white);
+    color: var(--color-secondary);
+}/* 
  * Closet Dellas - Estilo contemporâneo
  * Design Minimalista e Elegante inspirado no dezaincody.github.io/sitepadr-o/
  */
@@ -939,24 +954,26 @@ img {
     color: var(--color-grey-600);
 }
 
-/* Destaques section */
+/* Destaques section - ATUALIZADO PARA MAIOR TAMANHO */
 .destaques {
     background-color: var(--color-grey-100);
+    padding: var(--spacing-xl) 0;
 }
 
 .destaques-container {
     position: relative;
     padding: 0 40px;
+    max-width: 100%;
 }
 
 .destaques-slider {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg); /* Aumentado para dar mais espaço entre os itens */
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: var(--spacing-sm) 0 var(--spacing-md);
+    padding: var(--spacing-md) 0 var(--spacing-xl); /* Mais espaço vertical */
 }
 
 .destaques-slider::-webkit-scrollbar {
@@ -965,32 +982,33 @@ img {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 280px;
+    width: 350px; /* Aumentado de 280px para 350px */
     scroll-snap-align: center;
     background-color: var(--color-white);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md); /* Sombra mais pronunciada */
     transition: all var(--transition-medium);
     overflow: hidden;
+    position: relative;
+    border-radius: var(--border-radius-sm);
 }
 
 .destaque-item:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     transform: translateY(-5px);
 }
 
 .destaque-img-container {
     position: relative;
     overflow: hidden;
-    padding-bottom: 125%; /* Aspect ratio 4:5 */
+    width: 100%;
+    height: auto; /* Altura automática baseada no conteúdo */
 }
 
 .destaque-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain; /* Garante que a imagem seja exibida por completo */
     transition: transform var(--transition-slow);
 }
 
@@ -999,14 +1017,32 @@ img {
 }
 
 .destaque-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: var(--spacing-md);
     text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent);
+    color: var(--color-white);
+    z-index: 2;
 }
 
 .destaque-info h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: var(--spacing-xs);
-    font-weight: 400;
+    font-weight: 500;
+    color: var(--color-white);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Preço com melhor contraste */
+.destaque-info .preco {
+    color: var(--color-accent); /* Cor de destaque para melhor contraste */
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .slider-nav-arrow {
@@ -1522,6 +1558,11 @@ img {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent);
         padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
     }
+    
+    /* Itens de destaque maiores em tablet */
+    .destaque-item {
+        width: 400px; /* Ainda maior em tablet */
+    }
 }
 
 @media (min-width: 992px) {
@@ -1546,6 +1587,16 @@ img {
     .btn-comprar {
         min-width: 180px;
         padding: 0.9rem 2rem;
+    }
+    
+    /* Itens de destaque maiores em desktop */
+    .destaque-item {
+        width: 450px; /* Máximo em desktop */
+    }
+    
+    /* Espaço adicional para o slider de destaques */
+    .destaques-slider {
+        padding: var(--spacing-md) 0 var(--spacing-2xl);
     }
 }
 
@@ -1687,7 +1738,13 @@ img {
     }
     
     .destaque-item {
-        width: 220px;
+        width: 280px; /* Reduzido para telas menores */
+    }
+    
+    .destaque-info .btn-comprar {
+        min-width: 120px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.75rem;
     }
     
     .slider-nav-arrow {
