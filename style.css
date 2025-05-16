@@ -1,6 +1,6 @@
 /* 
  * Closet Dellas - Estilo contemporâneo
- * Design Minimalista e Elegante com Inspiração no Departlook.com
+ * Design Minimalista e Elegante inspirado no dezaincody.github.io/sitepadr-o/
  */
 
 /* === CONFIGURAÇÕES GERAIS === */
@@ -770,15 +770,16 @@ img {
     width: 50px;
 }
 
-/* Produtos section */
+/* Produtos section - REDESENHADO COM BASE NO SITE DE REFERÊNCIA */
 .produtos {
     background-color: var(--color-white);
 }
 
+/* Nova organização do grid para imagens grandes no estilo do site de referência */
 .produtos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /* Aumentado para 450px para imagens ainda maiores */
-    gap: var(--spacing-2xl); /* Aumentado para dar mais espaço entre os itens */
+    grid-template-columns: repeat(1, 1fr); /* Layout de uma coluna em mobile primeiro */
+    gap: 0; /* Sem espaçamento entre itens - estilo minimalista */
     position: relative;
 }
 
@@ -788,13 +789,16 @@ img {
     overflow: hidden;
     transition: all var(--transition-medium);
     background-color: var(--color-white);
-    max-width: none; /* Remover max-width para permitir que ocupe toda a largura disponível */
+    position: relative;
+    margin-bottom: var(--spacing-2xl); /* Espaçamento grande entre produtos */
 }
 
+/* Contêiner de imagem ocupando toda a largura */
 .produto-img-container {
     position: relative;
     overflow: hidden;
-    padding-bottom: 160%; /* Aumentado para 160% para imagens significativamente mais altas */
+    width: 100%;
+    padding-bottom: 100%; /* Proporção quadrada 1:1 como no site de referência */
 }
 
 .produto-item img {
@@ -803,30 +807,42 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
+    object-fit: cover; /* Mantém a proporção e preenche o espaço */
+    transition: transform var(--transition-slow), filter var(--transition-slow);
 }
 
 .produto-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03); /* Efeito de zoom suave ao passar o mouse */
+    filter: brightness(1.05); /* Leve aumento de brilho */
 }
 
+/* Estilo minimalista para informações do produto */
 .produto-info {
-    padding: var(--spacing-lg) var(--spacing-md); /* Aumentado de md/sm para lg/md */
+    padding: var(--spacing-lg) var(--spacing-sm);
     text-align: center;
+    background-color: var(--color-white);
 }
 
 .produto-info h3 {
-    font-size: 1.1rem; /* Aumentado de 1rem para 1.1rem */
-    margin-bottom: var(--spacing-sm);
-    font-weight: 400;
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--color-secondary);
 }
 
 .preco {
     color: var(--color-primary);
     font-weight: 500;
-    margin-bottom: var(--spacing-md); /* Aumentado de sm para md */
-    font-size: 1.05rem; /* Ligeiramente maior */
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+}
+
+/* Estilo para o botão de compra mais elegante */
+.btn-comprar {
+    min-width: 150px;
+    padding: 0.8rem 1.5rem;
+    letter-spacing: 2px;
+    border-width: 1px;
 }
 
 .main-search-container {
@@ -1454,8 +1470,9 @@ img {
     font-weight: 600;
 }
 
-/* Responsividade */
+/* Responsividade - AJUSTADA PARA O ESTILO DO SITE DE REFERÊNCIA */
 @media (min-width: 768px) {
+    /* Tablet */
     .contato-content {
         grid-template-columns: 1fr 2fr;
         gap: var(--spacing-xl);
@@ -1474,15 +1491,38 @@ img {
     .product-info {
         flex: 1;
     }
+    
+    /* Grade de produtos em 2 colunas para tablet */
+    .produtos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Ajustes para as imagens de produto em tablet */
+    .produto-img-container {
+        padding-bottom: 120%; /* Ligeiramente mais alto */
+    }
 }
 
 @media (min-width: 992px) {
+    /* Desktop */
     .footer-content {
         grid-template-columns: 1fr 1fr 1fr;
     }
     
+    /* Grade de produtos em 2 colunas para desktop - como no site de referência */
     .produtos-grid {
-        grid-template-columns: repeat(2, 1fr); /* Reduzido para 2 colunas em telas grandes para imagens maiores */
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg); /* Espaçamento entre colunas no desktop */
+    }
+    
+    /* Ajustes para as imagens de produto em desktop */
+    .produto-img-container {
+        padding-bottom: 130%; /* Ainda mais alto em desktop */
+    }
+    
+    /* Informações do produto com mais espaço */
+    .produto-info {
+        padding: var(--spacing-xl) var(--spacing-lg);
     }
 }
 
@@ -1519,6 +1559,7 @@ img {
 }
 
 @media (max-width: 767px) {
+    /* Mobile */
     .site-header {
         padding: 0.75rem 0;
     }
@@ -1549,13 +1590,14 @@ img {
         max-width: 100%;
     }
     
+    /* Grade de produtos em 1 coluna para mobile */
     .produtos-grid {
-        grid-template-columns: 1fr; /* Uma coluna para dispositivos médios */
+        grid-template-columns: 1fr;
     }
     
-    .produto-item {
-        max-width: none; /* Removido limitador de largura para permitir expandir ao máximo */
-        margin: 0 auto;
+    /* Ajustes para as imagens de produto em mobile */
+    .produto-img-container {
+        padding-bottom: 100%; /* Quadrado em mobile */
     }
     
     .destaques-container {
@@ -1573,6 +1615,7 @@ img {
 }
 
 @media (max-width: 576px) {
+    /* Mobile pequeno */
     .hero-content {
         padding: var(--spacing-lg) 0;
     }
@@ -1619,14 +1662,6 @@ img {
         width: 45px;
         height: 45px;
         font-size: 1.2rem;
-    }
-    
-    .produtos-grid {
-        grid-template-columns: 1fr; /* Mantido uma coluna em dispositivos pequenos */
-    }
-    
-    .produto-img-container {
-        padding-bottom: 150%; /* Ajustado para dispositivos pequenos, mas ainda mantendo imagens grandes */
     }
 }
 
