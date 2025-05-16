@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProduct = null;
     let selectedSize = null;
 
-    // SOLUÇÃO PROBLEMA 1: Função aprimorada para posicionar resultados de pesquisa
+    // Função para posicionar resultados de pesquisa
     function posicionarResultadosPesquisa() {
         if (!searchBar || !searchResults) return;
         
@@ -100,43 +100,45 @@ document.addEventListener('DOMContentLoaded', function() {
         searchResults.style.width = searchBarRect.width + 'px';
     }
 
-    // Função para abrir/fechar a barra de pesquisa com posicionamento consistente
+    // Função para abrir/fechar a barra de pesquisa
     function toggleSearchBar() {
         searchBar.classList.toggle('active');
         
         if (searchBar.classList.contains('active')) {
-            // Quando abre a barra, posiciona-a corretamente
             searchInput.focus();
-            
-            // Fechar resultados ao abrir para depois mostrar apenas com a pesquisa
             searchResults.classList.remove('active');
             searchResults.style.display = 'none';
-            
-            // Limpar o input para garantir que não mostrem resultados antigos
             searchInput.value = '';
             
-            // Adicionar pequeno atraso para permitir que a barra de pesquisa seja renderizada primeiro
             setTimeout(() => {
-                // Garantir que a barra esteja visível na tela
                 const headerHeight = document.querySelector('.site-header').offsetHeight;
-                
-                // Pré-posicionar os resultados (mesmo que não mostrados ainda)
                 searchResults.style.top = '';
                 searchResults.style.left = '';
                 searchResults.style.width = '100%';
             }, 50);
         } else {
-            // Quando fecha a barra, limpa tudo
             closeSearchBar();
         }
     }
 
-    // Função para fechar a barra de pesquisa (para ser usada em vários lugares)
+    // Função para fechar a barra de pesquisa
     function closeSearchBar() {
         searchBar.classList.remove('active');
         searchResults.classList.remove('active');
         searchResults.style.display = 'none';
         searchInput.value = '';
+        
+        // SOLUÇÃO: Quando a barra de pesquisa é fechada, restauramos a visibilidade de TODOS os produtos
+        // na seção principal "Nossa Coleção" apenas
+        const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+        produtosColecao.forEach(produto => {
+            produto.classList.remove('produto-hidden');
+        });
+        
+        if (produtosNaoEncontrados) {
+            produtosNaoEncontrados.classList.remove('active');
+            produtosNaoEncontrados.style.display = 'none';
+        }
     }
 
     // Função para remover acentos para comparação
@@ -144,47 +146,98 @@ document.addEventListener('DOMContentLoaded', function() {
         return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     }
 
-    // Função melhorada para realizar a pesquisa
+    // SOLUÇÃO: Função modificada para realizar a pesquisa somente em produtos específicos
     function realizarPesquisa(termoPesquisa, isMainSearch = false) {
         // Se o termo de pesquisa estiver vazio, reset tudo
         if (!termoPesquisa || termoPesquisa.trim() === '') {
             if (!isMainSearch) {
                 searchResults.classList.remove('active');
+                
+                // Se for a pesquisa da lupa, restaurar todos os produtos da seção principal
+                const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+                produtosColecao.forEach(produto => {
+                    produto.classList.remove('produto-hidden');
+                });
+                
+                if (produtosNaoEncontrados) {
+                    produtosNaoEncontrados.classList.remove('active');
+                    produtosNaoEncontrados.style.display = 'none';
+                }
+            } else {
+                // Se for a pesquisa principal, restaurar apenas a pesquisa principal
+                const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+                produtosColecao.forEach(produto => {
+                    produto.classList.remove('produto-hidden');
+                });
+                
+                if (produtosNaoEncontrados) {
+                    produtosNaoEncontrados.classList.remove('active');
+                    produtosNaoEncontrados.style.display = 'none';
+                }
+                
+                if (mainSearchClear) {
+                    mainSearchClear.classList.remove('active');
+                }
             }
-            resetarFiltros(isMainSearch);
             return;
         }
         
+        // Normalizar o termo de pesquisa
         termoPesquisa = removerAcentos(termoPesquisa.trim());
         
-        // MODIFICADO: Seleciona os produtos corretamente com base no tipo de pesquisa
-        let todosProdutos;
-        
-        // Para o dropdown de resultados, buscamos em TODOS os produtos
-        if (!isMainSearch) {
-            todosProdutos = document.querySelectorAll('.produto');
+        if (isMainSearch) {
+            // Para a barra de pesquisa principal, afetar apenas produtos da coleção principal
+            filtrarProdutosColecao(termoPesquisa);
+            
+            if (mainSearchClear) {
+                mainSearchClear.classList.add('active');
+            }
         } else {
-            // Para a pesquisa principal, buscamos apenas nos produtos da seção principal
-            todosProdutos = document.querySelectorAll('.produtos-grid .produto');
+            // Para a barra de pesquisa da lupa, também afetar apenas produtos da coleção principal,
+            // mas mostrar resultados de todos os produtos no dropdown
+            
+            // Obter todos os produtos para o dropdown de resultados
+            const todosProdutos = document.querySelectorAll('.produto');
+            
+            // Filtrar para o dropdown
+            const resultados = Array.from(todosProdutos).filter(produto => {
+                const nomeProduto = removerAcentos(produto.dataset.nome);
+                return nomeProduto.includes(termoPesquisa);
+            });
+            
+            // Atualizar o dropdown de resultados
+            atualizarResultadosPesquisa(resultados);
+            
+            // Filtrar apenas produtos da seção principal para exibição
+            filtrarProdutosColecao(termoPesquisa);
         }
+    }
+
+    // SOLUÇÃO: Nova função para filtrar apenas produtos da coleção principal
+    function filtrarProdutosColecao(termoPesquisa) {
+        // Selecionar APENAS os produtos da seção principal "Nossa Coleção"
+        const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
         
-        // Filtrar os resultados - agora usando includes() para correspondências parciais
-        const resultados = Array.from(todosProdutos).filter(produto => {
+        let produtosVisiveis = 0;
+        
+        produtosColecao.forEach(produto => {
             const nomeProduto = removerAcentos(produto.dataset.nome);
-            return nomeProduto.includes(termoPesquisa);
+            
+            if (nomeProduto.includes(termoPesquisa)) {
+                produto.classList.remove('produto-hidden');
+                produtosVisiveis++;
+            } else {
+                produto.classList.add('produto-hidden');
+            }
         });
         
-        // Se não for a pesquisa principal, atualizar o dropdown de resultados
-        if (!isMainSearch) {
-            atualizarResultadosPesquisa(resultados);
-        }
-        
-        // MODIFICADO: Filtragem visual agora é separada por seção
-        filtrarProdutos(termoPesquisa, isMainSearch);
-        
-        // Atualizar o botão de limpar da pesquisa principal
-        if (isMainSearch && mainSearchClear) {
-            mainSearchClear.classList.add('active');
+        // Mostrar ou esconder a mensagem de "nenhum produto encontrado"
+        if (produtosVisiveis === 0 && produtosNaoEncontrados) {
+            produtosNaoEncontrados.classList.add('active');
+            produtosNaoEncontrados.style.display = 'flex';
+        } else if (produtosNaoEncontrados) {
+            produtosNaoEncontrados.classList.remove('active');
+            produtosNaoEncontrados.style.display = 'none';
         }
     }
 
@@ -231,76 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             searchResults.classList.add('active');
         }, 10);
-    }
-
-    // MODIFICADO: Função aprimorada para filtrar apenas os produtos na seção correta
-    function filtrarProdutos(termoPesquisa, isMainSearch = false) {
-        // Selecionar apenas os produtos da seção apropriada para filtragem visual
-        let todosProdutos;
-        let produtosNaoEncontradosElement;
-        
-        if (isMainSearch) {
-            // Para a pesquisa principal na seção "Nossa Coleção", afetamos apenas os produtos dessa seção
-            todosProdutos = document.querySelectorAll('.produtos-grid .produto');
-            produtosNaoEncontradosElement = produtosNaoEncontrados;
-        } else {
-            // Para a pesquisa da lupa, afetamos APENAS os produtos da seção principal "Nossa Coleção"
-            todosProdutos = document.querySelectorAll('.produtos-grid .produto');
-            produtosNaoEncontradosElement = produtosNaoEncontrados;
-        }
-        
-        let produtosVisiveis = 0;
-        
-        todosProdutos.forEach(produto => {
-            const nomeProduto = removerAcentos(produto.dataset.nome);
-            
-            // Verifica se o nome do produto contém o termo de pesquisa (correspondência parcial)
-            if (nomeProduto.includes(termoPesquisa)) {
-                produto.classList.remove('produto-hidden');
-                produtosVisiveis++;
-            } else {
-                produto.classList.add('produto-hidden');
-            }
-        });
-        
-        // Mostrar mensagem se nenhum produto for encontrado
-        if (produtosVisiveis === 0 && produtosNaoEncontradosElement) {
-            produtosNaoEncontradosElement.classList.add('active');
-            produtosNaoEncontradosElement.style.display = 'flex';
-        } else if (produtosNaoEncontradosElement) {
-            produtosNaoEncontradosElement.classList.remove('active');
-            produtosNaoEncontradosElement.style.display = 'none';
-        }
-    }
-
-    // MODIFICADO: Função aprimorada para resetar apenas filtros da seção apropriada
-    function resetarFiltros(isMainSearch = false) {
-        // Sempre resetamos apenas os produtos da seção principal "Nossa Coleção"
-        const produtosGrid = document.querySelectorAll('.produtos-grid .produto');
-        
-        produtosGrid.forEach(produto => {
-            produto.classList.remove('produto-hidden');
-        });
-        
-        if (produtosNaoEncontrados) {
-            produtosNaoEncontrados.classList.remove('active');
-            produtosNaoEncontrados.style.display = 'none';
-        }
-        
-        if (isMainSearch) {
-            // Se for a pesquisa principal, resetamos também seus controles
-            if (mainSearchInput) {
-                mainSearchInput.value = '';
-                if (mainSearchClear) {
-                    mainSearchClear.classList.remove('active');
-                }
-            }
-        } else {
-            // Se for a pesquisa da lupa, resetamos seus controles específicos
-            searchInput.value = '';
-            searchBar.classList.remove('active');
-            searchResults.classList.remove('active');
-        }
     }
 
     // Efeito de header scroll
@@ -439,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Funções para o carrinho de compras - CORRIGIDAS
+    // Funções para o carrinho de compras
     function openCart() {
         // Primeiro, certifique-se de que os estilos sejam resetados para evitar conflitos
         cartSidebar.style.right = '-400px';
@@ -532,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // MODIFICAÇÃO: O botão plus agora abre a modal de produto
+        // O botão plus agora abre a modal de produto
         plusBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const index = parseInt(btn.dataset.index);
@@ -669,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
     }
 
-    // MODIFICAÇÃO: Função modificada para adicionar ao carrinho
+    // Função para adicionar ao carrinho
     function addToCart() {
         if (!currentProduct || !selectedSize) {
             alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
@@ -726,7 +709,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // SOLUÇÃO PROBLEMA 2: Corrigido o envio do formulário de contato para o WhatsApp
     // Event Listener para o formulário de contato
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -762,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Event Listeners - CORRIGIDOS
+    // Event Listeners
 
     // Abrir/fechar carrinho
     if (cartIcon) {
@@ -941,7 +923,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Event listeners para a funcionalidade de pesquisa
+    // SOLUÇÃO: Event listeners para a funcionalidade de pesquisa da lupa no header
     if (searchIcon) {
         searchIcon.addEventListener('click', toggleSearchBar);
     }
@@ -982,7 +964,20 @@ document.addEventListener('DOMContentLoaded', function() {
         mainSearchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.value = '';
-                resetarFiltros(true);
+                // Resetar apenas produtos da coleção principal
+                const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+                produtosColecao.forEach(produto => {
+                    produto.classList.remove('produto-hidden');
+                });
+                
+                if (produtosNaoEncontrados) {
+                    produtosNaoEncontrados.classList.remove('active');
+                    produtosNaoEncontrados.style.display = 'none';
+                }
+                
+                if (mainSearchClear) {
+                    mainSearchClear.classList.remove('active');
+                }
             }
         });
     }
@@ -991,14 +986,43 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainSearchClear) {
         mainSearchClear.addEventListener('click', function() {
             mainSearchInput.value = '';
-            resetarFiltros(true);
+            
+            // Resetar apenas produtos da coleção principal
+            const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+            produtosColecao.forEach(produto => {
+                produto.classList.remove('produto-hidden');
+            });
+            
+            if (produtosNaoEncontrados) {
+                produtosNaoEncontrados.classList.remove('active');
+                produtosNaoEncontrados.style.display = 'none';
+            }
+            
             mainSearchClear.classList.remove('active');
         });
     }
 
     // Botão para limpar a pesquisa na mensagem de "nenhum produto encontrado"
     if (limparPesquisa) {
-        limparPesquisa.addEventListener('click', resetarFiltros);
+        limparPesquisa.addEventListener('click', () => {
+            // Resetar apenas produtos da coleção principal
+            const produtosColecao = document.querySelectorAll('.produtos-grid .produto');
+            produtosColecao.forEach(produto => {
+                produto.classList.remove('produto-hidden');
+            });
+            
+            if (produtosNaoEncontrados) {
+                produtosNaoEncontrados.classList.remove('active');
+                produtosNaoEncontrados.style.display = 'none';
+            }
+            
+            if (mainSearchInput) {
+                mainSearchInput.value = '';
+                if (mainSearchClear) {
+                    mainSearchClear.classList.remove('active');
+                }
+            }
+        });
     }
 
     // Impedir que o formulário de pesquisa envie
