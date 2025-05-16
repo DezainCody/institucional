@@ -777,8 +777,8 @@ img {
 
 .produtos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Aumentado de 300px para 350px */
+    gap: var(--spacing-xl); /* Aumentado de spacing-lg para spacing-xl */
     position: relative;
 }
 
@@ -788,12 +788,13 @@ img {
     overflow: hidden;
     transition: all var(--transition-medium);
     background-color: var(--color-white);
+    max-width: none; /* Remover max-width para permitir que ocupe toda a largura disponível */
 }
 
 .produto-img-container {
     position: relative;
     overflow: hidden;
-    padding-bottom: 125%; /* Aspect ratio 4:5 */
+    padding-bottom: 140%; /* Aumentado de 125% para 140% */
 }
 
 .produto-item img {
@@ -811,20 +812,21 @@ img {
 }
 
 .produto-info {
-    padding: var(--spacing-md) var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-md); /* Aumentado de md/sm para lg/md */
     text-align: center;
 }
 
 .produto-info h3 {
-    font-size: 1rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem; /* Aumentado de 1rem para 1.1rem */
+    margin-bottom: var(--spacing-sm);
     font-weight: 400;
 }
 
 .preco {
     color: var(--color-primary);
     font-weight: 500;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md); /* Aumentado de sm para md */
+    font-size: 1.05rem; /* Ligeiramente maior */
 }
 
 .main-search-container {
@@ -1547,8 +1549,12 @@ img {
         max-width: 100%;
     }
     
+    .produtos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
     .produto-item {
-        max-width: 350px;
+        max-width: 400px; /* Aumentado de 350px */
         margin: 0 auto;
     }
     
@@ -1613,6 +1619,14 @@ img {
         width: 45px;
         height: 45px;
         font-size: 1.2rem;
+    }
+    
+    .produtos-grid {
+        grid-template-columns: 1fr; /* Uma coluna em dispositivos muito pequenos */
+    }
+    
+    .produto-img-container {
+        padding-bottom: 130%; /* Um pouco menor em dispositivos pequenos */
     }
 }
 
