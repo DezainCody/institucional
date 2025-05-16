@@ -3,48 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estilo Único | Moda Contemporânea</title>
+    <title>Closet Dellas | Moda Contemporânea</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="container">
+    <header class="site-header">
+        <div class="container header-container">
             <div class="logo">
-                <!-- Substituído o texto por uma imagem de logo com borda redonda -->
-                <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Estilo Único" class="logo-img">
+                <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas" class="logo-img">
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#produtos">Produtos</a></li>
-                    <li><a href="#contato">Contato</a></li>
+            
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li class="nav-item"><a href="#produtos" class="nav-link">Produtos</a></li>
+                    <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
                 </ul>
-                <!-- Botão de fechar para o menu mobile -->
                 <div class="menu-close">
                     <i class="fas fa-times"></i>
                 </div>
             </nav>
-            <div class="search-container">
-                <div class="search-icon" title="Clique para pesquisar">
-                    <i class="fas fa-search"></i>
+            
+            <div class="header-actions">
+                <div class="search-container">
+                    <div class="search-icon" title="Pesquisar">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Pesquisar..." aria-label="Pesquisar">
+                        <button id="search-close" aria-label="Fechar pesquisa">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="search-results">
+                            <!-- Resultados da pesquisa serão adicionados aqui via JavaScript -->
+                        </div>
+                    </div>
                 </div>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Pesquisar produtos...">
-                    <button id="search-close"><i class="fas fa-times"></i></button>
+                
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
                 </div>
-                <div class="search-results">
-                    <!-- Resultados da pesquisa serão adicionados aqui via JavaScript -->
+                
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
                 </div>
-            </div>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">0</span>
-            </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
@@ -53,10 +62,12 @@
     <div class="menu-overlay"></div>
 
     <!-- Carrinho de Compras -->
-    <div class="cart-sidebar" style="right: -400px; opacity: 0; visibility: hidden;">
+    <div class="cart-sidebar">
         <div class="cart-header">
             <h3>Seu Carrinho</h3>
-            <button class="cart-close"><i class="fas fa-times"></i></button>
+            <button class="cart-close" aria-label="Fechar carrinho">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="cart-items">
             <!-- Itens do carrinho serão adicionados aqui via JavaScript -->
@@ -70,162 +81,216 @@
             <button class="btn btn-continue">Continuar Comprando</button>
         </div>
     </div>
-    <div class="cart-overlay" style="opacity: 0; visibility: hidden;"></div>
+    <div class="cart-overlay"></div>
 
     <!-- Home Section -->
     <section id="home" class="hero">
         <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Vitrine Estilo Único">
+            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Vitrine">
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Estilo e Personalidade</h2>
+                <h1>Elegância & Sofisticação</h1>
                 <p>Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea</p>
-                <a href="#produtos" class="btn">Ver Coleção</a>
+                <a href="#produtos" class="btn btn-primary">Explorar Coleção</a>
             </div>
         </div>
     </section>
 
     <!-- Sobre Section -->
-    <section id="sobre" class="sobre">
+    <section id="sobre" class="sobre section-padding">
         <div class="container">
             <div class="section-header">
-                <h2>Sobre a Estilo Único</h2>
-                <div class="divider"></div>
+                <span class="section-tag">Nossa Essência</span>
+                <h2>Sobre a Closet Dellas</h2>
             </div>
             <div class="sobre-content">
                 <div class="sobre-text">
-                    <h3>Nossa História</h3>
-                    <p>Fundada em 2018, a Estilo Único nasceu da paixão por moda autêntica e design contemporâneo. Trabalhamos com tecidos de alta qualidade e designers talentosos para criar peças que expressam personalidade e estilo único.</p>
+                    <div class="sobre-block">
+                        <h3>Nossa História</h3>
+                        <p>Fundada em 2018, a Closet Dellas nasceu da paixão por moda autêntica e design contemporâneo. Trabalhamos com tecidos de alta qualidade e designers talentosos para criar peças que expressam personalidade e estilo único.</p>
+                    </div>
                     
-                    <h3>Nossa Missão</h3>
-                    <p>Transformar o visual das pessoas através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente.</p>
+                    <div class="sobre-block">
+                        <h3>Nossa Missão</h3>
+                        <p>Transformar o visual das pessoas através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente.</p>
+                    </div>
                     
-                    <h3>Nossos Valores</h3>
-                    <p>Qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.</p>
+                    <div class="sobre-block">
+                        <h3>Nossos Valores</h3>
+                        <p>Qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Produtos Section -->
-    <section id="produtos" class="colecoes">
+    <section id="produtos" class="produtos section-padding">
         <div class="container">
             <div class="section-header">
-                <h2>Nossos Produtos</h2>
-                <div class="divider"></div>
+                <span class="section-tag">Exclusividade</span>
+                <h2>Nossa Coleção</h2>
             </div>
-            <div class="colecoes-grid">
-                <div class="colecao-item produto" data-id="1" data-nome="Camisa Linho Premium" data-preco="149.90" data-img="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camisa Linho Premium">
-                    <div class="colecao-info">
+            
+            <div class="main-search-container">
+                <div class="main-search-bar">
+                    <i class="fas fa-search search-icon-main"></i>
+                    <input type="text" id="main-search-input" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos">
+                    <button id="main-search-clear" class="main-search-clear" aria-label="Limpar pesquisa">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="produtos-grid">
+                <div class="produto-item produto" data-id="1" data-nome="Camisa Linho Premium" data-preco="149.90" data-img="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camisa Linho Premium">
+                    </div>
+                    <div class="produto-info">
                         <h3>Camisa Linho Premium</h3>
                         <p class="preco">R$ 149,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="2" data-nome="Vestido Primavera" data-preco="189.90" data-img="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Vestido Primavera">
-                    <div class="colecao-info">
+                
+                <div class="produto-item produto" data-id="2" data-nome="Vestido Primavera" data-preco="189.90" data-img="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Vestido Primavera">
+                    </div>
+                    <div class="produto-info">
                         <h3>Vestido Primavera</h3>
                         <p class="preco">R$ 189,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="3" data-nome="Calça Jeans Moderna" data-preco="159.90" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Jeans Moderna">
-                    <div class="colecao-info">
+                
+                <div class="produto-item produto" data-id="3" data-nome="Calça Jeans Moderna" data-preco="159.90" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Jeans Moderna">
+                    </div>
+                    <div class="produto-info">
                         <h3>Calça Jeans Moderna</h3>
                         <p class="preco">R$ 159,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="4" data-nome="Blazer Elegance" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Blazer Elegance">
-                    <div class="colecao-info">
+                
+                <div class="produto-item produto" data-id="4" data-nome="Blazer Elegance" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Blazer Elegance">
+                    </div>
+                    <div class="produto-info">
                         <h3>Blazer Elegance</h3>
                         <p class="preco">R$ 259,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="5" data-nome="Saia Midi Flow" data-preco="129.90" data-img="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Saia Midi Flow">
-                    <div class="colecao-info">
+                
+                <div class="produto-item produto" data-id="5" data-nome="Saia Midi Flow" data-preco="129.90" data-img="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Saia Midi Flow">
+                    </div>
+                    <div class="produto-info">
                         <h3>Saia Midi Flow</h3>
                         <p class="preco">R$ 129,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
-                <div class="colecao-item produto" data-id="6" data-nome="Conjunto Casual Chic" data-preco="219.90" data-img="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
-                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Conjunto Casual Chic">
-                    <div class="colecao-info">
+                
+                <div class="produto-item produto" data-id="6" data-nome="Conjunto Casual Chic" data-preco="219.90" data-img="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                    <div class="produto-img-container">
+                        <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Conjunto Casual Chic">
+                    </div>
+                    <div class="produto-info">
                         <h3>Conjunto Casual Chic</h3>
                         <p class="preco">R$ 219,90</p>
                         <button class="btn-comprar">Comprar</button>
                     </div>
                 </div>
+                
                 <div class="produtos-nao-encontrados">
                     <i class="fas fa-search"></i>
                     <p>Nenhum produto encontrado para sua pesquisa.</p>
-                    <button id="limpar-pesquisa" class="btn">Limpar Pesquisa</button>
+                    <button id="limpar-pesquisa" class="btn btn-outline">Limpar Pesquisa</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Destaques Section com Setas de Navegação -->
-    <section class="destaques">
+    <!-- Destaques Section -->
+    <section class="destaques section-padding">
         <div class="container">
             <div class="section-header">
+                <span class="section-tag">Novidades</span>
                 <h2>Destaques da Estação</h2>
-                <div class="divider"></div>
-                <div class="main-search-container">
-                    <div class="main-search-bar">
-                        <i class="fas fa-search search-icon-main"></i>
-                        <input type="text" id="main-search-input" placeholder="Pesquisar produtos...">
-                        <button id="main-search-clear" class="main-search-clear"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
             </div>
+            
             <div class="destaques-container">
-                <!-- Setas de navegação -->
                 <div class="slider-nav-arrow slider-arrow-left">
                     <i class="fas fa-chevron-left"></i>
                 </div>
+                
                 <div class="slider-nav-arrow slider-arrow-right">
                     <i class="fas fa-chevron-right"></i>
                 </div>
+                
                 <div class="destaques-slider">
                     <div class="destaque-item produto" data-id="7" data-nome="Vestido Floral Verão" data-preco="229.90" data-img="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Vestido Floral Verão">
-                        <h3>Vestido Floral Verão</h3>
-                        <p class="preco">R$ 229,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Vestido Floral Verão">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>Vestido Floral Verão</h3>
+                            <p class="preco">R$ 229,90</p>
+                            <button class="btn-comprar">Comprar</button>
+                        </div>
                     </div>
+                    
                     <div class="destaque-item produto" data-id="8" data-nome="Camisa Social Slim" data-preco="139.90" data-img="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camisa Social Slim">
-                        <h3>Camisa Social Slim</h3>
-                        <p class="preco">R$ 139,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camisa Social Slim">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>Camisa Social Slim</h3>
+                            <p class="preco">R$ 139,90</p>
+                            <button class="btn-comprar">Comprar</button>
+                        </div>
                     </div>
+                    
                     <div class="destaque-item produto" data-id="9" data-nome="Calça Alfaiataria" data-preco="179.90" data-img="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Calça Alfaiataria">
-                        <h3>Calça Alfaiataria</h3>
-                        <p class="preco">R$ 179,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Calça Alfaiataria">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>Calça Alfaiataria</h3>
+                            <p class="preco">R$ 179,90</p>
+                            <button class="btn-comprar">Comprar</button>
+                        </div>
                     </div>
+                    
                     <div class="destaque-item produto" data-id="10" data-nome="Jaqueta Jeans Premium" data-preco="249.90" data-img="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Jeans Premium">
-                        <h3>Jaqueta Jeans Premium</h3>
-                        <p class="preco">R$ 249,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Jeans Premium">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>Jaqueta Jeans Premium</h3>
+                            <p class="preco">R$ 249,90</p>
+                            <button class="btn-comprar">Comprar</button>
+                        </div>
                     </div>
+                    
                     <div class="destaque-item produto" data-id="11" data-nome="Conjunto Esportivo" data-preco="199.90" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Esportivo">
-                        <h3>Conjunto Esportivo</h3>
-                        <p class="preco">R$ 199,90</p>
-                        <button class="btn-comprar">Comprar</button>
+                        <div class="destaque-img-container">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Esportivo">
+                        </div>
+                        <div class="destaque-info">
+                            <h3>Conjunto Esportivo</h3>
+                            <p class="preco">R$ 199,90</p>
+                            <button class="btn-comprar">Comprar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,56 +298,73 @@
     </section>
 
     <!-- Contato Section -->
-    <section id="contato" class="contato">
+    <section id="contato" class="contato section-padding">
         <div class="container">
             <div class="section-header">
+                <span class="section-tag">Fale Conosco</span>
                 <h2>Entre em Contato</h2>
-                <div class="divider"></div>
             </div>
+            
             <div class="contato-content">
                 <div class="contato-info">
                     <h3>Informações</h3>
+                    
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <p>Av. Fashion, 1234, Centro</p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
                         <p>(83) 99181-6153</p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <p>contato@estilounico.com</p>
+                        <p>contato@closetdellas.com</p>
                     </div>
+                    
                     <div class="info-item">
                         <i class="fas fa-clock"></i>
                         <p>Seg-Sex: 9h às 20h | Sáb: 9h às 17h</p>
                     </div>
+                    
                     <div class="social-media">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" aria-label="Pinterest">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
                     </div>
                 </div>
+                
                 <div class="contato-form">
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" id="nome" name="nome" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="telefone">Telefone</label>
                             <input type="tel" id="telefone" name="telefone" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="mensagem">Mensagem</label>
                             <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-submit">Enviar Mensagem</button>
+                        
+                        <button type="submit" class="btn btn-primary btn-submit">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -290,13 +372,14 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <!-- Adiciono a imagem de logo também no footer para manter a coerência -->
-                    <img src="/api/placeholder/150/150" alt="Logo Estilo Único" class="footer-logo-img">
+                    <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas" class="footer-logo-img">
+                    <p>Moda contemporânea com elegância e autenticidade</p>
                 </div>
+                
                 <div class="footer-links">
                     <h3>Links Rápidos</h3>
                     <ul>
@@ -307,14 +390,15 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Estilo Único. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Closet Dellas. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank" aria-label="Contato via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
     
@@ -324,7 +408,7 @@
     <!-- Modal de Detalhes do Produto -->
     <div class="product-modal">
         <div class="product-modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal" aria-label="Fechar modal">&times;</button>
             <div class="product-details">
                 <div class="product-image">
                     <img src="" alt="">
@@ -332,6 +416,7 @@
                 <div class="product-info">
                     <h2 class="product-title"></h2>
                     <p class="product-price"></p>
+                    
                     <div class="product-size">
                         <h3>Tamanho</h3>
                         <div class="size-options">
@@ -341,15 +426,17 @@
                             <button class="size-btn" data-size="GG">GG</button>
                         </div>
                     </div>
+                    
                     <div class="product-quantity">
                         <h3>Quantidade</h3>
                         <div class="quantity-selector">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1" max="10">
-                            <button class="quantity-btn plus">+</button>
+                            <button class="quantity-btn minus" aria-label="Diminuir quantidade">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Quantidade">
+                            <button class="quantity-btn plus" aria-label="Aumentar quantidade">+</button>
                         </div>
                     </div>
-                    <button class="btn add-to-cart">Adicionar ao Carrinho</button>
+                    
+                    <button class="btn btn-primary add-to-cart">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </div>
@@ -358,24 +445,29 @@
     <!-- Modal de Finalização de Pedido -->
     <div class="checkout-modal">
         <div class="checkout-modal-content">
-            <span class="close-checkout">&times;</span>
+            <button class="close-checkout" aria-label="Fechar finalização">&times;</button>
             <h2>Finalizar Pedido</h2>
+            
             <div class="checkout-items">
                 <!-- Itens do pedido serão adicionados aqui via JavaScript -->
             </div>
+            
             <form id="checkout-form" class="checkout-form">
                 <div class="form-group">
                     <label for="checkout-nome">Nome Completo</label>
                     <input type="text" id="checkout-nome" name="checkout-nome" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="checkout-telefone">Telefone</label>
                     <input type="tel" id="checkout-telefone" name="checkout-telefone" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="checkout-endereco">Endereço Completo</label>
                     <input type="text" id="checkout-endereco" name="checkout-endereco" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="checkout-pagamento">Forma de Pagamento</label>
                     <select id="checkout-pagamento" name="checkout-pagamento" required>
@@ -386,15 +478,18 @@
                         <option value="dinheiro">Dinheiro (na entrega)</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="checkout-obs">Observações (opcional)</label>
                     <textarea id="checkout-obs" name="checkout-obs" rows="3"></textarea>
                 </div>
+                
                 <div class="checkout-total">
                     <span>Total:</span>
                     <strong></strong>
                 </div>
-                <button type="submit" class="btn btn-submit">Confirmar Pedido</button>
+                
+                <button type="submit" class="btn btn-primary btn-submit">Confirmar Pedido</button>
             </form>
         </div>
     </div>

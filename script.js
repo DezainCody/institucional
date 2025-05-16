@@ -1,9 +1,9 @@
-// Script principal para a loja de roupas Estilo Único
+// Script principal para a loja de roupas Closet Dellas
 document.addEventListener('DOMContentLoaded', function() {
     // Ativar efeito de menu mobile
     const menuToggle = document.querySelector('.menu-toggle');
     const menuClose = document.querySelector('.menu-close');
-    const nav = document.querySelector('nav');
+    const nav = document.querySelector('.main-nav');
     const menuOverlay = document.querySelector('.menu-overlay');
 
     if (menuToggle && menuClose) {
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Obter a posição e dimensões da barra de pesquisa
         const searchBarRect = searchBar.getBoundingClientRect();
-        const headerHeight = document.querySelector('header').offsetHeight;
         
         // Posicionar resultados exatamente abaixo da barra de pesquisa
         searchResults.style.top = (searchBarRect.bottom + 5) + 'px';
@@ -115,11 +114,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Adicionar pequeno atraso para permitir que a barra de pesquisa seja renderizada primeiro
             setTimeout(() => {
                 // Garantir que a barra esteja visível na tela
-                const headerHeight = document.querySelector('header').offsetHeight;
-                searchBar.style.top = (headerHeight + 5) + 'px';
+                const headerHeight = document.querySelector('.site-header').offsetHeight;
                 
                 // Pré-posicionar os resultados (mesmo que não mostrados ainda)
-                posicionarResultadosPesquisa();
+                searchResults.style.top = '';
+                searchResults.style.left = '';
+                searchResults.style.width = '100%';
             }, 50);
         } else {
             // Quando fecha a barra, limpa tudo
@@ -224,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Usar setTimeout para garantir que a renderização complete antes de animar
         setTimeout(() => {
-            posicionarResultadosPesquisa();
             searchResults.classList.add('active');
         }, 10);
     }
@@ -245,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 produtosNaoEncontradosElement.innerHTML = `
                     <i class="fas fa-search"></i>
                     <p>Nenhum produto encontrado para sua pesquisa.</p>
-                    <button class="btn limpar-pesquisa-destaque">Limpar Pesquisa</button>
+                    <button class="btn btn-outline limpar-pesquisa-destaque">Limpar Pesquisa</button>
                 `;
                 document.querySelector('.destaques-container').appendChild(produtosNaoEncontradosElement);
                 
@@ -282,8 +281,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Mostrar mensagem se nenhum produto for encontrado
         if (produtosVisiveis === 0 && produtosNaoEncontradosElement) {
-            produtosNaoEncontradosElement.style.display = 'block';
+            produtosNaoEncontradosElement.classList.add('active');
+            produtosNaoEncontradosElement.style.display = 'flex';
         } else if (produtosNaoEncontradosElement) {
+            produtosNaoEncontradosElement.classList.remove('active');
             produtosNaoEncontradosElement.style.display = 'none';
         }
     }
@@ -299,6 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const destaquesNaoEncontrados = document.querySelector('.destaques .produtos-nao-encontrados');
             if (destaquesNaoEncontrados) {
+                destaquesNaoEncontrados.classList.remove('active');
                 destaquesNaoEncontrados.style.display = 'none';
             }
             
@@ -316,13 +318,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 produto.classList.remove('produto-hidden');
             });
             
-            produtosNaoEncontrados.style.display = 'none';
+            if (produtosNaoEncontrados) {
+                produtosNaoEncontrados.classList.remove('active');
+                produtosNaoEncontrados.style.display = 'none';
+            }
+            
             searchInput.value = '';
             searchBar.classList.remove('active');
             searchResults.classList.remove('active');
             
             const destaquesNaoEncontrados = document.querySelector('.destaques .produtos-nao-encontrados');
             if (destaquesNaoEncontrados) {
+                destaquesNaoEncontrados.classList.remove('active');
                 destaquesNaoEncontrados.style.display = 'none';
             }
             
@@ -336,10 +343,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Efeito de header scroll
-    const header = document.querySelector('header');
+    const header = document.querySelector('.site-header');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
@@ -381,36 +388,38 @@ document.addEventListener('DOMContentLoaded', function() {
     function initScrollAnimations() {
         // Seleciona todos os itens que devem ter animação ao scroll
         const animatedElements = [
-            ...document.querySelectorAll('.colecao-item'),
+            ...document.querySelectorAll('.produto-item'),
             ...document.querySelectorAll('.destaque-item'),
-            ...document.querySelectorAll('.sobre-text'),
+            ...document.querySelectorAll('.sobre-block'),
             ...document.querySelectorAll('.contato-content > div')
         ];
         
         // Adiciona classe inicial para esconder os elementos
         animatedElements.forEach(element => {
-            element.classList.add('scroll-animation');
+            element.classList.add('slide-up');
+            element.style.opacity = '0';
         });
         
         // Função para verificar se um elemento está visível na viewport
         function isElementInViewport(el) {
             const rect = el.getBoundingClientRect();
             return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85
             );
         }
         
         // Função para animar elementos visíveis
         function animateElementsOnScroll() {
             animatedElements.forEach((element, index) => {
-                if (isElementInViewport(element) && !element.classList.contains('animated')) {
+                if (isElementInViewport(element) && element.style.opacity === '0') {
                     // Calculando um delay escalonado
                     const row = Math.floor(index / 3); // Assume 3 elementos por linha
                     const col = index % 3;
                     const delay = 0.1 + (row * 0.15) + (col * 0.1);
                     
                     setTimeout(() => {
-                        element.classList.add('animated');
+                        element.style.opacity = '1';
+                        element.style.animation = 'slideUp 0.6s ease forwards';
                     }, delay * 1000);
                 }
             });
@@ -728,14 +737,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Contato via Site - Estilo Único*%0A%0A`;
+            let whatsappMessage = `*Contato via Site - Closet Dellas*%0A%0A`;
             whatsappMessage += `*Nome:* ${nome}%0A`;
             whatsappMessage += `*Telefone:* ${telefone}%0A`;
             whatsappMessage += `*Email:* ${email}%0A%0A`;
             whatsappMessage += `*Mensagem:*%0A${mensagem}%0A%0A`;
             
             // Redirecionar para o WhatsApp usando o formato correto
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
             
             // Limpar o formulário
             contactForm.reset();
@@ -891,7 +900,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const totalPedido = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
             
             // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Novo Pedido - Estilo Único*%0A%0A`;
+            let whatsappMessage = `*Novo Pedido - Closet Dellas*%0A%0A`;
             whatsappMessage += `*Cliente:* ${nome}%0A`;
             whatsappMessage += `*Telefone:* ${telefone}%0A`;
             whatsappMessage += `*Endereço:* ${endereco}%0A`;
@@ -911,8 +920,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 whatsappMessage += `*Observações:* ${obs}%0A%0A`;
             }
             
-            // Redirecionar para o WhatsApp com formato correto - SOLUÇÃO PROBLEMA 2
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
+            // Redirecionar para o WhatsApp
+            window.open(`https://wa.me/5583991816153?text=${whatsappMessage}`, '_blank');
             
             // Limpar o carrinho e fechar o modal
             cart = [];
