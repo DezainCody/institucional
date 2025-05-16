@@ -35,8 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnContinue = document.querySelector('.btn-continue');
     const btnCheckout = document.querySelector('.btn-checkout');
 
-    // Nova variável para rastrear o índice do item atual no carrinho
-    let currentCartItemIndex = null;
+    // Flag para controlar se estamos adicionando a partir do botão plus no carrinho
+    let addingFromCartPlus = false;
+    let plusClickedItemIndex = -1;
 
     // Garantir que o carrinho comece corretamente fechado sem causar problemas de CSS
     function resetCartStyles() {
@@ -580,8 +581,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const index = parseInt(btn.dataset.index);
                 const item = cart[index];
                 
-                // Armazenar o índice do item atual no carrinho
-                currentCartItemIndex = index;
+                // Guardar o índice do item clicado
+                plusClickedItemIndex = index;
+                
+                // Marcar que estamos adicionando a partir do botão plus
+                addingFromCartPlus = true;
                 
                 // Obter os dados do produto para a modal
                 const productData = {
@@ -649,9 +653,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
         
         // Se estávamos adicionando a partir do carrinho e cancelamos, abrir o carrinho novamente
-        if (currentCartItemIndex !== null) {
-            currentCartItemIndex = null;
-            openCart();
+        if (addingFromCartPlus) {
+            addingFromCartPlus = false;
+            plusClickedItemIndex = -1;
+            setTimeout(() => {
+                openCart();
+            }, 300);
         }
     }
 
@@ -720,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Verifica se estamos adicionando a partir do botão "mais" no carrinho
-        if (currentCartItemIndex !== null) {
+        if (addingFromCartPlus && plusClickedItemIndex >= 0) {
             // Criar o novo item com os dados do produto atual
             const newItem = {
                 id: currentProduct.id,
@@ -732,10 +739,11 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             // Inserir o novo item logo após o item atual no carrinho
-            cart.splice(currentCartItemIndex + 1, 0, newItem);
+            cart.splice(plusClickedItemIndex + 1, 0, newItem);
             
-            // Resetar o índice
-            currentCartItemIndex = null;
+            // Resetar as flags
+            addingFromCartPlus = false;
+            plusClickedItemIndex = -1;
         } else {
             // Comportamento original: adicionar como itens individuais
             for (let i = 0; i < quantity; i++) {
@@ -752,11 +760,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Atualizar o carrinho e fechar o modal
-        updateCartDisplay();
         closeProductModal();
         
-        // Abrir o carrinho para mostrar o item adicionado
-        openCart();
+        // Pequeno delay para garantir que a modal feche completamente antes de abrir o carrinho
+        setTimeout(() => {
+            updateCartDisplay();
+            openCart();
+        }, 300);
     }
 
     // SOLUÇÃO PROBLEMA 2: Corrigido o envio do formulário de contato para o WhatsApp
@@ -1045,6 +1055,21 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', () => {
         if (searchResults.classList.contains('active')) {
             posicionarResultadosPesquisa();
+        }
+    });
+
+    // Adicionar manipulador para fechamento de modal ao apertar ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (productModal.classList.contains('active')) {
+                closeProductModal();
+            }
+            if (cartSidebar.classList.contains('active')) {
+                closeCart();
+            }
+            if (checkoutModal.classList.contains('active')) {
+                closeCheckoutModal();
+            }
         }
     });
 
