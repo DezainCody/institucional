@@ -791,23 +791,24 @@ img {
     box-shadow: var(--shadow-sm);
     margin-bottom: var(--spacing-md);
     border-radius: var(--border-radius-sm);
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo verticalmente */
 }
 
-/* Contêiner de imagem ocupando toda a largura */
+/* Contêiner de imagem com altura automática */
 .produto-img-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-bottom: 100%; /* Proporção quadrada 1:1 como no site de referência */
+    height: auto; /* Permite que a altura seja determinada pelo conteúdo */
 }
 
 .produto-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Mantém a proporção e preenche o espaço */
+    height: auto; /* Altura ajustada automaticamente mantendo proporção */
+    object-fit: contain; /* Garante que a imagem seja exibida por completo */
+    max-height: none; /* Remove qualquer limite de altura máxima */
     transition: transform var(--transition-slow), filter var(--transition-slow);
 }
 
@@ -827,6 +828,7 @@ img {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 60%, transparent);
     color: var(--color-white);
     z-index: 2;
+    transform: translateY(0); /* Garante posicionamento correto */
 }
 
 .produto-info h3 {
@@ -1515,11 +1517,6 @@ img {
         gap: var(--spacing-md);
     }
     
-    /* Ajustes para as imagens de produto em tablet */
-    .produto-img-container {
-        padding-bottom: 120%; /* Ligeiramente mais alto */
-    }
-    
     /* Ajuste do gradiente para telas maiores */
     .produto-info {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 70%, transparent);
@@ -1537,11 +1534,6 @@ img {
     .produtos-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-xl); /* Espaçamento entre colunas no desktop */
-    }
-    
-    /* Ajustes para as imagens de produto em desktop */
-    .produto-img-container {
-        padding-bottom: 130%; /* Ainda mais alto em desktop */
     }
     
     /* Gradiente mais suave em telas grandes */
@@ -1626,11 +1618,6 @@ img {
         grid-template-columns: 1fr;
     }
     
-    /* Ajustes para as imagens de produto em mobile */
-    .produto-img-container {
-        padding-bottom: 100%; /* Quadrado em mobile */
-    }
-    
     .destaques-container {
         padding: 0 30px;
     }
@@ -1642,6 +1629,26 @@ img {
     
     .main-search-container {
         margin-bottom: var(--spacing-lg);
+    }
+    
+    /* Ajuste para melhor exibição em mobile */
+    .produto-info {
+        padding: var(--spacing-sm);
+    }
+    
+    .produto-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .preco {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .btn-comprar {
+        padding: 0.6rem 1.2rem;
+        min-width: 120px;
+        font-size: 0.75rem;
     }
 }
 
