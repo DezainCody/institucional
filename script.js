@@ -1,5 +1,110 @@
 // Script principal para a loja de roupas Closet Dellas
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar AOS (Animate On Scroll)
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: true
+    });
+    
+    // Inicializar Typed.js na hero section
+    if (document.querySelector('.typed-element')) {
+        let typed = new Typed('.typed-element', {
+            strings: ['Sofisticação', 'Estilo Único', 'Autenticidade', 'Elegância'],
+            typeSpeed: 80,
+            backSpeed: 50,
+            backDelay: 2000,
+            startDelay: 500,
+            loop: true
+        });
+    }
+    
+    // Inicializar animações Lottie
+const lottieContainers = document.querySelectorAll('[data-lottie-container]');
+
+const lottieUrls = {
+    // Ícone de "Qualidade Premium"
+    quality: 'https://assets7.lottiefiles.com/packages/lf20_8cxcnczq.json',
+    
+    // Ícone de "Design Exclusivo"
+    design: 'https://assets10.lottiefiles.com/packages/lf20_1pxqjqps.json', // Designer de Moda Feminina
+    
+    // Ícone de "Moda Sustentável"
+    sustain: 'https://assets1.lottiefiles.com/packages/lf20_tnrzlN.json',
+    
+    // Ícone de "Entrega Rápida"
+    delivery: 'https://assets9.lottiefiles.com/packages/lf20_uu0x8lqv.json'
+};
+    
+    // Verificar se a biblioteca lottie está disponível
+    if (typeof lottie !== 'undefined') {
+        console.log('Biblioteca Lottie carregada com sucesso!');
+        
+        // Inicializar cada animação Lottie
+        lottieContainers.forEach(container => {
+            const type = container.getAttribute('data-lottie-container');
+            if (lottieUrls[type]) {
+                try {
+                    const anim = lottie.loadAnimation({
+                        container: container,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: lottieUrls[type]
+                    });
+                    
+                    // Adicionar evento para detectar quando a animação é carregada
+                    anim.addEventListener('DOMLoaded', function() {
+                        console.log(`Animação ${type} carregada com sucesso!`);
+                    });
+                    
+                    // Tratar erros de carregamento
+                    anim.addEventListener('error', function() {
+                        console.error(`Erro ao carregar a animação ${type}`);
+                        // Fallback para ícones estáticos caso a animação falhe
+                        container.innerHTML = getFallbackIcon(type);
+                    });
+                    
+                } catch (error) {
+                    console.error(`Erro ao inicializar a animação ${type}:`, error);
+                    container.innerHTML = getFallbackIcon(type);
+                }
+            } else {
+                console.warn(`URL não encontrada para o tipo de animação: ${type}`);
+                container.innerHTML = getFallbackIcon(type);
+            }
+        });
+    } else {
+        console.warn('Biblioteca Lottie não encontrada. Usando ícones estáticos como fallback.');
+        lottieContainers.forEach(container => {
+            const type = container.getAttribute('data-lottie-container');
+            container.innerHTML = getFallbackIcon(type);
+        });
+    }
+    
+    // Função para fornecer ícones fallback quando as animações Lottie falham
+    function getFallbackIcon(type) {
+        const icons = {
+            quality: '<i class="fas fa-award" style="font-size: 2.5rem; color: var(--color-primary);"></i>',
+            design: '<i class="fas fa-tshirt" style="font-size: 2.5rem; color: var(--color-primary);"></i>',
+            sustain: '<i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--color-primary);"></i>',
+            delivery: '<i class="fas fa-shipping-fast" style="font-size: 2.5rem; color: var(--color-primary);"></i>'
+        };
+        
+        return icons[type] || '<i class="fas fa-star" style="font-size: 2.5rem; color: var(--color-primary);"></i>';
+    }
+    
+    // Efeito parallax para a hero section
+    const parallaxBg = document.querySelector('.parallax-bg');
+    if (parallaxBg) {
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.pageYOffset;
+            let speed = parseFloat(parallaxBg.getAttribute('data-parallax-speed') || 0.2);
+            parallaxBg.style.transform = 'translateY(' + (scrollPosition * speed) + 'px)';
+        });
+    }
+    
     // Ativar efeito de menu mobile
     const menuToggle = document.querySelector('.menu-toggle');
     const menuClose = document.querySelector('.menu-close');
@@ -86,6 +191,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variáveis para controle do produto atual
     let currentProduct = null;
     let selectedSize = null;
+
+    // Scroll suave aprimorado para todos os links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            
+            if (targetElement) {
+                // Fechar o menu mobile se estiver aberto
+                if (nav && nav.classList.contains('active')) {
+                    closeMenu();
+                }
+                
+                // Calcular a posição considerando o header fixo
+                const headerHeight = document.querySelector('.site-header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                // Animação de scroll suave com opções personalizadas
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     // Função para posicionar resultados de pesquisa
     function posicionarResultadosPesquisa() {
@@ -301,82 +432,6 @@ document.addEventListener('DOMContentLoaded', function() {
             posicionarResultadosPesquisa();
         }
     });
-
-    // Navegação suave ao clicar em links do menu
-    const navLinks = document.querySelectorAll('nav a, .footer-links a, .btn[href^="#"]');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (this.getAttribute('href').startsWith('#')) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    closeMenu();
-                    
-                    const headerHeight = header.offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // Inicializar animações de scroll
-    function initScrollAnimations() {
-        // Seleciona todos os itens que devem ter animação ao scroll
-        const animatedElements = [
-            ...document.querySelectorAll('.produto-item'),
-            ...document.querySelectorAll('.destaque-item'),
-            ...document.querySelectorAll('.sobre-block'),
-            ...document.querySelectorAll('.contato-content > div')
-        ];
-        
-        // Adiciona classe inicial para esconder os elementos
-        animatedElements.forEach(element => {
-            element.classList.add('slide-up');
-            element.style.opacity = '0';
-        });
-        
-        // Função para verificar se um elemento está visível na viewport
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85
-            );
-        }
-        
-        // Função para animar elementos visíveis
-        function animateElementsOnScroll() {
-            animatedElements.forEach((element, index) => {
-                if (isElementInViewport(element) && element.style.opacity === '0') {
-                    // Calculando um delay escalonado
-                    const row = Math.floor(index / 3); // Assume 3 elementos por linha
-                    const col = index % 3;
-                    const delay = 0.1 + (row * 0.15) + (col * 0.1);
-                    
-                    setTimeout(() => {
-                        element.style.opacity = '1';
-                        element.style.animation = 'slideUp 0.6s ease forwards';
-                    }, delay * 1000);
-                }
-            });
-        }
-        
-        // Verificar elementos visíveis no carregamento inicial
-        setTimeout(() => {
-            animateElementsOnScroll();
-        }, 200);
-        
-        // Adicionar listener de scroll para animar elementos quando se tornarem visíveis
-        window.addEventListener('scroll', animateElementsOnScroll, { passive: true });
-    }
 
     // Controle do slider de destaques
     const destaquesSlider = document.querySelector('.destaques-slider');
@@ -1053,9 +1108,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
-    // Inicializar
-    initScrollAnimations();
 
     // Apenas atualiza o contador, sem mostrar o carrinho
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);

@@ -1,21 +1,6 @@
-/* Estilo para o botão de compra na seção de destaques */
-.destaque-info .btn-comprar {
-    min-width: 150px;
-    padding: 0.8rem 1.5rem;
-    letter-spacing: 2px;
-    border-width: 1px;
-    border-color: var(--color-white);
-    color: var(--color-white);
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: all var(--transition-medium);
-}
-
-.destaque-info .btn-comprar:hover {
-    background-color: var(--color-white);
-    color: var(--color-secondary);
-}/* 
+/* 
  * Closet Dellas - Estilo contemporâneo
- * Design Minimalista e Elegante inspirado no dezaincody.github.io/sitepadr-o/
+ * Design Minimalista e Elegante
  */
 
 /* === CONFIGURAÇÕES GERAIS === */
@@ -81,7 +66,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;  /* Scroll suave global */
     font-size: 16px;
 }
 
@@ -188,6 +173,30 @@ img {
     background-color: var(--color-grey-100);
 }
 
+/* Botão com animação */
+.animated-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.animated-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.animated-btn:hover::before {
+    left: 100%;
+}
+
 .btn-comprar {
     display: inline-block;
     background-color: transparent;
@@ -205,6 +214,23 @@ img {
 .btn-comprar:hover {
     background-color: var(--color-secondary);
     color: var(--color-white);
+}
+
+/* Estilo para o botão de compra na seção de destaques */
+.destaque-info .btn-comprar {
+    min-width: 150px;
+    padding: 0.8rem 1.5rem;
+    letter-spacing: 2px;
+    border-width: 1px;
+    border-color: var(--color-white);
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-medium);
+}
+
+.destaque-info .btn-comprar:hover {
+    background-color: var(--color-white);
+    color: var(--color-secondary);
 }
 
 /* Seções e Cabeçalhos */
@@ -693,7 +719,7 @@ img {
     cursor: pointer;
 }
 
-/* Hero section */
+/* Hero section com Parallax e Typed.js */
 .hero {
     position: relative;
     height: 80vh;
@@ -718,6 +744,23 @@ img {
     object-fit: cover;
 }
 
+/* Efeito Parallax */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%; /* Maior que 100% para criar o efeito de parallax */
+    z-index: 0;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -725,11 +768,12 @@ img {
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.6));
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 600px;
     padding: var(--spacing-xl) 0;
 }
@@ -743,6 +787,26 @@ img {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-lg);
     color: var(--color-grey-700);
+}
+
+/* Efeito typed.js */
+.typed-element {
+    color: var(--color-primary);
+    font-weight: 700;
+    position: relative;
+}
+
+.typed-cursor {
+    color: var(--color-primary);
+    font-weight: 700;
+    opacity: 1;
+    animation: typedjsBlink 0.7s infinite;
+}
+
+@keyframes typedjsBlink {
+    50% {
+        opacity: 0.0;
+    }
 }
 
 /* Sobre section */
@@ -783,6 +847,78 @@ img {
 
 .sobre-block:hover h3::after {
     width: 50px;
+}
+
+/* Seção de Vantagens com ícones animados */
+.vantagens-section {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-grey-200);
+}
+
+.vantagens-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.vantagens-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.vantagem-item {
+    text-align: center;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-white);
+}
+
+.vantagem-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    background-color: var(--color-light);
+}
+
+.lottie-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vantagem-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-secondary);
+    position: relative;
+    display: inline-block;
+    padding-bottom: var(--spacing-xs);
+}
+
+.vantagem-item h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 1px;
+    background-color: var(--color-primary);
+    transition: width var(--transition-medium);
+}
+
+.vantagem-item:hover h4::after {
+    width: 50px;
+}
+
+.vantagem-item p {
+    font-size: 0.9rem;
+    color: var(--color-grey-600);
+    margin-bottom: 0;
 }
 
 /* Produtos section - REDESENHADO COM BASE NO SITE DE REFERÊNCIA */
@@ -862,6 +998,16 @@ img {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Animação para cards (produtos) */
+.animated-card {
+    transition: all 0.4s ease;
+}
+
+.animated-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
 /* Estilo para o botão de compra mais elegante */
 .btn-comprar {
     min-width: 150px;
@@ -877,6 +1023,8 @@ img {
 .btn-comprar:hover {
     background-color: var(--color-white);
     color: var(--color-secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .main-search-container {
@@ -1563,6 +1711,11 @@ img {
     .destaque-item {
         width: 400px; /* Ainda maior em tablet */
     }
+    
+    /* Vantagens em 2 colunas */
+    .vantagens-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (min-width: 992px) {
@@ -1597,6 +1750,11 @@ img {
     /* Espaço adicional para o slider de destaques */
     .destaques-slider {
         padding: var(--spacing-md) 0 var(--spacing-2xl);
+    }
+    
+    /* Vantagens em 4 colunas */
+    .vantagens-container {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -1701,6 +1859,16 @@ img {
         min-width: 120px;
         font-size: 0.75rem;
     }
+    
+    /* Vantagens mais compactas em mobile */
+    .vantagens-container {
+        gap: var(--spacing-lg);
+    }
+    
+    .lottie-container {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1758,6 +1926,21 @@ img {
         height: 45px;
         font-size: 1.2rem;
     }
+    
+    /* Vantagens ainda mais compactas */
+    .lottie-container {
+        width: 50px;
+        height: 50px;
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .vantagem-item h4 {
+        font-size: 1rem;
+    }
+    
+    .vantagem-item p {
+        font-size: 0.8rem;
+    }
 }
 
 /* Animações */
@@ -1799,7 +1982,7 @@ img {
     display: flex;
 }
 
-/* Ajustes de accessibilidade */
+/* Ajustes de acessibilidade */
 :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;

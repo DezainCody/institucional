@@ -3,22 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Closet Dellas | Moda Contemporânea</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Closet Dellas | Moda Contemporânea Feminina em João Pessoa</title>
+    <meta name="description" content="Closet Dellas oferece moda contemporânea feminina com peças exclusivas. Descubra nossa coleção de roupas elegantes e sofisticadas com estilo único. Entrega em João Pessoa e região.">
+    <meta name="keywords" content="moda feminina, roupas femininas, loja de roupas, closet dellas, moda contemporânea, roupas elegantes, moda João Pessoa, peças exclusivas">
+    <meta name="author" content="Closet Dellas">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.closetdellas.com.br/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.closetdellas.com.br/">
+    <meta property="og:title" content="Closet Dellas | Moda Contemporânea Feminina">
+    <meta property="og:description" content="Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea. Visite nossa loja em João Pessoa.">
+    <meta property="og:image" content="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.closetdellas.com.br/">
+    <meta property="twitter:title" content="Closet Dellas | Moda Contemporânea Feminina">
+    <meta property="twitter:description" content="Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea. Visite nossa loja em João Pessoa.">
+    <meta property="twitter:image" content="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <!-- Header -->
     <header class="site-header">
         <div class="container header-container">
             <div class="logo">
-                <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas" class="logo-img">
+                <a href="#home" aria-label="Closet Dellas - Página Inicial">
+                    <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas - Boutique de Moda Feminina" class="logo-img">
+                </a>
             </div>
             
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Navegação principal">
                 <ul class="nav-list">
                     <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
@@ -84,16 +123,16 @@
     <div class="cart-overlay"></div>
 
     <!-- Home Section -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Vitrine">
+    <section id="home" class="hero parallax-section">
+        <div class="hero-background parallax-bg" data-parallax-speed="0.2">
+            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=800&q=80" alt="Vitrine da Closet Dellas mostrando nossa coleção de moda feminina contemporânea">
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
-            <div class="hero-content">
-                <h1>Elegância & Sofisticação</h1>
+            <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
+                <h1>Elegância & <span class="typed-element">Sofisticação</span></h1>
                 <p>Peças exclusivas que valorizam sua autenticidade com o melhor da moda contemporânea</p>
-                <a href="#produtos" class="btn btn-primary">Explorar Coleção</a>
+                <a href="#produtos" class="btn btn-primary animated-btn">Explorar Coleção</a>
             </div>
         </div>
     </section>
@@ -101,19 +140,47 @@
     <!-- Sobre Section -->
     <section id="sobre" class="sobre section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Nossa Essência</span>
                 <h2>Sobre a Closet Dellas</h2>
             </div>
             <div class="sobre-content">
-                <div class="sobre-text">
+                <div class="sobre-text" data-aos="fade-up" data-aos-delay="200">
                     <div class="sobre-block">
                         <h3>Nossa História</h3>
-                        <p>Nossa História 
-                            Fundada em 2018, a Closet Dellas nasceu da paixão por moda autêntica e design contemporâneo. Trabalhamos com tecidos de alta qualidade e designers talentosos para criar peças que expressam personalidade e estilo único.
-                             Transformando o visual das pessoas através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente. Com qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.
-                            </p>
+                        <p>Fundada em 2018, a Closet Dellas nasceu da paixão por moda autêntica e design contemporâneo. Trabalhamos com tecidos de alta qualidade e designers talentosos para criar peças que expressam personalidade e estilo único.
+                         Transformando o visual das pessoas através de roupas que unem conforto, estilo e exclusividade, sempre respeitando a individualidade e as preferências específicas de cada cliente. Com qualidade, inovação, sustentabilidade e compromisso com a produção responsável são os pilares que guiam todas as nossas coleções, desde a escolha dos materiais até a entrega final.
+                        </p>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção de vantagens com ícones animados -->
+        <div class="vantagens-section container">
+            <div class="vantagens-header" data-aos="fade-up">
+                <h3>Nossos Diferenciais</h3>
+            </div>
+            <div class="vantagens-container">
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="lottie-container" data-lottie-container="quality"></div>
+                    <h4>Qualidade Premium</h4>
+                    <p>Tecidos selecionados e acabamento impecável em todas as peças</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="lottie-container" data-lottie-container="design"></div>
+                    <h4>Design Exclusivo</h4>
+                    <p>Modelagens que valorizam diferentes tipos de corpos</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="lottie-container" data-lottie-container="sustain"></div>
+                    <h4>Moda Sustentável</h4>
+                    <p>Compromisso com práticas responsáveis de produção</p>
+                </div>
+                <div class="vantagem-item" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="lottie-container" data-lottie-container="delivery"></div>
+                    <h4>Entrega Rápida</h4>
+                    <p>Receba suas compras em até 48h em João Pessoa</p>
                 </div>
             </div>
         </div>
@@ -122,12 +189,12 @@
     <!-- Produtos Section -->
     <section id="produtos" class="produtos section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Exclusividade</span>
                 <h2>Nossa Coleção</h2>
             </div>
             
-            <div class="main-search-container">
+            <div class="main-search-container" data-aos="fade-up" data-aos-delay="100">
                 <div class="main-search-bar">
                     <i class="fas fa-search search-icon-main"></i>
                     <input type="text" id="main-search-input" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos">
@@ -138,9 +205,9 @@
             </div>
             
             <div class="produtos-grid">
-                <div class="produto-item produto" data-id="1" data-nome="Camisa Linho Premium" data-preco="149.90" data-img="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="100" data-id="1" data-nome="Camisa Linho Premium" data-preco="149.90" data-img="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camisa Linho Premium">
+                        <img src="https://images.unsplash.com/photo-1598522325074-042db73aa4e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Camisa Linho Premium - Peça confeccionada em linho de alta qualidade para conforto e estilo">
                     </div>
                     <div class="produto-info">
                         <h3>Camisa Linho Premium</h3>
@@ -149,9 +216,9 @@
                     </div>
                 </div>
                 
-                <div class="produto-item produto" data-id="2" data-nome="Vestido Primavera" data-preco="189.90" data-img="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="200" data-id="2" data-nome="Vestido Primavera" data-preco="189.90" data-img="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Vestido Primavera">
+                        <img src="https://images.unsplash.com/photo-1612336307429-8a898d10e223?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Vestido Primavera - Modelo leve e florido ideal para a estação mais colorida do ano">
                     </div>
                     <div class="produto-info">
                         <h3>Vestido Primavera</h3>
@@ -160,9 +227,9 @@
                     </div>
                 </div>
                 
-                <div class="produto-item produto" data-id="3" data-nome="Calça Jeans Moderna" data-preco="159.90" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="300" data-id="3" data-nome="Calça Jeans Moderna" data-preco="159.90" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Jeans Moderna">
+                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Calça Jeans Moderna - Modelo contemporâneo com corte confortável e design atemporal">
                     </div>
                     <div class="produto-info">
                         <h3>Calça Jeans Moderna</h3>
@@ -171,9 +238,9 @@
                     </div>
                 </div>
                 
-                <div class="produto-item produto" data-id="4" data-nome="Blazer Elegance" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="400" data-id="4" data-nome="Blazer Elegance" data-preco="259.90" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Blazer Elegance">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Blazer Elegance - Peça sofisticada para compor looks formais ou casuais com estilo">
                     </div>
                     <div class="produto-info">
                         <h3>Blazer Elegance</h3>
@@ -182,9 +249,9 @@
                     </div>
                 </div>
                 
-                <div class="produto-item produto" data-id="5" data-nome="Saia Midi Flow" data-preco="129.90" data-img="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="500" data-id="5" data-nome="Saia Midi Flow" data-preco="129.90" data-img="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Saia Midi Flow">
+                        <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Saia Midi Flow - Modelo fluido que proporciona conforto e movimento ao caminhar">
                     </div>
                     <div class="produto-info">
                         <h3>Saia Midi Flow</h3>
@@ -193,9 +260,9 @@
                     </div>
                 </div>
                 
-                <div class="produto-item produto" data-id="6" data-nome="Conjunto Casual Chic" data-preco="219.90" data-img="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
+                <div class="produto-item produto animated-card" data-aos="fade-up" data-aos-delay="600" data-id="6" data-nome="Conjunto Casual Chic" data-preco="219.90" data-img="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80">
                     <div class="produto-img-container">
-                        <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Conjunto Casual Chic">
+                        <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=500&q=80" alt="Conjunto Casual Chic - Combinação perfeita para um visual descontraído com elegância">
                     </div>
                     <div class="produto-info">
                         <h3>Conjunto Casual Chic</h3>
@@ -216,12 +283,12 @@
     <!-- Destaques Section -->
     <section class="destaques section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Novidades</span>
                 <h2>Destaques da Estação</h2>
             </div>
             
-            <div class="destaques-container">
+            <div class="destaques-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="slider-nav-arrow slider-arrow-left">
                     <i class="fas fa-chevron-left"></i>
                 </div>
@@ -231,9 +298,9 @@
                 </div>
                 
                 <div class="destaques-slider">
-                    <div class="destaque-item produto" data-id="7" data-nome="Vestido Floral Verão" data-preco="229.90" data-img="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                    <div class="destaque-item produto animated-card" data-id="7" data-nome="Vestido Floral Verão" data-preco="229.90" data-img="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
                         <div class="destaque-img-container">
-                            <img src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Vestido Floral Verão">
+                            <img src="https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Vestido Floral Verão - Modelo leve com estampa floral perfeito para dias quentes">
                         </div>
                         <div class="destaque-info">
                             <h3>Vestido Floral Verão</h3>
@@ -242,9 +309,9 @@
                         </div>
                     </div>
                     
-                    <div class="destaque-item produto" data-id="8" data-nome="Camisa Social Slim" data-preco="139.90" data-img="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                    <div class="destaque-item produto animated-card" data-id="8" data-nome="Camisa Social Slim" data-preco="139.90" data-img="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
                         <div class="destaque-img-container">
-                            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camisa Social Slim">
+                            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Camisa Social Slim - Corte moderno ajustado ao corpo para um visual elegante">
                         </div>
                         <div class="destaque-info">
                             <h3>Camisa Social Slim</h3>
@@ -253,9 +320,9 @@
                         </div>
                     </div>
                     
-                    <div class="destaque-item produto" data-id="9" data-nome="Calça Alfaiataria" data-preco="179.90" data-img="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                    <div class="destaque-item produto animated-card" data-id="9" data-nome="Calça Alfaiataria" data-preco="179.90" data-img="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
                         <div class="destaque-img-container">
-                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Calça Alfaiataria">
+                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Calça Alfaiataria - Modelo sofisticado com caimento perfeito e acabamento premium">
                         </div>
                         <div class="destaque-info">
                             <h3>Calça Alfaiataria</h3>
@@ -264,9 +331,9 @@
                         </div>
                     </div>
                     
-                    <div class="destaque-item produto" data-id="10" data-nome="Jaqueta Jeans Premium" data-preco="249.90" data-img="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                    <div class="destaque-item produto animated-card" data-id="10" data-nome="Jaqueta Jeans Premium" data-preco="249.90" data-img="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
                         <div class="destaque-img-container">
-                            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Jeans Premium">
+                            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Jaqueta Jeans Premium - Peça versátil confeccionada em jeans de alta qualidade">
                         </div>
                         <div class="destaque-info">
                             <h3>Jaqueta Jeans Premium</h3>
@@ -275,9 +342,9 @@
                         </div>
                     </div>
                     
-                    <div class="destaque-item produto" data-id="11" data-nome="Conjunto Esportivo" data-preco="199.90" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
+                    <div class="destaque-item produto animated-card" data-id="11" data-nome="Conjunto Esportivo" data-preco="199.90" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80">
                         <div class="destaque-img-container">
-                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Esportivo">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=400&q=80" alt="Conjunto Esportivo - Kit confortável e moderno para atividades físicas ou looks casuais">
                         </div>
                         <div class="destaque-info">
                             <h3>Conjunto Esportivo</h3>
@@ -293,28 +360,28 @@
     <!-- Contato Section -->
     <section id="contato" class="contato section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Fale Conosco</span>
                 <h2>Entre em Contato</h2>
             </div>
             
             <div class="contato-content">
-                <div class="contato-info">
+                <div class="contato-info" data-aos="fade-right" data-aos-delay="200">
                     <h3>Informações</h3>
                     
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <p>Av. Fashion, 1234, Centro</p>
+                        <p>Av. Fashion, 1234, Centro, João Pessoa - PB</p>
                     </div>
                     
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <p>(83) 99181-6153</p>
+                        <p><a href="tel:+5583991816153">(83) 99181-6153</a></p>
                     </div>
                     
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <p>contato@closetdellas.com</p>
+                        <p><a href="mailto:contato@closetdellas.com">contato@closetdellas.com</a></p>
                     </div>
                     
                     <div class="info-item">
@@ -323,19 +390,19 @@
                     </div>
                     
                     <div class="social-media">
-                        <a href="#" aria-label="Instagram">
+                        <a href="https://www.instagram.com/closetdellas" aria-label="Siga-nos no Instagram" target="_blank" rel="noopener">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" aria-label="Facebook">
+                        <a href="https://www.facebook.com/closetdellas" aria-label="Curta nossa página no Facebook" target="_blank" rel="noopener">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" aria-label="Pinterest">
+                        <a href="https://www.pinterest.com/closetdellas" aria-label="Siga-nos no Pinterest" target="_blank" rel="noopener">
                             <i class="fab fa-pinterest"></i>
                         </a>
                     </div>
                 </div>
                 
-                <div class="contato-form">
+                <div class="contato-form" data-aos="fade-left" data-aos-delay="300">
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="nome">Nome</label>
@@ -357,7 +424,7 @@
                             <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary btn-submit">Enviar Mensagem</button>
+                        <button type="submit" class="btn btn-primary btn-submit animated-btn">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -368,12 +435,12 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas" class="footer-logo-img">
+                <div class="footer-logo" data-aos="fade-up">
+                    <img src="https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg" alt="Logo Closet Dellas - Boutique de Moda Feminina" class="footer-logo-img">
                     <p>Moda contemporânea com elegância e autenticidade</p>
                 </div>
                 
-                <div class="footer-links">
+                <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
                     <h3>Links Rápidos</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
@@ -382,16 +449,26 @@
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
+
+                <div class="footer-links" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Políticas</h3>
+                    <ul>
+                        <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+                        <li><a href="/termos-de-uso">Termos de Uso</a></li>
+                        <li><a href="/trocas-e-devolucoes">Trocas e Devoluções</a></li>
+                        <li><a href="/envio-e-entrega">Envio e Entrega</a></li>
+                    </ul>
+                </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Closet Dellas. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Closet Dellas. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank" aria-label="Contato via WhatsApp">
+    <a href="https://wa.me/5583991816153" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
     
@@ -429,7 +506,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary add-to-cart">Adicionar ao Carrinho</button>
+                    <button class="btn btn-primary add-to-cart animated-btn">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </div>
@@ -482,11 +559,79 @@
                     <strong></strong>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-submit">Confirmar Pedido</button>
+                <button type="submit" class="btn btn-primary btn-submit animated-btn">Confirmar Pedido</button>
             </form>
         </div>
     </div>
 
+    <!-- Schema.org estruturado para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Closet Dellas",
+      "image": "https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg",
+      "logo": "https://i.postimg.cc/65Wz3j7G/CLOSET-DELLAS-jpg.jpg",
+      "url": "https://www.closetdellas.com.br",
+      "telephone": "+5583991816153",
+      "email": "contato@closetdellas.com",
+      "priceRange": "R$",
+      "description": "Loja de moda feminina contemporânea com peças exclusivas que unem elegância, sofisticação e personalidade.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Fashion, 1234",
+        "addressLocality": "João Pessoa",
+        "addressRegion": "PB",
+        "postalCode": "58000-000",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -7.115,
+        "longitude": -34.863
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/closetdellas",
+        "https://www.instagram.com/closetdellas",
+        "https://www.pinterest.com/closetdellas"
+      ]
+    }
+    </script>
+
+    <!-- JavaScript e Bibliotecas de Animação -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 </body>
 </html>
