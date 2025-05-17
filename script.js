@@ -969,13 +969,14 @@ const lottieUrls = {
                     nome: item.name,
                     quantidade: item.quantity,
                     tamanho: item.size,
-                    valorTotal: (item.price * item.quantity).toFixed(2)
+                    valorTotal: (item.price * item.quantity).toFixed(2),
+                    imagem: item.image // Adicionamos a imagem aos dados do pedido
                 })),
                 observacoes: document.getElementById('checkout-obs').value.trim(),
                 totalPedido: cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
             };
     
-            // Função para formatar mensagem de forma mais limpa
+            // Função para formatar mensagem incluindo links das imagens
             const formatWhatsAppMessage = (data) => {
                 let message = `*Novo Pedido - Closet Dellas*%0A%0A`;
                 
@@ -985,11 +986,12 @@ const lottieUrls = {
                 message += `*Endereço:* ${data.cliente.endereco}%0A`;
                 message += `*Pagamento:* ${data.cliente.pagamento}%0A%0A`;
     
-                // Itens do pedido
+                // Itens do pedido com links para as imagens
                 message += `*Itens do Pedido:*%0A`;
                 data.itens.forEach(item => {
                     message += `- ${item.quantidade}x ${item.nome} (Tam: ${item.tamanho})%0A`;
                     message += `   R$ ${item.valorTotal.replace('.', ',')}%0A`;
+                    message += `   Imagem: ${item.imagem}%0A%0A`; // Adicionamos a URL da imagem
                 });
     
                 // Total e observações
@@ -1014,12 +1016,16 @@ const lottieUrls = {
             closeCheckoutModal();
     
             // Confirmação suave
-            Swal.fire({
-                icon: 'success',
-                title: 'Pedido Enviado!',
-                text: 'Entraremos em contato em breve.',
-                confirmButtonText: 'OK'
-            });
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pedido Enviado!',
+                    text: 'Entraremos em contato em breve.',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                alert('Pedido enviado com sucesso! Entraremos em contato em breve.');
+            }
         });
     }
 
