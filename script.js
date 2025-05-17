@@ -923,58 +923,103 @@ const lottieUrls = {
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+    
+            // Validação rápida e centralizada
+            const formFields = {
+                nome: document.getElementById('checkout-nome'),
+                telefone: document.getElementById('checkout-telefone'),
+                endereco: document.getElementById('checkout-endereco'),
+                pagamento: document.getElementById('checkout-pagamento')
+            };
+    
+            // Verificação de campos vazios com feedback visual
+            const validateFields = () => {
+                let isValid = true;
+                Object.entries(formFields).forEach(([key, field]) => {
+                    if (!field.value.trim()) {
+                        field.classList.add('error');
+                        isValid = false;
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+                return isValid;
+            };
+    
+            // Verificações iniciais
             if (cart.length === 0) {
                 alert('Seu carrinho está vazio.');
                 return;
             }
-            
-            // Coletar dados do formulário
-            const nome = document.getElementById('checkout-nome').value.trim();
-            const telefone = document.getElementById('checkout-telefone').value.trim();
-            const endereco = document.getElementById('checkout-endereco').value.trim();
-            const pagamento = document.getElementById('checkout-pagamento').value;
-            const obs = document.getElementById('checkout-obs').value.trim();
-            
-            if (!nome || !telefone || !endereco || !pagamento) {
+    
+            if (!validateFields()) {
                 alert('Por favor, preencha todos os campos obrigatórios.');
                 return;
             }
+    
+            // Preparar dados do pedido de forma mais eficiente
+            const pedidoData = {
+                cliente: {
+                    nome: formFields.nome.value.trim(),
+                    telefone: formFields.telefone.value.trim(),
+                    endereco: formFields.endereco.value.trim(),
+                    pagamento: formFields.pagamento.options[formFields.pagamento.selectedIndex].text
+                },
+                itens: cart.map(item => ({
+                    nome: item.name,
+                    quantidade: item.quantity,
+                    tamanho: item.size,
+                    valorTotal: (item.price * item.quantity).toFixed(2)
+                })),
+                observacoes: document.getElementById('checkout-obs').value.trim(),
+                totalPedido: cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
+            };
+    
+            // Função para formatar mensagem de forma mais limpa
+            const formatWhatsAppMessage = (data) => {
+                let message = `*Novo Pedido - Closet Dellas*%0A%0A`;
+                
+                // Dados do cliente
+                message += `*Cliente:* ${data.cliente.nome}%0A`;
+                message += `*Telefone:* ${data.cliente.telefone}%0A`;
+                message += `*Endereço:* ${data.cliente.endereco}%0A`;
+                message += `*Pagamento:* ${data.cliente.pagamento}%0A%0A`;
+    
+                // Itens do pedido
+                message += `*Itens do Pedido:*%0A`;
+                data.itens.forEach(item => {
+                    message += `- ${item.quantidade}x ${item.nome} (Tam: ${item.tamanho})%0A`;
+                    message += `   R$ ${item.valorTotal.replace('.', ',')}%0A`;
+                });
+    
+                // Total e observações
+                message += `%0A*Total:* R$ ${data.totalPedido.replace('.', ',')}%0A`;
+                
+                if (data.observacoes) {
+                    message += `%0A*Obs:* ${data.observacoes}%0A`;
+                }
+    
+                return message;
+            };
+    
+            // Link WhatsApp otimizado
+            const whatsappLink = `https://wa.me/5583991816152?text=${formatWhatsAppMessage(pedidoData)}`;
             
-            // Calcular o total do pedido
-            const totalPedido = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            
-            // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Novo Pedido - Closet Dellas*%0A%0A`;
-            whatsappMessage += `*Cliente:* ${nome}%0A`;
-            whatsappMessage += `*Telefone:* ${telefone}%0A`;
-            whatsappMessage += `*Endereço:* ${endereco}%0A`;
-            whatsappMessage += `*Forma de Pagamento:* ${document.getElementById('checkout-pagamento').options[document.getElementById('checkout-pagamento').selectedIndex].text}%0A%0A`;
-            
-            whatsappMessage += `*Itens do Pedido:*%0A`;
-            
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                whatsappMessage += `- ${item.quantity}x ${item.name} (Tamanho: ${item.size})%0A`;
-                whatsappMessage += `   R$ ${itemTotal.toFixed(2).replace('.', ',')}%0A`;
-            });
-            
-            whatsappMessage += `%0A*Total do Pedido:* R$ ${totalPedido.toFixed(2).replace('.', ',')}%0A%0A`;
-            
-            if (obs) {
-                whatsappMessage += `*Observações:* ${obs}%0A%0A`;
-            }
-            
-            // Redirecionar para o WhatsApp
-            window.open(`https://wa.me/5583991816152?text=${whatsappMessage}`, '_blank');
-            
-            // Limpar o carrinho e fechar o modal
+            // Abrir WhatsApp em nova aba
+            window.open(whatsappLink, '_blank');
+    
+            // Resetar estado
             cart = [];
             updateCartDisplay();
             closeCheckoutModal();
-            
-            // Mostrar confirmação
-            alert('Seu pedido foi enviado com sucesso! Em breve entraremos em contato.');
+    
+            // Confirmação suave
+            Swal.fire({
+                icon: 'success',
+                title: 'Pedido Enviado!',
+                text: 'Entraremos em contato em breve.',
+                confirmButtonText: 'OK'
+            });
         });
     }
 
