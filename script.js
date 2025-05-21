@@ -174,6 +174,7 @@ const lottieUrls = {
     const productImage = document.querySelector('.product-image img');
     const productTitle = document.querySelector('.product-title');
     const productPrice = document.querySelector('.product-price');
+    const productTamanhos = document.querySelector('.product-tamanhos');
     const closeModal = document.querySelector('.close-modal');
     const addToCartBtn = document.querySelector('.add-to-cart');
     const sizeBtns = document.querySelectorAll('.size-btn');
@@ -395,7 +396,8 @@ const lottieUrls = {
                         id: produto.dataset.id,
                         name: produto.dataset.nome,
                         price: parseFloat(produto.dataset.preco),
-                        image: produto.dataset.img
+                        image: produto.dataset.img,
+                        tamanhos: produto.dataset.tamanhos // Adicionando os tamanhos disponíveis
                     };
                     
                     openProductModal(productData);
@@ -587,7 +589,8 @@ const lottieUrls = {
                     id: item.id,
                     name: item.name,
                     price: item.price,
-                    image: item.image
+                    image: item.image,
+                    tamanhos: item.tamanhos // Adicionando os tamanhos disponíveis
                 };
                 
                 // Fechar o carrinho
@@ -632,6 +635,14 @@ const lottieUrls = {
         productImage.src = productData.image;
         productTitle.textContent = productData.name;
         productPrice.textContent = `R$ ${productData.price.toFixed(2).replace('.', ',')}`;
+        
+        // Adicionar os tamanhos disponíveis na modal
+        if (productData.tamanhos) {
+            productTamanhos.textContent = `Tamanhos disponíveis: ${productData.tamanhos}`;
+            productTamanhos.style.display = 'block';
+        } else {
+            productTamanhos.style.display = 'none';
+        }
         
         // Reset tamanho e quantidade
         selectedSize = null;
@@ -730,7 +741,8 @@ const lottieUrls = {
                 price: currentProduct.price,
                 image: currentProduct.image,
                 size: selectedSize,
-                quantity: quantity
+                quantity: quantity,
+                tamanhos: currentProduct.tamanhos // Adicionando os tamanhos disponíveis
             };
             
             // Inserir o novo item logo após o item atual no carrinho
@@ -749,7 +761,8 @@ const lottieUrls = {
                     price: currentProduct.price,
                     image: currentProduct.image,
                     size: selectedSize,
-                    quantity: 1  // Sempre adiciona 1 unidade
+                    quantity: 1,  // Sempre adiciona 1 unidade
+                    tamanhos: currentProduct.tamanhos // Adicionando os tamanhos disponíveis
                 });
             }
         }
@@ -841,7 +854,8 @@ const lottieUrls = {
                     id: productItem.dataset.id,
                     name: productItem.dataset.nome,
                     price: parseFloat(productItem.dataset.preco),
-                    image: productItem.dataset.img
+                    image: productItem.dataset.img,
+                    tamanhos: productItem.dataset.tamanhos // Adicionando os tamanhos disponíveis
                 };
                 
                 openProductModal(productData);
