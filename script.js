@@ -793,7 +793,7 @@ const lottieUrls = {
             }
             
             // Formatar a mensagem para o WhatsApp
-            let whatsappMessage = `*Contato via Site - Closet Dellas*%0A%0A`;
+            let whatsappMessage = `*Contato via Site - Holy Glo Beauty*%0A%0A`;
             whatsappMessage += `*Nome:* ${nome}%0A`;
             whatsappMessage += `*Telefone:* ${telefone}%0A`;
             whatsappMessage += `*Email:* ${email}%0A%0A`;
