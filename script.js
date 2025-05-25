@@ -173,8 +173,8 @@ const lottieUrls = {
     const productModal = document.querySelector('.product-modal');
     const productImage = document.querySelector('.product-image img');
     const productTitle = document.querySelector('.product-title');
+    const productDescription = document.querySelector('.product-description'); // NOVO: campo de descrição
     const productPrice = document.querySelector('.product-price');
-    const productTamanhos = document.querySelector('.product-tamanhos');
     const closeModal = document.querySelector('.close-modal');
     const addToCartBtn = document.querySelector('.add-to-cart');
     const sizeBtns = document.querySelectorAll('.size-btn');
@@ -397,7 +397,7 @@ const lottieUrls = {
                         name: produto.dataset.nome,
                         price: parseFloat(produto.dataset.preco),
                         image: produto.dataset.img,
-                        tamanhos: produto.dataset.tamanhos // Adicionando os tamanhos disponíveis
+                        description: produto.dataset.descricao // NOVO: incluir descrição
                     };
                     
                     openProductModal(productData);
@@ -590,7 +590,7 @@ const lottieUrls = {
                     name: item.name,
                     price: item.price,
                     image: item.image,
-                    tamanhos: item.tamanhos // Adicionando os tamanhos disponíveis
+                    description: item.description // NOVO: incluir descrição
                 };
                 
                 // Fechar o carrinho
@@ -627,22 +627,20 @@ const lottieUrls = {
         });
     }
 
-    // Funções para o modal de produto
+    // Funções para o modal de produto - ATUALIZADA PARA SUPORTAR DESCRIÇÃO
     function openProductModal(productData) {
         currentProduct = productData;
         
         // Preencher os dados do produto no modal
         productImage.src = productData.image;
         productTitle.textContent = productData.name;
-        productPrice.textContent = `R$ ${productData.price.toFixed(2).replace('.', ',')}`;
         
-        // Adicionar os tamanhos disponíveis na modal
-        if (productData.tamanhos) {
-            productTamanhos.textContent = `Tamanhos disponíveis: ${productData.tamanhos}`;
-            productTamanhos.style.display = 'block';
-        } else {
-            productTamanhos.style.display = 'none';
+        // NOVO: Preencher a descrição do produto no modal
+        if (productDescription) {
+            productDescription.textContent = productData.description || '';
         }
+        
+        productPrice.textContent = `R$ ${productData.price.toFixed(2).replace('.', ',')}`;
         
         // Reset tamanho e quantidade
         selectedSize = null;
@@ -718,7 +716,7 @@ const lottieUrls = {
         checkoutTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
     }
 
-    // Função para adicionar ao carrinho
+    // Função para adicionar ao carrinho - ATUALIZADA PARA INCLUIR DESCRIÇÃO
     function addToCart() {
         if (!currentProduct || !selectedSize) {
             alert('Por favor, selecione um tamanho antes de adicionar ao carrinho.');
@@ -740,9 +738,9 @@ const lottieUrls = {
                 name: currentProduct.name,
                 price: currentProduct.price,
                 image: currentProduct.image,
+                description: currentProduct.description, // NOVO: incluir descrição
                 size: selectedSize,
-                quantity: quantity,
-                tamanhos: currentProduct.tamanhos // Adicionando os tamanhos disponíveis
+                quantity: quantity
             };
             
             // Inserir o novo item logo após o item atual no carrinho
@@ -760,9 +758,9 @@ const lottieUrls = {
                     name: currentProduct.name,
                     price: currentProduct.price,
                     image: currentProduct.image,
+                    description: currentProduct.description, // NOVO: incluir descrição
                     size: selectedSize,
-                    quantity: 1,  // Sempre adiciona 1 unidade
-                    tamanhos: currentProduct.tamanhos // Adicionando os tamanhos disponíveis
+                    quantity: 1  // Sempre adiciona 1 unidade
                 });
             }
         }
@@ -841,7 +839,7 @@ const lottieUrls = {
         });
     }
 
-    // Mostrar modal de produto ao clicar em "Comprar"
+    // Mostrar modal de produto ao clicar em "Comprar" - ATUALIZADO PARA INCLUIR DESCRIÇÃO
     const buyButtons = document.querySelectorAll('.btn-comprar');
 
     buyButtons.forEach(button => {
@@ -855,7 +853,7 @@ const lottieUrls = {
                     name: productItem.dataset.nome,
                     price: parseFloat(productItem.dataset.preco),
                     image: productItem.dataset.img,
-                    tamanhos: productItem.dataset.tamanhos // Adicionando os tamanhos disponíveis
+                    description: productItem.dataset.descricao // NOVO: incluir descrição
                 };
                 
                 openProductModal(productData);
@@ -1021,7 +1019,7 @@ const lottieUrls = {
             // Link WhatsApp otimizado
             const whatsappLink = `https://wa.me/5583991816152?text=${formatWhatsAppMessage(pedidoData)}`;
             
-            // Abrir WhatsApp em nova aba
+            // Abrir WeChat.js
             window.open(whatsappLink, '_blank');
     
             // Resetar estado
@@ -1029,17 +1027,7 @@ const lottieUrls = {
             updateCartDisplay();
             closeCheckoutModal();
     
-            // Confirmação suave
-            if (typeof Swal !== 'undefined') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Pedido Enviado!',
-                    text: 'Entraremos em contato em breve.',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                alert('Pedido enviado com sucesso! Entraremos em contato em breve.');
-            }
+            alert('Pedido enviado com sucesso! Entraremos em contato em breve.');
         });
     }
 

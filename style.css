@@ -23,7 +23,6 @@
     --color-grey-700: #404040;
     --color-success: #4CAF50;
     --color-error: #e53935;
-    --color-tamanhos: #e53935; /* Cor vermelha para o texto de tamanhos disponíveis */
     
     /* Tipografia */
     --font-heading: 'Playfair Display', serif;
@@ -67,7 +66,7 @@
 }
 
 html {
-    scroll-behavior: smooth;  /* Scroll suave global */
+    scroll-behavior: smooth;
     font-size: 16px;
 }
 
@@ -198,40 +197,31 @@ img {
     left: 100%;
 }
 
+/* BOTÃO DE COMPRA ATUALIZADO - NOVO POSICIONAMENTO FORA DA FOTO */
 .btn-comprar {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--color-secondary);
+    display: block;
+    width: 100%;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
     border: 1px solid var(--color-secondary);
-    padding: 0.6rem 1.5rem;
-    font-size: 0.8rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all var(--transition-medium);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+    /* Removido o posicionamento absoluto e efeitos de hover de visibilidade */
 }
 
 .btn-comprar:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-}
-
-/* Estilo para o botão de compra na seção de destaques */
-.destaque-info .btn-comprar {
-    min-width: 150px;
-    padding: 0.8rem 1.5rem;
-    letter-spacing: 2px;
-    border-width: 1px;
-    border-color: var(--color-white);
-    color: var(--color-white);
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: all var(--transition-medium);
-}
-
-.destaque-info .btn-comprar:hover {
     background-color: var(--color-white);
     color: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Seções e Cabeçalhos */
@@ -756,7 +746,7 @@ img {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%; /* Maior que 100% para criar o efeito de parallax */
+    height: 120%;
     z-index: 0;
     will-change: transform;
     transform: translateZ(0);
@@ -922,16 +912,16 @@ img {
     margin-bottom: 0;
 }
 
-/* Produtos section - REDESENHADO COM BASE NO SITE DE REFERÊNCIA */
+/* Produtos section - REDESENHADO COM NOVA ESTRUTURA */
 .produtos {
     background-color: var(--color-white);
 }
 
-/* Nova organização do grid para imagens grandes no estilo do site de referência */
+/* Nova organização do grid para imagens grandes */
 .produtos-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Layout de uma coluna em mobile primeiro */
-    gap: var(--spacing-lg); /* Espaçamento entre itens */
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--spacing-lg);
     position: relative;
 }
 
@@ -944,7 +934,8 @@ img {
     margin-bottom: var(--spacing-md);
     border-radius: var(--border-radius-sm);
     display: flex;
-    flex-direction: column; /* Organiza o conteúdo verticalmente */
+    flex-direction: column;
+    padding-bottom: var(--spacing-md); /* Espaço para o botão */
 }
 
 /* Contêiner de imagem com altura automática */
@@ -952,67 +943,53 @@ img {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: auto; /* Permite que a altura seja determinada pelo conteúdo */
+    height: auto;
 }
 
 .produto-item img {
     display: block;
     width: 100%;
-    height: auto; /* Altura ajustada automaticamente mantendo proporção */
-    object-fit: contain; /* Garante que a imagem seja exibida por completo */
-    max-height: none; /* Remove qualquer limite de altura máxima */
+    height: auto;
+    object-fit: contain;
+    max-height: none;
     transition: transform var(--transition-slow), filter var(--transition-slow);
 }
 
 .produto-item:hover img {
-    transform: scale(1.03); /* Efeito de zoom suave ao passar o mouse */
-    filter: brightness(1.05); /* Leve aumento de brilho */
+    transform: scale(1.03);
+    filter: brightness(1.05);
 }
 
-/* Estilo para informações do produto */
+/* Estilo para informações do produto FORA DA IMAGEM */
 .produto-info {
-    position: relative; /* Alterado de absolute para relative */
-    bottom: auto; /* Removido posicionamento absoluto */
-    left: auto; /* Removido posicionamento absoluto */
-    width: 100%;
     padding: var(--spacing-md);
-    text-align: center;
-    background: var(--color-white); /* Fundo branco em vez do gradiente */
-    color: var(--color-secondary); /* Texto escuro em vez de branco */
-    z-index: 2;
+    text-align: left;
+    color: var(--color-secondary);
+    background-color: var(--color-white);
 }
 
 .produto-info h3 {
     font-size: 1.2rem;
     margin-bottom: var(--spacing-xs);
     font-weight: 500;
-    color: var(--color-secondary); /* Alterado para cor secundária */
-    text-shadow: none; /* Removida a sombra do texto */
+    color: var(--color-secondary);
 }
 
+/* PREÇO LOGO ABAIXO DO NOME */
 .preco {
-    color: var(--color-primary); /* Alterado para cor primária */
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
     font-size: 1.1rem;
-    text-shadow: none; /* Removida a sombra do texto */
 }
 
-/* Estilo para os tamanhos disponíveis */
-.tamanhos-disponiveis {
-    color: var(--color-tamanhos);
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
+/* DESCRIÇÃO DO PRODUTO COM COR VERMELHA ABAIXO DO PREÇO */
+.produto-descricao {
+    color: #ff4444 !important; /* Cor vermelha como solicitado */
     font-size: 0.9rem;
-    text-shadow: none; /* Removida a sombra do texto */
-}
-
-/* Na modal de produto */
-.product-tamanhos {
-    color: var(--color-tamanhos);
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
-    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+    font-weight: 400;
 }
 
 /* Animação para cards (produtos) */
@@ -1023,25 +1000,6 @@ img {
 .animated-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-}
-
-/* Estilo para o botão de compra mais elegante */
-.btn-comprar {
-    min-width: 150px;
-    padding: 0.8rem 1.5rem;
-    letter-spacing: 2px;
-    border-width: 1px;
-    border-color: var(--color-secondary); /* Alterado para cor secundária */
-    color: var(--color-secondary); /* Alterado para cor secundária */
-    background-color: transparent; /* Fundo transparente */
-    transition: all var(--transition-medium);
-}
-
-.btn-comprar:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .main-search-container {
@@ -1119,7 +1077,7 @@ img {
     color: var(--color-grey-600);
 }
 
-/* Destaques section - ATUALIZADO PARA MAIOR TAMANHO */
+/* Destaques section - ATUALIZADO COM NOVA ESTRUTURA */
 .destaques {
     background-color: var(--color-grey-100);
     padding: var(--spacing-xl) 0;
@@ -1135,10 +1093,10 @@ img {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: var(--spacing-lg); /* Aumentado para dar mais espaço entre os itens */
+    gap: var(--spacing-lg);
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: var(--spacing-md) 0 var(--spacing-xl); /* Mais espaço vertical */
+    padding: var(--spacing-md) 0 var(--spacing-xl);
 }
 
 .destaques-slider::-webkit-scrollbar {
@@ -1147,16 +1105,17 @@ img {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 350px; /* Aumentado de 280px para 350px */
+    width: 350px;
     scroll-snap-align: center;
     background-color: var(--color-white);
-    box-shadow: var(--shadow-md); /* Sombra mais pronunciada */
+    box-shadow: var(--shadow-md);
     transition: all var(--transition-medium);
     overflow: hidden;
     position: relative;
     border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
+    padding-bottom: var(--spacing-md);
 }
 
 .destaque-item:hover {
@@ -1168,14 +1127,14 @@ img {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: auto; /* Altura automática baseada no conteúdo */
+    height: auto;
 }
 
 .destaque-item img {
     display: block;
     width: 100%;
     height: auto;
-    object-fit: contain; /* Garante que a imagem seja exibida por completo */
+    object-fit: contain;
     transition: transform var(--transition-slow);
 }
 
@@ -1183,54 +1142,35 @@ img {
     transform: scale(1.05);
 }
 
+/* Informações dos destaques também fora da imagem */
 .destaque-info {
-    position: relative; /* Alterado de absolute para relative */
-    bottom: auto; /* Removido posicionamento absoluto */
-    left: auto; /* Removido posicionamento absoluto */
-    width: 100%;
     padding: var(--spacing-md);
-    text-align: center;
-    background: var(--color-white); /* Fundo branco em vez do gradiente */
-    color: var(--color-secondary); /* Texto escuro em vez de branco */
-    z-index: 2;
+    text-align: left;
+    color: var(--color-secondary);
+    background-color: var(--color-white);
 }
 
 .destaque-info h3 {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-xs);
     font-weight: 500;
-    color: var(--color-secondary); /* Alterado para cor secundária */
-    text-shadow: none; /* Removida a sombra do texto */
-}
-
-/* Preço com melhor contraste */
-.destaque-info .preco {
-    color: var(--color-primary); /* Alterado para cor primária */
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    font-size: 1.1rem;
-    text-shadow: none; /* Removida a sombra do texto */
-}
-
-/* Estilo para os tamanhos na seção de destaques */
-.destaque-info .tamanhos-disponiveis {
-    color: var(--color-tamanhos);
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
-    font-size: 0.9rem;
-    text-shadow: none; /* Removida a sombra do texto */
-}
-
-/* Estilo para o botão na seção de destaques */
-.destaque-info .btn-comprar {
-    border-color: var(--color-secondary);
     color: var(--color-secondary);
-    background-color: transparent;
 }
 
-.destaque-info .btn-comprar:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
+/* Preço nos destaques */
+.destaque-info .preco {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.1rem;
+}
+
+/* Descrição nos destaques também com cor vermelha */
+.destaque-info .produto-descricao {
+    color: #ff4444 !important;
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
 }
 
 .slider-nav-arrow {
@@ -1572,6 +1512,15 @@ img {
     margin-bottom: var(--spacing-sm);
 }
 
+/* DESCRIÇÃO DO PRODUTO NO MODAL TAMBÉM COM COR VERMELHA */
+.product-description {
+    color: #ff4444 !important; /* Cor vermelha como solicitado */
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+    font-weight: 400;
+}
+
 .product-price {
     font-size: 1.25rem;
     color: var(--color-primary);
@@ -1741,14 +1690,9 @@ img {
         gap: var(--spacing-md);
     }
     
-    /* Ajuste do espaçamento para o info box */
-    .produto-info {
-        padding: var(--spacing-md);
-    }
-    
     /* Itens de destaque maiores em tablet */
     .destaque-item {
-        width: 400px; /* Ainda maior em tablet */
+        width: 400px;
     }
     
     /* Vantagens em 2 colunas */
@@ -1763,26 +1707,15 @@ img {
         grid-template-columns: 1fr 1fr 1fr;
     }
     
-    /* Grade de produtos em 2 colunas para desktop - como no site de referência */
+    /* Grade de produtos em 2 colunas para desktop */
     .produtos-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-xl); /* Espaçamento entre colunas no desktop */
-    }
-    
-    /* Ajuste do espaçamento para desktop */
-    .produto-info {
-        padding: var(--spacing-lg);
-    }
-    
-    /* Botão maior em desktop */
-    .btn-comprar {
-        min-width: 180px;
-        padding: 0.9rem 2rem;
+        gap: var(--spacing-xl);
     }
     
     /* Itens de destaque maiores em desktop */
     .destaque-item {
-        width: 450px; /* Máximo em desktop */
+        width: 450px;
     }
     
     /* Espaço adicional para o slider de destaques */
@@ -1880,28 +1813,25 @@ img {
     
     /* Ajuste para melhor exibição em mobile */
     .produto-info {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
-    .produto-info h3, 
-    .destaque-info h3 {
+    .produto-info h3 {
         font-size: 1.1rem;
+    }
+    
+    .produto-descricao {
+        font-size: 0.85rem;
+        margin-bottom: var(--spacing-xs);
     }
     
     .preco {
         font-size: 1rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .tamanhos-disponiveis {
-        font-size: 0.8rem;
-        margin-bottom: var(--spacing-sm);
     }
     
     .btn-comprar {
-        padding: 0.6rem 1.2rem;
-        min-width: 120px;
-        font-size: 0.75rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
     }
     
     /* Vantagens mais compactas em mobile */
@@ -1913,215 +1843,7 @@ img {
         width: 60px;
         height: 60px;
     }
-}
-
-@media (max-width: 576px) {
-    /* Mobile pequeno */
-    .hero-content {
-        padding: var(--spacing-lg) 0;
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1rem;
-    }
-    
-    .section-header {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .section-padding {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .search-bar.active {
-        width: 200px;
-    }
-    
-    .search-results {
-        width: 200px;
-    }
-    
-    .destaques-container {
-        padding: 0 25px;
-    }
-    
-    .destaque-item {
-        width: 280px; /* Reduzido para telas menores */
-    }
-    
-    .destaque-info .btn-comprar {
-        min-width: 120px;
-        padding: 0.6rem 1.2rem;
-        font-size: 0.75rem;
-    }
-    
-    .slider-nav-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-    }
-    
-    .whatsapp-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-    }
-    
-    /* Vantagens ainda mais compactas */
-    .lottie-container {
-        width: 50px;
-        height: 50px;
-        margin-bottom: var(--spacing-xs);
-    }
-    
-    .vantagem-item h4 {
-        font-size: 1rem;
-    }
-    
-    .vantagem-item p {
-        font-size: 0.8rem;
-    }
-    
-    /* Produto info em telas pequenas */
-    .produto-info,
-    .destaque-info {
-        padding: var(--spacing-sm);
-    }
-}
-       
-    
-    .slider-nav-arrow {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .main-search-container {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    /* Ajuste para melhor exibição em mobile */
-    .produto-info {
-        padding: var(--spacing-md);
-    }
-    
-    .produto-info h3, 
-    .destaque-info h3 {
-        font-size: 1.1rem;
-    }
-    
-    .preco {
-        font-size: 1rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .tamanhos-disponiveis {
-        font-size: 0.8rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .btn-comprar {
-        padding: 0.6rem 1.2rem;
-        min-width: 120px;
-        font-size: 0.75rem;
-    }
-    
-    /* Vantagens mais compactas em mobile */
-    .vantagens-container {
-        gap: var(--spacing-lg);
-    }
-    
-    .lottie-container {
-        width: 60px;
-        height: 60px;
-    }
-
-
-@media (max-width: 576px) {
-    /* Mobile pequeno */
-    .hero-content {
-        padding: var(--spacing-lg) 0;
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1rem;
-    }
-    
-    .section-header {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .section-padding {
-        padding: var(--spacing-xl) 0;
-    }
-    
-    .search-bar.active {
-        width: 200px;
-    }
-    
-    .search-results {
-        width: 200px;
-    }
-    
-    .destaques-container {
-        padding: 0 25px;
-    }
-    
-    .destaque-item {
-        width: 280px; /* Reduzido para telas menores */
-    }
-    
-    .destaque-info .btn-comprar {
-        min-width: 120px;
-        padding: 0.6rem 1.2rem;
-        font-size: 0.75rem;
-    }
-    
-    .slider-nav-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-    }
-    
-    .whatsapp-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-    }
-    
-    /* Vantagens ainda mais compactas */
-    .lottie-container {
-        width: 50px;
-        height: 50px;
-        margin-bottom: var(--spacing-xs);
-    }
-    
-    .vantagem-item h4 {
-        font-size: 1rem;
-    }
-    
-    .vantagem-item p {
-        font-size: 0.8rem;
-    }
-    
-    /* Produto info em telas pequenas */
-    .produto-info,
-    .destaque-info {
-        padding: var(--spacing-sm);
-    }
-} 
-    
-    .slider-nav-arrow {
-        width: 35px;
-        height: 35px;
-    }
+};
     
     .main-search-container {
         margin-bottom: var(--spacing-lg);
@@ -2136,20 +1858,27 @@ img {
         font-size: 1.1rem;
     }
     
+    .produto-descricao {
+        font-size: 0.8rem;
+        margin-bottom: var(--spacing-xs);
+    }
+    
     .preco {
         font-size: 1rem;
         margin-bottom: var(--spacing-sm);
     }
     
-    .tamanhos-disponiveis {
-        font-size: 0.8rem;
-        margin-bottom: var(--spacing-sm);
+    .btn-comprar {
+        bottom: 50px;
+        padding: 0.6rem 1.2rem;
+        min-width: 110px;
+        font-size: 0.75rem;
     }
     
-    .btn-comprar {
-        padding: 0.6rem 1.2rem;
-        min-width: 120px;
-        font-size: 0.75rem;
+    .destaque-item .btn-comprar {
+        bottom: 70px;
+        min-width: 130px;
+        padding: 0.7rem 1.4rem;
     }
     
     /* Vantagens mais compactas em mobile */
@@ -2198,13 +1927,7 @@ img {
     }
     
     .destaque-item {
-        width: 280px; /* Reduzido para telas menores */
-    }
-    
-    .destaque-info .btn-comprar {
-        min-width: 120px;
-        padding: 0.6rem 1.2rem;
-        font-size: 0.75rem;
+        width: 280px;
     }
     
     .slider-nav-arrow {
@@ -2232,6 +1955,24 @@ img {
     
     .vantagem-item p {
         font-size: 0.8rem;
+    }
+    
+    /* Ajustes para mobile pequeno nos produtos */
+    .btn-comprar {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .produto-descricao {
+        font-size: 0.8rem;
+    }
+    
+    .produto-info {
+        padding: var(--spacing-xs);
+    }
+    
+    .destaque-info {
+        padding: var(--spacing-xs);
     }
 }
 
@@ -2280,7 +2021,7 @@ img {
     outline-offset: 2px;
 }
 
-/* Efeito hover em produtos */
+/* Efeito hover em produtos - ATUALIZADO PARA NOVA ESTRUTURA */
 .produto-item::before {
     content: '';
     position: absolute;
