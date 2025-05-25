@@ -840,7 +840,7 @@ img {
     width: 50px;
 }
 
-/* Seção de Vantagens com ícones animados */
+/* Seção de Vantagens com ícones animados - ATUALIZADA PARA SLIDER MOBILE */
 .vantagens-section {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-xl);
@@ -1695,9 +1695,12 @@ img {
         width: 400px;
     }
     
-    /* Vantagens em 2 colunas */
+    /* Vantagens em 2 colunas para tablet - volta ao grid normal */
     .vantagens-container {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xl);
+        overflow: visible;
     }
 }
 
@@ -1723,9 +1726,12 @@ img {
         padding: var(--spacing-md) 0 var(--spacing-2xl);
     }
     
-    /* Vantagens em 4 colunas */
+    /* Vantagens em 4 colunas para desktop */
     .vantagens-container {
+        display: grid;
         grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-xl);
+        overflow: visible;
     }
 }
 
@@ -1834,63 +1840,33 @@ img {
         font-size: 0.8rem;
     }
     
-    /* Vantagens mais compactas em mobile */
+    /* NOVO: Transformar vantagens em slider horizontal para mobile */
     .vantagens-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
         gap: var(--spacing-lg);
+        padding: var(--spacing-md) 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .vantagens-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .vantagem-item {
+        flex: 0 0 auto;
+        width: 280px;
+        scroll-snap-align: center;
+        margin-bottom: 0;
     }
     
     .lottie-container {
         width: 60px;
         height: 60px;
     }
-};
-    
-    .main-search-container {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    /* Ajuste para melhor exibição em mobile */
-    .produto-info {
-        padding: var(--spacing-sm);
-    }
-    
-    .produto-info h3 {
-        font-size: 1.1rem;
-    }
-    
-    .produto-descricao {
-        font-size: 0.8rem;
-        margin-bottom: var(--spacing-xs);
-    }
-    
-    .preco {
-        font-size: 1rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .btn-comprar {
-        bottom: 50px;
-        padding: 0.6rem 1.2rem;
-        min-width: 110px;
-        font-size: 0.75rem;
-    }
-    
-    .destaque-item .btn-comprar {
-        bottom: 70px;
-        min-width: 130px;
-        padding: 0.7rem 1.4rem;
-    }
-    
-    /* Vantagens mais compactas em mobile */
-    .vantagens-container {
-        gap: var(--spacing-lg);
-    }
-    
-    .lottie-container {
-        width: 60px;
-        height: 60px;
-    }
-
+}
 
 @media (max-width: 576px) {
     /* Mobile pequeno */
@@ -1942,7 +1918,11 @@ img {
         font-size: 1.2rem;
     }
     
-    /* Vantagens ainda mais compactas */
+    /* Vantagens ainda mais compactas para mobile pequeno */
+    .vantagem-item {
+        width: 240px;
+    }
+    
     .lottie-container {
         width: 50px;
         height: 50px;
