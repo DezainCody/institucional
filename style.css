@@ -197,15 +197,15 @@ img {
     left: 100%;
 }
 
-/* BOTÃO DE COMPRA ATUALIZADO - NOVO POSICIONAMENTO FORA DA FOTO */
+/* BOTÃO DE COMPRA ATUALIZADO - COMPACTO */
 .btn-comprar {
     display: block;
     width: 100%;
     background-color: var(--color-secondary);
     color: var(--color-white);
     border: 1px solid var(--color-secondary);
-    padding: 0.75rem 1.5rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -213,8 +213,7 @@ img {
     transition: all var(--transition-medium);
     border-radius: var(--border-radius-sm);
     text-align: center;
-    margin-top: var(--spacing-sm);
-    /* Removido o posicionamento absoluto e efeitos de hover de visibilidade */
+    margin-top: var(--spacing-xs);
 }
 
 .btn-comprar:hover {
@@ -912,17 +911,19 @@ img {
     margin-bottom: 0;
 }
 
-/* Produtos section - REDESENHADO COM NOVA ESTRUTURA */
+/* Produtos section - LARGURA AJUSTADA */
 .produtos {
     background-color: var(--color-white);
 }
 
-/* Nova organização do grid para imagens grandes */
+/* Nova organização do grid com largura mais estreita */
 .produtos-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     position: relative;
+    max-width: 600px; /* LARGURA MÁXIMA REDUZIDA */
+    margin: 0 auto; /* CENTRALIZAR */
 }
 
 .produto-item {
@@ -931,27 +932,27 @@ img {
     transition: all var(--transition-medium);
     background-color: var(--color-white);
     box-shadow: var(--shadow-sm);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--spacing-md); /* Espaço para o botão */
+    padding-bottom: var(--spacing-xs);
+    max-width: 100%; /* GARANTIR QUE NÃO ULTRAPASSE */
 }
 
-/* Contêiner de imagem com altura automática */
+/* Contêiner de imagem COM LARGURA MAIS ESTREITA */
 .produto-img-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: auto;
+    height: 350px; /* Altura mantida */
 }
 
 .produto-item img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    max-height: none;
+    height: 100%;
+    object-fit: cover;
     transition: transform var(--transition-slow), filter var(--transition-slow);
 }
 
@@ -960,35 +961,36 @@ img {
     filter: brightness(1.05);
 }
 
-/* Estilo para informações do produto FORA DA IMAGEM */
+/* Estilo para informações do produto MAIS COMPACTO */
 .produto-info {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     text-align: left;
     color: var(--color-secondary);
     background-color: var(--color-white);
 }
 
 .produto-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
     font-weight: 500;
     color: var(--color-secondary);
+    line-height: 1.2;
 }
 
-/* PREÇO LOGO ABAIXO DO NOME */
+/* PREÇO REDUZIDO */
 .preco {
     color: var(--color-primary);
     font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
 }
 
-/* DESCRIÇÃO DO PRODUTO COM COR VERMELHA ABAIXO DO PREÇO */
+/* DESCRIÇÃO DO PRODUTO MAIS COMPACTA */
 .produto-descricao {
-    color: #ff4444 !important; /* Cor vermelha como solicitado */
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.4;
+    color: #ff4444 !important;
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.3;
     font-weight: 400;
 }
 
@@ -998,7 +1000,7 @@ img {
 }
 
 .animated-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -1077,10 +1079,10 @@ img {
     color: var(--color-grey-600);
 }
 
-/* Destaques section - ATUALIZADO COM NOVA ESTRUTURA */
+/* Destaques section - LARGURA AJUSTADA */
 .destaques {
     background-color: var(--color-grey-100);
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
 }
 
 .destaques-container {
@@ -1093,10 +1095,10 @@ img {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: var(--spacing-md) 0 var(--spacing-xl);
+    padding: var(--spacing-sm) 0 var(--spacing-md);
 }
 
 .destaques-slider::-webkit-scrollbar {
@@ -1105,7 +1107,7 @@ img {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 350px;
+    width: 280px; /* LARGURA REDUZIDA */
     scroll-snap-align: center;
     background-color: var(--color-white);
     box-shadow: var(--shadow-md);
@@ -1115,26 +1117,26 @@ img {
     border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
 }
 
 .destaque-item:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .destaque-img-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: auto;
+    height: 240px; /* Altura mantida */
 }
 
 .destaque-item img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     transition: transform var(--transition-slow);
 }
 
@@ -1142,35 +1144,36 @@ img {
     transform: scale(1.05);
 }
 
-/* Informações dos destaques também fora da imagem */
+/* Informações dos destaques MAIS COMPACTAS */
 .destaque-info {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     text-align: left;
     color: var(--color-secondary);
     background-color: var(--color-white);
 }
 
 .destaque-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
     font-weight: 500;
     color: var(--color-secondary);
+    line-height: 1.2;
 }
 
 /* Preço nos destaques */
 .destaque-info .preco {
     color: var(--color-primary);
     font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
 }
 
-/* Descrição nos destaques também com cor vermelha */
+/* Descrição nos destaques */
 .destaque-info .produto-descricao {
     color: #ff4444 !important;
-    font-size: 0.85rem;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.4;
+    font-size: 0.7rem;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.3;
 }
 
 .slider-nav-arrow {
@@ -1514,7 +1517,7 @@ img {
 
 /* DESCRIÇÃO DO PRODUTO NO MODAL TAMBÉM COM COR VERMELHA */
 .product-description {
-    color: #ff4444 !important; /* Cor vermelha como solicitado */
+    color: #ff4444 !important;
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: var(--spacing-md);
@@ -1662,7 +1665,7 @@ img {
     font-weight: 600;
 }
 
-/* Responsividade - AJUSTADA PARA O ESTILO DO SITE DE REFERÊNCIA */
+/* Responsividade - LARGURAS AJUSTADAS */
 @media (min-width: 768px) {
     /* Tablet */
     .contato-content {
@@ -1684,18 +1687,28 @@ img {
         flex: 1;
     }
     
-    /* Grade de produtos em 2 colunas para tablet */
+    /* Grade de produtos em 2 colunas para tablet COM LARGURA LIMITADA */
     .produtos-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-md);
+        max-width: 800px; /* LARGURA MÁXIMA PARA TABLET */
     }
     
-    /* Itens de destaque maiores em tablet */
+    /* Altura das imagens para tablet */
+    .produto-img-container {
+        height: 280px;
+    }
+    
+    .destaque-img-container {
+        height: 220px;
+    }
+    
+    /* Itens de destaque para tablet */
     .destaque-item {
-        width: 400px;
+        width: 260px; /* LARGURA REDUZIDA PARA TABLET */
     }
     
-    /* Vantagens em 2 colunas para tablet - volta ao grid normal */
+    /* Vantagens em 2 colunas para tablet */
     .vantagens-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -1710,20 +1723,30 @@ img {
         grid-template-columns: 1fr 1fr 1fr;
     }
     
-    /* Grade de produtos em 2 colunas para desktop */
+    /* Grade de produtos em 2 colunas para desktop COM LARGURA LIMITADA */
     .produtos-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-xl);
+        gap: var(--spacing-lg);
+        max-width: 900px; /* LARGURA MÁXIMA PARA DESKTOP */
     }
     
-    /* Itens de destaque maiores em desktop */
+    /* Altura das imagens para desktop */
+    .produto-img-container {
+        height: 400px;
+    }
+    
+    .destaque-img-container {
+        height: 300px;
+    }
+    
+    /* Itens de destaque para desktop */
     .destaque-item {
-        width: 450px;
+        width: 270px; /* LARGURA REDUZIDA PARA DESKTOP */
     }
     
-    /* Espaço adicional para o slider de destaques */
+    /* Espaço para o slider de destaques */
     .destaques-slider {
-        padding: var(--spacing-md) 0 var(--spacing-2xl);
+        padding: var(--spacing-sm) 0 var(--spacing-lg);
     }
     
     /* Vantagens em 4 colunas para desktop */
@@ -1799,9 +1822,19 @@ img {
         max-width: 100%;
     }
     
-    /* Grade de produtos em 1 coluna para mobile */
+    /* Grade de produtos em 1 coluna para mobile COM LARGURA LIMITADA */
     .produtos-grid {
         grid-template-columns: 1fr;
+        max-width: 400px; /* LARGURA MÁXIMA PARA MOBILE */
+    }
+    
+    /* Altura das imagens em mobile */
+    .produto-img-container {
+        height: 260px;
+    }
+    
+    .destaque-img-container {
+        height: 200px;
     }
     
     .destaques-container {
@@ -1817,30 +1850,51 @@ img {
         margin-bottom: var(--spacing-lg);
     }
     
-    /* Ajuste para melhor exibição em mobile */
+    /* Ajuste para mobile */
     .produto-info {
-        padding: var(--spacing-sm);
+        padding: 0.5rem;
     }
     
     .produto-info h3 {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
     }
     
     .produto-descricao {
-        font-size: 0.85rem;
-        margin-bottom: var(--spacing-xs);
+        font-size: 0.7rem;
+        margin-bottom: 0.25rem;
     }
     
     .preco {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
     
     .btn-comprar {
-        padding: 0.7rem 1.2rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Destaques mobile */
+    .destaque-item {
+        width: 220px; /* LARGURA REDUZIDA PARA MOBILE */
+    }
+    
+    .destaque-info {
+        padding: 0.5rem;
+    }
+    
+    .destaque-info h3 {
+        font-size: 0.85rem;
+    }
+    
+    .destaque-info .preco {
         font-size: 0.8rem;
     }
     
-    /* NOVO: Transformar vantagens em slider horizontal para mobile */
+    .destaque-info .produto-descricao {
+        font-size: 0.65rem;
+    }
+    
+    /* Vantagens em slider horizontal para mobile */
     .vantagens-container {
         display: flex;
         overflow-x: auto;
@@ -1902,8 +1956,22 @@ img {
         padding: 0 25px;
     }
     
+    /* Grade de produtos para mobile pequeno COM LARGURA AINDA MAIS LIMITADA */
+    .produtos-grid {
+        max-width: 350px; /* LARGURA MÁXIMA PARA MOBILE PEQUENO */
+    }
+    
+    /* Altura das imagens em mobile pequeno */
+    .produto-img-container {
+        height: 240px;
+    }
+    
+    .destaque-img-container {
+        height: 180px;
+    }
+    
     .destaque-item {
-        width: 280px;
+        width: 200px; /* LARGURA REDUZIDA PARA MOBILE PEQUENO */
     }
     
     .slider-nav-arrow {
@@ -1918,7 +1986,7 @@ img {
         font-size: 1.2rem;
     }
     
-    /* Vantagens ainda mais compactas para mobile pequeno */
+    /* Vantagens compactas para mobile pequeno */
     .vantagem-item {
         width: 240px;
     }
@@ -1939,20 +2007,40 @@ img {
     
     /* Ajustes para mobile pequeno nos produtos */
     .btn-comprar {
-        padding: 0.6rem 1rem;
-        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
+        font-size: 0.65rem;
     }
     
     .produto-descricao {
-        font-size: 0.8rem;
+        font-size: 0.65rem;
     }
     
     .produto-info {
-        padding: var(--spacing-xs);
+        padding: 0.4rem;
+    }
+    
+    .produto-info h3 {
+        font-size: 0.8rem;
+    }
+    
+    .preco {
+        font-size: 0.8rem;
     }
     
     .destaque-info {
-        padding: var(--spacing-xs);
+        padding: 0.4rem;
+    }
+    
+    .destaque-info h3 {
+        font-size: 0.75rem;
+    }
+    
+    .destaque-info .preco {
+        font-size: 0.75rem;
+    }
+    
+    .destaque-info .produto-descricao {
+        font-size: 0.6rem;
     }
 }
 
@@ -2001,7 +2089,7 @@ img {
     outline-offset: 2px;
 }
 
-/* Efeito hover em produtos - ATUALIZADO PARA NOVA ESTRUTURA */
+/* Efeito hover em produtos */
 .produto-item::before {
     content: '';
     position: absolute;
