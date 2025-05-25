@@ -197,15 +197,15 @@ img {
     left: 100%;
 }
 
-/* BOTÃO DE COMPRA ATUALIZADO - COMPACTO */
+/* BOTÃO DE COMPRA ATUALIZADO - NOVO POSICIONAMENTO FORA DA FOTO */
 .btn-comprar {
     display: block;
     width: 100%;
     background-color: var(--color-secondary);
     color: var(--color-white);
     border: 1px solid var(--color-secondary);
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -213,7 +213,7 @@ img {
     transition: all var(--transition-medium);
     border-radius: var(--border-radius-sm);
     text-align: center;
-    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
 }
 
 .btn-comprar:hover {
@@ -911,19 +911,17 @@ img {
     margin-bottom: 0;
 }
 
-/* Produtos section - LARGURA AJUSTADA */
+/* Produtos section - REDESENHADO COM NOVA ESTRUTURA E PRODUTOS OTIMIZADOS */
 .produtos {
     background-color: var(--color-white);
 }
 
-/* Nova organização do grid com largura mais estreita */
+/* Nova organização do grid para produtos otimizados */
 .produtos-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
     position: relative;
-    max-width: 600px; /* LARGURA MÁXIMA REDUZIDA */
-    margin: 0 auto; /* CENTRALIZAR */
 }
 
 .produto-item {
@@ -936,16 +934,16 @@ img {
     border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--spacing-xs);
-    max-width: 100%; /* GARANTIR QUE NÃO ULTRAPASSE */
+    max-width: 350px;
+    margin: 0 auto var(--spacing-sm);
 }
 
-/* Contêiner de imagem COM LARGURA MAIS ESTREITA */
+/* Contêiner de imagem com altura otimizada */
 .produto-img-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 350px; /* Altura mantida */
+    height: 420px;
 }
 
 .produto-item img {
@@ -961,37 +959,42 @@ img {
     filter: brightness(1.05);
 }
 
-/* Estilo para informações do produto MAIS COMPACTO */
+/* Estilo para informações do produto FORA DA IMAGEM - OTIMIZADO */
 .produto-info {
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-md);
     text-align: left;
     color: var(--color-secondary);
     background-color: var(--color-white);
 }
 
 .produto-info h3 {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
     font-weight: 500;
     color: var(--color-secondary);
     line-height: 1.2;
 }
 
-/* PREÇO REDUZIDO */
+/* PREÇO LOGO ABAIXO DO NOME - OTIMIZADO */
 .preco {
     color: var(--color-primary);
     font-weight: 600;
-    margin-bottom: 0.25rem;
-    font-size: 0.95rem;
+    margin-bottom: var(--spacing-xs);
+    font-size: 1rem;
 }
 
-/* DESCRIÇÃO DO PRODUTO MAIS COMPACTA */
+/* DESCRIÇÃO DO PRODUTO COM COR VERMELHA ABAIXO DO PREÇO - OTIMIZADA */
 .produto-descricao {
     color: #ff4444 !important;
-    font-size: 0.75rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-sm);
     line-height: 1.3;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* Animação para cards (produtos) */
@@ -1000,7 +1003,7 @@ img {
 }
 
 .animated-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -1079,10 +1082,10 @@ img {
     color: var(--color-grey-600);
 }
 
-/* Destaques section - LARGURA AJUSTADA */
+/* Destaques section - ATUALIZADO COM NOVA ESTRUTURA E MENORES */
 .destaques {
     background-color: var(--color-grey-100);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl) 0;
 }
 
 .destaques-container {
@@ -1098,7 +1101,7 @@ img {
     gap: var(--spacing-md);
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: var(--spacing-sm) 0 var(--spacing-md);
+    padding: var(--spacing-md) 0 var(--spacing-xl);
 }
 
 .destaques-slider::-webkit-scrollbar {
@@ -1107,7 +1110,7 @@ img {
 
 .destaque-item {
     flex: 0 0 auto;
-    width: 280px; /* LARGURA REDUZIDA */
+    width: 350px;
     scroll-snap-align: center;
     background-color: var(--color-white);
     box-shadow: var(--shadow-md);
@@ -1117,19 +1120,18 @@ img {
     border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--spacing-xs);
 }
 
 .destaque-item:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 .destaque-img-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 240px; /* Altura mantida */
+    height: 420px;
 }
 
 .destaque-item img {
@@ -1144,36 +1146,41 @@ img {
     transform: scale(1.05);
 }
 
-/* Informações dos destaques MAIS COMPACTAS */
+/* Informações dos destaques também fora da imagem e otimizadas */
 .destaque-info {
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-md);
     text-align: left;
     color: var(--color-secondary);
     background-color: var(--color-white);
 }
 
 .destaque-info h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
     font-weight: 500;
     color: var(--color-secondary);
     line-height: 1.2;
 }
 
-/* Preço nos destaques */
+/* Preço nos destaques - otimizado */
 .destaque-info .preco {
     color: var(--color-primary);
     font-weight: 600;
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
+    margin-bottom: var(--spacing-xs);
+    font-size: 1rem;
 }
 
-/* Descrição nos destaques */
+/* Descrição nos destaques também com cor vermelha e otimizada */
 .destaque-info .produto-descricao {
     color: #ff4444 !important;
-    font-size: 0.7rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-sm);
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .slider-nav-arrow {
@@ -1665,7 +1672,7 @@ img {
     font-weight: 600;
 }
 
-/* Responsividade - LARGURAS AJUSTADAS */
+/* Responsividade - AJUSTADA PARA PRODUTOS MENORES */
 @media (min-width: 768px) {
     /* Tablet */
     .contato-content {
@@ -1687,25 +1694,14 @@ img {
         flex: 1;
     }
     
-    /* Grade de produtos em 2 colunas para tablet COM LARGURA LIMITADA */
+    /* Grade de produtos em 3 colunas para tablet */
     .produtos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-md);
-        max-width: 800px; /* LARGURA MÁXIMA PARA TABLET */
     }
     
-    /* Altura das imagens para tablet */
-    .produto-img-container {
-        height: 280px;
-    }
-    
-    .destaque-img-container {
-        height: 220px;
-    }
-    
-    /* Itens de destaque para tablet */
-    .destaque-item {
-        width: 260px; /* LARGURA REDUZIDA PARA TABLET */
+    .produto-item {
+        max-width: none;
     }
     
     /* Vantagens em 2 colunas para tablet */
@@ -1717,36 +1713,16 @@ img {
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 900px) {
     /* Desktop */
     .footer-content {
         grid-template-columns: 1fr 1fr 1fr;
     }
     
-    /* Grade de produtos em 2 colunas para desktop COM LARGURA LIMITADA */
+    /* Grade de produtos em 3 colunas para desktop */
     .produtos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-lg);
-        max-width: 900px; /* LARGURA MÁXIMA PARA DESKTOP */
-    }
-    
-    /* Altura das imagens para desktop */
-    .produto-img-container {
-        height: 400px;
-    }
-    
-    .destaque-img-container {
-        height: 300px;
-    }
-    
-    /* Itens de destaque para desktop */
-    .destaque-item {
-        width: 270px; /* LARGURA REDUZIDA PARA DESKTOP */
-    }
-    
-    /* Espaço para o slider de destaques */
-    .destaques-slider {
-        padding: var(--spacing-sm) 0 var(--spacing-lg);
     }
     
     /* Vantagens em 4 colunas para desktop */
@@ -1822,19 +1798,18 @@ img {
         max-width: 100%;
     }
     
-    /* Grade de produtos em 1 coluna para mobile COM LARGURA LIMITADA */
+    /* Grade de produtos em 2 colunas para mobile */
     .produtos-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px; /* LARGURA MÁXIMA PARA MOBILE */
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
     }
     
-    /* Altura das imagens em mobile */
+    .produto-item {
+        max-width: none;
+    }
+    
     .produto-img-container {
-        height: 260px;
-    }
-    
-    .destaque-img-container {
-        height: 200px;
+        height: 300px;
     }
     
     .destaques-container {
@@ -1850,51 +1825,15 @@ img {
         margin-bottom: var(--spacing-lg);
     }
     
-    /* Ajuste para mobile */
-    .produto-info {
-        padding: 0.5rem;
-    }
-    
-    .produto-info h3 {
-        font-size: 0.9rem;
-    }
-    
-    .produto-descricao {
-        font-size: 0.7rem;
-        margin-bottom: 0.25rem;
-    }
-    
-    .preco {
-        font-size: 0.85rem;
-    }
-    
-    .btn-comprar {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.7rem;
-    }
-    
-    /* Destaques mobile */
     .destaque-item {
-        width: 220px; /* LARGURA REDUZIDA PARA MOBILE */
+        width: 280px;
     }
     
-    .destaque-info {
-        padding: 0.5rem;
+    .destaque-img-container {
+        height: 350px;
     }
     
-    .destaque-info h3 {
-        font-size: 0.85rem;
-    }
-    
-    .destaque-info .preco {
-        font-size: 0.8rem;
-    }
-    
-    .destaque-info .produto-descricao {
-        font-size: 0.65rem;
-    }
-    
-    /* Vantagens em slider horizontal para mobile */
+    /* NOVO: Transformar vantagens em slider horizontal para mobile */
     .vantagens-container {
         display: flex;
         overflow-x: auto;
@@ -1956,22 +1895,12 @@ img {
         padding: 0 25px;
     }
     
-    /* Grade de produtos para mobile pequeno COM LARGURA AINDA MAIS LIMITADA */
-    .produtos-grid {
-        max-width: 350px; /* LARGURA MÁXIMA PARA MOBILE PEQUENO */
-    }
-    
-    /* Altura das imagens em mobile pequeno */
-    .produto-img-container {
-        height: 240px;
+    .destaque-item {
+        width: 250px;
     }
     
     .destaque-img-container {
-        height: 180px;
-    }
-    
-    .destaque-item {
-        width: 200px; /* LARGURA REDUZIDA PARA MOBILE PEQUENO */
+        height: 320px;
     }
     
     .slider-nav-arrow {
@@ -1986,7 +1915,21 @@ img {
         font-size: 1.2rem;
     }
     
-    /* Vantagens compactas para mobile pequeno */
+    /* Grade de produtos em 1 coluna para mobile muito pequeno */
+    .produtos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .produto-item {
+        max-width: 320px;
+        margin: 0 auto var(--spacing-sm);
+    }
+    
+    .produto-img-container {
+        height: 380px;
+    }
+    
+    /* Vantagens ainda mais compactas para mobile pequeno */
     .vantagem-item {
         width: 240px;
     }
@@ -2003,44 +1946,6 @@ img {
     
     .vantagem-item p {
         font-size: 0.8rem;
-    }
-    
-    /* Ajustes para mobile pequeno nos produtos */
-    .btn-comprar {
-        padding: 0.4rem 0.7rem;
-        font-size: 0.65rem;
-    }
-    
-    .produto-descricao {
-        font-size: 0.65rem;
-    }
-    
-    .produto-info {
-        padding: 0.4rem;
-    }
-    
-    .produto-info h3 {
-        font-size: 0.8rem;
-    }
-    
-    .preco {
-        font-size: 0.8rem;
-    }
-    
-    .destaque-info {
-        padding: 0.4rem;
-    }
-    
-    .destaque-info h3 {
-        font-size: 0.75rem;
-    }
-    
-    .destaque-info .preco {
-        font-size: 0.75rem;
-    }
-    
-    .destaque-info .produto-descricao {
-        font-size: 0.6rem;
     }
 }
 
@@ -2089,7 +1994,7 @@ img {
     outline-offset: 2px;
 }
 
-/* Efeito hover em produtos */
+/* Efeito hover em produtos - ATUALIZADO PARA NOVA ESTRUTURA */
 .produto-item::before {
     content: '';
     position: absolute;
